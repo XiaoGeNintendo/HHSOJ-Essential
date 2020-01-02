@@ -1,0 +1,12 @@
+{
+	"cpp":{
+		"ext":"cpp",
+		"name":"GNU C++ 11",
+		"compileCmd":["g++","Main.cpp","-o","Main.exe","-O2","-DONLINE_JUDGE","-std=gnu++11"],
+		
+		"runCmd":["./Main.exe"],
+		"opCode":[1,2,3,4],
+		"opFile":[]
+	}
+	
+}

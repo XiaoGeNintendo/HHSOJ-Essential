@@ -1,0 +1,106 @@
+package com.hhs.xgn.hhsoj.essential.se;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Vector;
+
+import com.google.gson.Gson;
+import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.Submission;
+
+/**
+ * The main server to control everything. <br/>
+ * File operations and socket connections 
+ * @author XGN
+ *
+ */
+public class ServerManager {
+
+	public static void main(String[] args) throws Exception {
+		ServerManager m=new ServerManager();
+		m.solve(args);
+	}
+
+	
+	String ip;
+	int port;
+	
+	public Vector<Judger> judgers=new Vector<>();
+	
+	public synchronized void addJudger(String name,Socket sock,DataInputStream dis,DataOutputStream dos){
+		System.out.println("Added new judge:"+name+" from "+sock);
+		judgers.add(new Judger(name,sock,dis,dos));
+		
+		notifyJudge();
+	}
+	
+	public Vector<Submission> submissions=new Vector<>();
+	
+	public synchronized void addSubmission(Submission s){
+		submissions.add(s);
+		System.out.println("Added submission:"+s.id);
+		notifyJudge();
+	}
+	
+	/**
+	 * Notify the first item in the queue to be judged
+	 */
+	public synchronized void notifyJudge(){
+		if(submissions.isEmpty()){
+			return;
+		}
+		
+		for(int i=0;i<judgers.size();i++){
+			if(!judgers.get(i).isOnline()){ //kill offline judges
+				judgers.remove(i);
+				i--;
+				continue;
+			}
+			if(judgers.get(i).isFree){
+				judgers.get(i).work(submissions.get(0),this);
+				submissions.remove(0);
+				break;
+			}
+		}
+	}
+	
+	void solve(String[] args) throws Exception{
+		if(args.length<1){
+			System.out.println("ServerManager <port>");
+			System.out.println("7512 is recommended");
+			System.exit(1);
+		}
+		
+		//debug
+		addSubmission(CommonUtil.generateBlankSubmission("XGN", "", "cpp", 0, "testP", "testProblemSet"));
+		
+		port=Integer.parseInt(args[0]);
+		
+		ServerSocket ss=new ServerSocket(port);
+		System.out.println("ServerSocket started successfully");
+		while(true){
+			Socket s=ss.accept();
+			
+			Thread t=new SocketThread(s,this);
+			t.start();
+		}
+	}
+
+	public synchronized void saveSubmission(Submission sub) {
+		try{
+			Gson gs=new Gson();
+			String js=gs.toJson(sub);
+			
+			PrintWriter pw=new PrintWriter(new File("submission/"+sub.id+".json"));
+			pw.print(js);
+			pw.close();
+		}catch(Exception e){
+			System.err.println("Cannot save submission!");
+			e.printStackTrace();
+		}
+	}
+}
