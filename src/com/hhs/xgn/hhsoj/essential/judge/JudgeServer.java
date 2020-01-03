@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -115,16 +116,19 @@ public class JudgeServer {
 			
 			//run the core
 			String[] r=getLang(sub.lang).runCmd;
-			String[] cmd=new String[4+r.length];
-			cmd[0]="python";
-			cmd[1]="core.py";
-			cmd[2]=""+pr.tl;
-			cmd[3]=""+pr.ml;
-			for(int i=0;i<r.length;i++){
-				cmd[i+4]=r[i];
-			}
+			ArrayList<String> cmd=new ArrayList<>();
+			cmd.add("python");
+			cmd.add("core.py");
+			cmd.add(""+pr.tl);
+			cmd.add(""+pr.ml);
 			
-			System.out.println("Start running core");
+			
+			addAll(cmd,getLang(sub.lang).opCode);
+			addAll(cmd,getLang(sub.lang).file);
+			addAll(cmd,r);
+			
+			
+			System.out.println("Start running core with arg:"+cmd);
 			ProcessBuilder pb=new ProcessBuilder(cmd);
 			pb.directory(new File("judge"));
 			pb.redirectOutput(new File("judge/sbout.txt"));
@@ -191,8 +195,23 @@ public class JudgeServer {
 				return false;
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			sub.addResult(new TestResult("Judgement Failed", 0,0, e+"", "", "", 0));
 			return false;
+		}
+	}
+	
+	private void addAll(ArrayList<String> cmd, int[] x) {
+		cmd.add(""+x.length);
+		for(int y:x){
+			cmd.add(""+y);
+		}
+	}
+
+	private void addAll(ArrayList<String> cmd, String[] x) {
+		cmd.add(""+x.length);
+		for(String y:x){
+			cmd.add(""+y);
 		}
 	}
 	
