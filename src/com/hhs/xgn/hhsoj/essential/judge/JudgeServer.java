@@ -18,7 +18,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
 import com.hhs.xgn.hhsoj.essential.common.Language;
+import com.hhs.xgn.hhsoj.essential.common.Problem;
 import com.hhs.xgn.hhsoj.essential.common.Submission;
+import com.hhs.xgn.hhsoj.essential.common.TestResult;
+import com.hhs.xgn.hhsoj.essential.common.TestsetResult;
 
 public class JudgeServer {
 
@@ -92,22 +95,112 @@ public class JudgeServer {
 	 * @param in
 	 * @param set
 	 * @return
+	 * @throws Exception 
 	 */
-	boolean runSingleTest(Submission sub,File in,File set){
-		//TODO ddd
-		return true;
+	boolean runSingleTest(Submission sub,int id,File set,Problem pr) throws Exception{
+		
+		File in=new File(set.getAbsoluteFile()+"/test"+id+".in");
+		File out=new File(set.getAbsoluteFile()+"/test"+id+".out");
+		
+		System.out.println("Running:"+sub.id+" on "+in.getName()+" "+set.getName());
+		
+		//copy files to given path
+		CommonUtil.copyFile(in,new File("judge/in.txt"));
+		CommonUtil.copyFile(out,new File("judge/ans.txt"));
+		
+		//run the core
+		String[] r=getLang(sub.lang).runCmd;
+		String[] cmd=new String[4+r.length];
+		cmd[0]="python";
+		cmd[1]="core.py";
+		cmd[2]=""+pr.tl;
+		cmd[3]=""+pr.ml;
+		for(int i=0;i<r.length;i++){
+			cmd[i+4]=r[i];
+		}
+		
+		System.out.println("Start running core");
+		ProcessBuilder pb=new ProcessBuilder(cmd);
+		pb.directory(new File("judge"));
+		pb.redirectOutput(new File("judge/sbout.txt"));
+		Process p=pb.start();
+		p.waitFor();
+		
+
+		String inp=CommonUtil.readFileWithLimit(in.getAbsolutePath(),1024);
+		
+		
+		int v=p.exitValue();
+		if(v!=0){
+			sub.addResult(new TestResult("Judgement Failed", 0, 0, "The sandbox returned:"+v+"\nSee 'checker exit code' on Github for detail", inp, "", 0));
+			return false;
+		}
+		
+		//core is done
+		String sbout=CommonUtil.readFile("judge/sbout.txt");
+		String[] arg=sbout.split("\n");
+		if(arg[0].equals("RE")){
+			sub.addResult(new TestResult("Runtime Error", arg[1],arg[2], "Exit code is "+arg[3], inp, "", 0));
+			return false;
+		}
+		if(arg[0].equals("RF")){
+			sub.addResult(new TestResult("Restrict Function", arg[1],arg[2], "Bad code is "+arg[3], inp, "", 0));
+			return false;
+		}
+		if(arg[0].equals("TLE")){
+			sub.addResult(new TestResult("Time Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+			return false;
+		}
+		if(arg[0].equals("MLE")){
+			sub.addResult(new TestResult("Memory Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+			return false;
+		}
+		//next is compare answers
+		
+		String oup=CommonUtil.readFileWithLimit("judge/out.txt",1024);
+		
+		ProcessBuilder pb2=new ProcessBuilder("checker","in.txt","out.txt","ans.txt","report.txt");
+		pb2.directory(new File("judge"));
+		Process p2=pb2.start();
+		
+		boolean notle=p2.waitFor(30, TimeUnit.SECONDS);
+		
+		if(notle){
+			
+			String info=CommonUtil.readFileWithLimit("judge/report.txt", 1024);
+			
+			if(p2.exitValue()==0){
+				sub.addResult(new TestResult("Accepted", arg[1],arg[2], info, inp, oup, 1));
+				return true;
+			}else{
+				if(p2.exitValue()==7){
+					sub.addResult(new TestResult("Point", arg[1],arg[2], info, inp, oup, Float.parseFloat(info.split(" ")[0])));
+					return true;
+				}else{
+					sub.addResult(new TestResult("Wrong Answer", arg[1],arg[2], info, inp, oup, 0));
+					return false;
+				}
+			}
+		}else{
+			sub.addResult(new TestResult("Checker Time Limit Exceeded", arg[1],arg[2], "", inp, oup, 0));
+			return false;
+		}
+		
 	}
 	
-	void runTestset(Submission sub,File set){
+	void runTestset(Submission sub,File set,Problem p) throws Exception{
 		System.out.println("Running on testset:"+set);
 		
+		sub.res.add(new TestsetResult(set.getName()));
+		
 		for(int id=0;;id++){
-			File in=new File("test"+id+".in");
+			File in=new File(set.getAbsoluteFile()+"/test"+id+".in");
 			if(in.exists()==false){
 				break;
 			}
 			
-			boolean b=runSingleTest(sub,in,set);
+			boolean b=runSingleTest(sub,id,set,p);
+			rollbackInfo(sub);
 			if(b==false){
 				break;
 			}
@@ -149,10 +242,30 @@ public class JudgeServer {
 		}
 		
 		System.out.println("Compile Success");
+		
+		rollbackInfo(sub);
+		
+		//collect problem data
+		Problem pr=gs.fromJson(CommonUtil.readFile("data/"+sub.problemSet+"_"+sub.problemId+"/problem.json"), Problem.class);
+		
 		for(File x:data.listFiles()){
 			if(x.isDirectory()){
-				runTestset(sub,x);
+				runTestset(sub,x,pr);
 			}
+		}
+		
+		System.out.println("Calculating final score");
+		sub.score=sub.calcScore(pr);
+		sub.isFinal=true;
+		
+	}
+	
+	public void rollbackInfo(Submission sub){
+		try{
+			dos.writeUTF(gs.toJson(sub));
+		}catch(Exception e){
+			System.out.println("Warning: cannot rollback info:");
+			e.printStackTrace();
 		}
 	}
 	
@@ -225,6 +338,7 @@ public class JudgeServer {
 				//TODO test it
 				try{
 					testSubmission(sub);
+					rollbackInfo(sub);
 					System.out.println("Test finished successfully");
 				}catch(Exception e){
 					sub.compilerInfo="Judge failed:"+e;

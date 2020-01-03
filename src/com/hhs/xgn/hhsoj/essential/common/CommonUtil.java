@@ -1,8 +1,11 @@
 package com.hhs.xgn.hhsoj.essential.common;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -55,7 +58,6 @@ public class CommonUtil {
 		s.problemSet=pSet;
 		s.res=new ArrayList<>();
 		s.score=0;
-		s.scorerInfo="";
 		s.submitTime=System.currentTimeMillis();
 		return s;
 	}
@@ -69,7 +71,8 @@ public class CommonUtil {
 			
 			int read=br.read(c);
 			
-			String s=new String(c);
+			
+			String s=new String(c,0,read);
 			if(read==limit){
 				s+="<...>";
 			}
@@ -80,5 +83,18 @@ public class CommonUtil {
 		}catch(Exception e){
 			return null;
 		}
+	}
+
+	public static void copyFile(File fromFile, File toFile) throws IOException {
+		FileInputStream ins = new FileInputStream(fromFile);
+		FileOutputStream out = new FileOutputStream(toFile);
+		byte[] b = new byte[1024];
+		int n = 0;
+		while ((n = ins.read(b)) != -1) {
+			out.write(b, 0, n);
+		}
+
+		ins.close();
+		out.close();
 	}
 }
