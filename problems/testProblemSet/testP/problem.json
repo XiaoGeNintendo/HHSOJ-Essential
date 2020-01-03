@@ -2,6 +2,17 @@
 	"name":"Test Problem",
 	"tl":1000,
 	"ml":262144,
-	"openHack":false,
-	"ver":1
+	"ver":3,
+	"tests":[
+		{
+			"name":"easy",
+			"scheme":"min",
+			"requirement:":[]
+		},
+		{
+			"name":"hard",
+			"scheme":"sum",
+			"requirement":["easy"]
+		}
+	]
 }

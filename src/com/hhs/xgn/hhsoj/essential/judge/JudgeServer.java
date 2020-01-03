@@ -66,6 +66,9 @@ public class JudgeServer {
 		while(true){
 			String name=dis.readUTF();
 			
+			if(name.equals("$$END")){
+				break;
+			}
 			if(name.startsWith("!")){
 				System.out.println("Read folder:"+name);
 				new File(path+"/"+name.substring(1)).mkdirs();
@@ -87,6 +90,7 @@ public class JudgeServer {
 			
 			System.out.println("Read "+bytes+" bytes from "+name);
 		}
+		System.out.println("Read done");
 	}
 	
 	/**
@@ -97,95 +101,99 @@ public class JudgeServer {
 	 * @return
 	 * @throws Exception 
 	 */
-	boolean runSingleTest(Submission sub,int id,File set,Problem pr) throws Exception{
+	boolean runSingleTest(Submission sub,int id,File set,Problem pr) {
 		
-		File in=new File(set.getAbsoluteFile()+"/test"+id+".in");
-		File out=new File(set.getAbsoluteFile()+"/test"+id+".out");
-		
-		System.out.println("Running:"+sub.id+" on "+in.getName()+" "+set.getName());
-		
-		//copy files to given path
-		CommonUtil.copyFile(in,new File("judge/in.txt"));
-		CommonUtil.copyFile(out,new File("judge/ans.txt"));
-		
-		//run the core
-		String[] r=getLang(sub.lang).runCmd;
-		String[] cmd=new String[4+r.length];
-		cmd[0]="python";
-		cmd[1]="core.py";
-		cmd[2]=""+pr.tl;
-		cmd[3]=""+pr.ml;
-		for(int i=0;i<r.length;i++){
-			cmd[i+4]=r[i];
-		}
-		
-		System.out.println("Start running core");
-		ProcessBuilder pb=new ProcessBuilder(cmd);
-		pb.directory(new File("judge"));
-		pb.redirectOutput(new File("judge/sbout.txt"));
-		Process p=pb.start();
-		p.waitFor();
-		
-
-		String inp=CommonUtil.readFileWithLimit(in.getAbsolutePath(),1024);
-		
-		
-		int v=p.exitValue();
-		if(v!=0){
-			sub.addResult(new TestResult("Judgement Failed", 0, 0, "The sandbox returned:"+v+"\nSee 'checker exit code' on Github for detail", inp, "", 0));
-			return false;
-		}
-		
-		//core is done
-		String sbout=CommonUtil.readFile("judge/sbout.txt");
-		String[] arg=sbout.split("\n");
-		if(arg[0].equals("RE")){
-			sub.addResult(new TestResult("Runtime Error", arg[1],arg[2], "Exit code is "+arg[3], inp, "", 0));
-			return false;
-		}
-		if(arg[0].equals("RF")){
-			sub.addResult(new TestResult("Restrict Function", arg[1],arg[2], "Bad code is "+arg[3], inp, "", 0));
-			return false;
-		}
-		if(arg[0].equals("TLE")){
-			sub.addResult(new TestResult("Time Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
-			return false;
-		}
-		if(arg[0].equals("MLE")){
-			sub.addResult(new TestResult("Memory Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
-			return false;
-		}
-		//next is compare answers
-		
-		String oup=CommonUtil.readFileWithLimit("judge/out.txt",1024);
-		
-		ProcessBuilder pb2=new ProcessBuilder("checker","in.txt","out.txt","ans.txt","report.txt");
-		pb2.directory(new File("judge"));
-		Process p2=pb2.start();
-		
-		boolean notle=p2.waitFor(30, TimeUnit.SECONDS);
-		
-		if(notle){
+		try{
+			File in=new File(set.getAbsoluteFile()+"/test"+id+".in");
+			File out=new File(set.getAbsoluteFile()+"/test"+id+".out");
 			
-			String info=CommonUtil.readFileWithLimit("judge/report.txt", 1024);
+			System.out.println("Running:"+sub.id+" on "+in.getName()+" "+set.getName());
 			
-			if(p2.exitValue()==0){
-				sub.addResult(new TestResult("Accepted", arg[1],arg[2], info, inp, oup, 1));
-				return true;
-			}else{
-				if(p2.exitValue()==7){
-					sub.addResult(new TestResult("Point", arg[1],arg[2], info, inp, oup, Float.parseFloat(info.split(" ")[0])));
+			//copy files to given path
+			CommonUtil.copyFile(in,new File("judge/in.txt"));
+			CommonUtil.copyFile(out,new File("judge/ans.txt"));
+			
+			//run the core
+			String[] r=getLang(sub.lang).runCmd;
+			String[] cmd=new String[4+r.length];
+			cmd[0]="python";
+			cmd[1]="core.py";
+			cmd[2]=""+pr.tl;
+			cmd[3]=""+pr.ml;
+			for(int i=0;i<r.length;i++){
+				cmd[i+4]=r[i];
+			}
+			
+			System.out.println("Start running core");
+			ProcessBuilder pb=new ProcessBuilder(cmd);
+			pb.directory(new File("judge"));
+			pb.redirectOutput(new File("judge/sbout.txt"));
+			Process p=pb.start();
+			p.waitFor();
+			
+	
+			String inp=CommonUtil.readFileWithLimit(in.getAbsolutePath(),1024);
+			
+			
+			int v=p.exitValue();
+			if(v!=0){
+				sub.addResult(new TestResult("Judgement Failed", 0, 0, "The sandbox returned:"+v+"\nSee 'checker exit code' on Github for detail", inp, "", 0));
+				return false;
+			}
+			
+			//core is done
+			String sbout=CommonUtil.readFile("judge/sbout.txt");
+			String[] arg=sbout.split("\n");
+			if(arg[0].equals("RE")){
+				sub.addResult(new TestResult("Runtime Error", arg[1],arg[2], "Exit code is "+arg[3], inp, "", 0));
+				return false;
+			}
+			if(arg[0].equals("RF")){
+				sub.addResult(new TestResult("Restrict Function", arg[1],arg[2], "Bad code is "+arg[3], inp, "", 0));
+				return false;
+			}
+			if(arg[0].equals("TLE")){
+				sub.addResult(new TestResult("Time Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+				return false;
+			}
+			if(arg[0].equals("MLE")){
+				sub.addResult(new TestResult("Memory Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+				return false;
+			}
+			//next is compare answers
+			
+			String oup=CommonUtil.readFileWithLimit("judge/out.txt",1024);
+			
+			ProcessBuilder pb2=new ProcessBuilder("checker","in.txt","out.txt","ans.txt","report.txt");
+			pb2.directory(new File("judge"));
+			Process p2=pb2.start();
+			
+			boolean notle=p2.waitFor(30, TimeUnit.SECONDS);
+			
+			if(notle){
+				
+				String info=CommonUtil.readFileWithLimit("judge/report.txt", 1024);
+				
+				if(p2.exitValue()==0){
+					sub.addResult(new TestResult("Accepted", arg[1],arg[2], info, inp, oup, 1));
 					return true;
 				}else{
-					sub.addResult(new TestResult("Wrong Answer", arg[1],arg[2], info, inp, oup, 0));
-					return false;
+					if(p2.exitValue()==7){
+						sub.addResult(new TestResult("Point", arg[1],arg[2], info, inp, oup, Float.parseFloat(info.split(" ")[0])));
+						return true;
+					}else{
+						sub.addResult(new TestResult("Wrong Answer", arg[1],arg[2], info, inp, oup, 0));
+						return false;
+					}
 				}
+			}else{
+				sub.addResult(new TestResult("Checker Time Limit Exceeded", arg[1],arg[2], "", inp, oup, 0));
+				return false;
 			}
-		}else{
-			sub.addResult(new TestResult("Checker Time Limit Exceeded", arg[1],arg[2], "", inp, oup, 0));
+		}catch(Exception e){
+			sub.addResult(new TestResult("Judgement Failed", 0,0, e+"", "", "", 0));
 			return false;
 		}
-		
 	}
 	
 	void runTestset(Submission sub,File set,Problem p) throws Exception{
@@ -198,6 +206,7 @@ public class JudgeServer {
 			if(in.exists()==false){
 				break;
 			}
+			
 			
 			boolean b=runSingleTest(sub,id,set,p);
 			rollbackInfo(sub);

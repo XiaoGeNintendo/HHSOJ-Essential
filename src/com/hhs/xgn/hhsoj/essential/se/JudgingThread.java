@@ -78,6 +78,8 @@ public class JudgingThread extends Thread {
 						br.close();
 					}
 				}
+				
+				j.dos.writeUTF("$$END");
 			}else{
 				j.dos.writeUTF("OK");
 			}

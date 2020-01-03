@@ -76,7 +76,7 @@ public class ServerManager {
 		}
 		
 		//debug
-		addSubmission(CommonUtil.generateBlankSubmission("XGN", "", "cpp", 0, "testP", "testProblemSet"));
+		addSubmission(CommonUtil.generateBlankSubmission("XGN", "#include <iostream>\nusing namespace std;\nint main(){cout<<\"Hello,World\"<<endl;}", "cpp", 0, "testP", "testProblemSet"));
 		
 		port=Integer.parseInt(args[0]);
 		
@@ -94,6 +94,10 @@ public class ServerManager {
 		try{
 			Gson gs=new Gson();
 			String js=gs.toJson(sub);
+			
+			if(new File("submission").exists()==false){
+				new File("submission").mkdirs();
+			}
 			
 			PrintWriter pw=new PrintWriter(new File("submission/"+sub.id+".json"));
 			pw.print(js);
