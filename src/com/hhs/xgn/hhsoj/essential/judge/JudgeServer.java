@@ -174,7 +174,7 @@ public class JudgeServer {
 			
 			String oup=CommonUtil.readFileWithLimit("judge/out.txt",1024);
 			
-			ProcessBuilder pb2=new ProcessBuilder("checker","in.txt","out.txt","ans.txt","report.txt");
+			ProcessBuilder pb2=new ProcessBuilder("./checker","in.txt","out.txt","ans.txt","report.txt");
 			pb2.directory(new File("judge"));
 			Process p2=pb2.start();
 			
@@ -271,6 +271,16 @@ public class JudgeServer {
 		
 		//write to file
 		CommonUtil.writeFile("judge/Main."+getLang(sub.lang).ext,sub.code);
+		
+		//copy library
+		CommonUtil.copyFile(new File("lib/core.py"), new File("judge/core.py"));
+		CommonUtil.copyFile(new File("data/"+sub.problemSet+"_"+sub.problemId+"/checker"),new File("judge/checker"));
+		
+		//chmod
+		ProcessBuilder pb_=new ProcessBuilder("chmod","*","+777");
+		pb_.directory(new File("judge"));
+		Process p_=pb_.start();
+		p_.waitFor();
 		
 		//compile file
 		System.out.println("Compiling by:"+Arrays.toString(getLang(sub.lang).compileCmd));
