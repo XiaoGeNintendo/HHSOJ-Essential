@@ -103,6 +103,8 @@ public class JudgeServer {
 	 * @throws Exception 
 	 */
 	boolean runSingleTest(Submission sub,int id,File set,Problem pr) {
+
+		String sn=set.getName();
 		
 		try{
 			File in=new File(set.getAbsoluteFile()+"/test"+id+".in");
@@ -141,7 +143,7 @@ public class JudgeServer {
 			
 			int v=p.exitValue();
 			if(v!=0){
-				sub.addResult(new TestResult("Judgement Failed", 0, 0, "The sandbox returned:"+v+"\nSee 'checker exit code' on Github for detail", inp, "", 0));
+				sub.addResult(sn,new TestResult("Judgement Failed", 0, 0, "The sandbox returned:"+v+"\nSee 'checker exit code' on Github for detail", inp, "", 0));
 				return false;
 			}
 			
@@ -149,19 +151,23 @@ public class JudgeServer {
 			String sbout=CommonUtil.readFile("judge/sbout.txt");
 			String[] arg=sbout.split("\n");
 			if(arg[0].equals("RE")){
-				sub.addResult(new TestResult("Runtime Error", arg[1],arg[2], "Exit code is "+arg[3], inp, "", 0));
+				sub.addResult(sn,new TestResult("Runtime Error", arg[1],arg[2], "Exit code is "+arg[3], inp, "", 0));
 				return false;
 			}
 			if(arg[0].equals("RF")){
-				sub.addResult(new TestResult("Restrict Function", arg[1],arg[2], "Bad code is "+arg[3], inp, "", 0));
+				sub.addResult(sn,new TestResult("Restrict Function", arg[1],arg[2], arg[3], inp, "", 0));
 				return false;
 			}
 			if(arg[0].equals("TLE")){
-				sub.addResult(new TestResult("Time Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+				sub.addResult(sn,new TestResult("Time Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
 				return false;
 			}
 			if(arg[0].equals("MLE")){
-				sub.addResult(new TestResult("Memory Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+				sub.addResult(sn,new TestResult("Memory Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+				return false;
+			}
+			if(arg[0].equals("UKE")){
+				sub.addResult(sn,new TestResult("Judgement Failed", arg[1], arg[2], "Please send an issue with this information:"+arg[3], "", "", 0));
 				return false;
 			}
 			//next is compare answers
@@ -179,24 +185,24 @@ public class JudgeServer {
 				String info=CommonUtil.readFileWithLimit("judge/report.txt", 1024);
 				
 				if(p2.exitValue()==0){
-					sub.addResult(new TestResult("Accepted", arg[1],arg[2], info, inp, oup, 1));
+					sub.addResult(sn,new TestResult("Accepted", arg[1],arg[2], info, inp, oup, 1));
 					return true;
 				}else{
 					if(p2.exitValue()==7){
-						sub.addResult(new TestResult("Point", arg[1],arg[2], info, inp, oup, Float.parseFloat(info.split(" ")[0])));
+						sub.addResult(sn,new TestResult("Point", arg[1],arg[2], info, inp, oup, Float.parseFloat(info.split(" ")[0])));
 						return true;
 					}else{
-						sub.addResult(new TestResult("Wrong Answer", arg[1],arg[2], info, inp, oup, 0));
+						sub.addResult(sn,new TestResult("Wrong Answer", arg[1],arg[2], info, inp, oup, 0));
 						return false;
 					}
 				}
 			}else{
-				sub.addResult(new TestResult("Checker Time Limit Exceeded", arg[1],arg[2], "", inp, oup, 0));
+				sub.addResult(sn,new TestResult("Checker Time Limit Exceeded", arg[1],arg[2], "", inp, oup, 0));
 				return false;
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			sub.addResult(new TestResult("Judgement Failed", 0,0, e+"", "", "", 0));
+			sub.addResult(sn,new TestResult("Judgement Failed", 0,0, e+"", "", "", 0));
 			return false;
 		}
 	}
@@ -216,9 +222,26 @@ public class JudgeServer {
 	}
 	
 	void runTestset(Submission sub,File set,Problem p) throws Exception{
-		System.out.println("Running on testset:"+set);
+		System.out.println("Running on testset:"+set.getName());
 		
-		sub.res.add(new TestsetResult(set.getName()));
+		sub.res.put(set.getName(),new TestsetResult());
+		
+		boolean ok=true;
+//		System.out.println(p.tests);
+		
+		for(String y:p.tests.get(set.getName()).requirement){
+			if(!sub.res.get(y).pass){
+				System.out.println(y+" did not pass! Skipped");
+				ok=false;
+				break;
+			}
+		}
+		
+		if(!ok){
+			return;
+		}
+		
+		boolean allClear=true;
 		
 		for(int id=0;;id++){
 			File in=new File(set.getAbsoluteFile()+"/test"+id+".in");
@@ -230,9 +253,14 @@ public class JudgeServer {
 			boolean b=runSingleTest(sub,id,set,p);
 			rollbackInfo(sub);
 			if(b==false){
-				break;
+				allClear=false;
+				if(!p.tests.get(set.getName()).toEnd){
+					break;
+				}
 			}
 		}
+		
+		sub.res.get(set.getName()).pass=allClear;
 	}
 	
 	void testFull(Submission sub,File data) throws Exception{
@@ -276,10 +304,9 @@ public class JudgeServer {
 		//collect problem data
 		Problem pr=gs.fromJson(CommonUtil.readFile("data/"+sub.problemSet+"_"+sub.problemId+"/problem.json"), Problem.class);
 		
-		for(File x:data.listFiles()){
-			if(x.isDirectory()){
-				runTestset(sub,x,pr);
-			}
+		for(String ord:pr.order){
+			File x=new File("data/"+sub.problemSet+"_"+sub.problemId+"/"+ord);
+			runTestset(sub,x,pr);
 		}
 		
 		System.out.println("Calculating final score");
@@ -313,7 +340,12 @@ public class JudgeServer {
 			dos.writeInt(-1);
 		}else{
 			//read ver
-			dos.writeInt(CommonUtil.readProbInfo(path+"/problem.json").ver);
+			try{
+				dos.writeInt(CommonUtil.readProbInfo(path+"/problem.json").ver);
+			}catch(Exception e){
+				//even structure isn't right!
+				dos.writeInt(-1);
+			}
 		}
 		
 		String isOk=dis.readUTF();

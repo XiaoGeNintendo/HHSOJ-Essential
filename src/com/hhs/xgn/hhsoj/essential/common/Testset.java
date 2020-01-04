@@ -1,12 +1,13 @@
 package com.hhs.xgn.hhsoj.essential.common;
 
+import java.util.Arrays;
+
 /**
  * A testset
  * @author XGN
  *
  */
 public class Testset {
-	public String name;
 	/**
 	 * Max - the maximum score of each subtask <br/>
 	 * Min - the minimum score of each subtask <br/>
@@ -18,5 +19,15 @@ public class Testset {
 	/**
 	 * All requirement for testing this subtask
 	 */
-	public String[] requirement;
+	public String[] requirement=new String[0];
+	
+	/**
+	 * Judge to the end of the subtask even if there's something wrong already?
+	 */
+	public boolean toEnd;
+
+	@Override
+	public String toString() {
+		return "Testset [scheme=" + scheme + ", requirement=" + Arrays.toString(requirement) + ", toEnd=" + toEnd + "]";
+	}
 }

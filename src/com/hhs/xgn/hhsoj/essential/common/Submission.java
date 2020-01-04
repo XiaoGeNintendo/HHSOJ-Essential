@@ -2,6 +2,7 @@ package com.hhs.xgn.hhsoj.essential.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * Represents a submission
@@ -20,7 +21,7 @@ public class Submission {
 	/**
 	 * The result of the submission
 	 */
-	public ArrayList<TestsetResult> res;
+	public HashMap<String,TestsetResult> res=new HashMap<>();
 	/**
 	 * Compiler information
 	 */
@@ -44,20 +45,15 @@ public class Submission {
 	 */
 	public String problemId;
 	
-	public void addResult(TestResult testResult) {
-		res.get(res.size()-1).res.add(testResult);
+	public void addResult(String tsn,TestResult testResult) {
+		res.get(tsn).res.add(testResult);
 	}
 
 	public float calcScore(Problem pr) {
-		HashMap<String,Testset> mp=new HashMap<>();
-		
-		for(Testset ts:pr.tests){
-			mp.put(ts.name, ts);
-		}
 		
 		float score=0;
-		for(TestsetResult tsr:res){
-			score+=tsr.getScore(mp.get(tsr.name).scheme);
+		for(Entry<String,TestsetResult> tsr:res.entrySet()){
+			score+=tsr.getValue().getScore(pr.tests.get(tsr.getKey()).scheme);
 		}
 		
 		return score;

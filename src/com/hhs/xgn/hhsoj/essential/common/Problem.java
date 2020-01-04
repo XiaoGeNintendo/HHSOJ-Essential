@@ -1,6 +1,6 @@
 package com.hhs.xgn.hhsoj.essential.common;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Problem {
 	public String name;
@@ -8,6 +8,7 @@ public class Problem {
 	public int ml;
 	public int ver;
 	
-	public ArrayList<Testset> tests;
+	public HashMap<String,Testset> tests=new HashMap<>();
+	public String[] order=new String[0];
 	
 }

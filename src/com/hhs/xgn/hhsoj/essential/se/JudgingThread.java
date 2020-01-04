@@ -39,6 +39,8 @@ public class JudgingThread extends Thread {
 			Problem p=CommonUtil.readProbInfo(path+"/problem.json");
 			
 			int clientVer=j.dis.readInt();
+			
+			System.out.println(clientVer+"<>"+p.ver);
 			if(clientVer!=p.ver){
 				System.out.println("Need to update client information");
 				j.dos.writeUTF("Update");

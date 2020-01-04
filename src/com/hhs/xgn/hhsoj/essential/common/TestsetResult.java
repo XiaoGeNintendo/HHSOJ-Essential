@@ -8,11 +8,10 @@ import java.util.ArrayList;
  *
  */
 public class TestsetResult {
-	public String name;
 	public ArrayList<TestResult> res;
+	public boolean pass;
 	
-	public TestsetResult(String name){
-		this.name=name;
+	public TestsetResult(){
 		res=new ArrayList<>();
 	}
 	

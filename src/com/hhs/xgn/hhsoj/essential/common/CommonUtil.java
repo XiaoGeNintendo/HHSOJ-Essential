@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 
@@ -56,7 +57,7 @@ public class CommonUtil {
 		s.judger="";
 		s.problemId=pId;
 		s.problemSet=pSet;
-		s.res=new ArrayList<>();
+		s.res=new HashMap<>();
 		s.score=0;
 		s.submitTime=System.currentTimeMillis();
 		return s;

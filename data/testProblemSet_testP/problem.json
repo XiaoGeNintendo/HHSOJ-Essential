@@ -2,17 +2,18 @@
 	"name":"Test Problem",
 	"tl":1000,
 	"ml":262144,
-	"ver":3,
-	"tests":[
-		{
-			"name":"easy",
+	"ver":4,
+	"order":["easy","hard"],
+	"tests":{
+		"easy":{
 			"scheme":"min",
-			"requirement:":[]
+			"requirement:":[],
+			"toEnd":true
 		},
-		{
-			"name":"hard",
+		"hard":{
 			"scheme":"sum",
-			"requirement":["easy"]
+			"requirement":["easy"],
+			"toEnd":false
 		}
-	]
+	}
 }
