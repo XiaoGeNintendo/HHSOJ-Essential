@@ -40,7 +40,8 @@ public class JudgeServer {
 	
 	HashMap<String,Language> langs=new HashMap<>();
 	
-
+	String callPy;
+	
 	Gson gs=new Gson();
 	
 	public void downloadData(String set,String id){
@@ -65,6 +66,9 @@ public class JudgeServer {
 		
 		System.out.println("Read files");
 		while(true){
+
+			long last=System.currentTimeMillis();
+			
 			String name=dis.readUTF();
 			
 			if(name.equals("$$END")){
@@ -76,20 +80,24 @@ public class JudgeServer {
 				continue;
 			}
 			
-			PrintWriter pw=new PrintWriter(path+"/"+name);
-			int bytes=0;
-			
-			while(true){
-				int c=dis.readInt();
-				if(c==-1){
-					break;
-				}
-				bytes++;
-				pw.append((char)c);
+			System.out.println("Reading "+name);
+			//transfer file
+			int bytes=dis.readInt();
+			FileOutputStream fos=new FileOutputStream(path+"/"+name);
+			byte[] by=new byte[1024];
+			int rc=(bytes+1023)/1024;
+			for(int i=0;i<rc-1;i++){
+				int read=dis.read(by,0,1024);
+//				System.out.println("Write:"+read);
+				fos.write(by,0,read);
 			}
-			pw.close();
+			int read=dis.read(by,0,bytes-Math.max(0, (rc-1)*1024));
+//			System.out.println("ExWrite:"+read);
+			fos.write(by,0,read);
+			fos.close();
 			
-			System.out.println("Read "+bytes+" bytes from "+name);
+			long t=System.currentTimeMillis()-last;
+			System.out.println("Read "+bytes+" bytes from "+name+". Took "+t+"ms");
 		}
 		System.out.println("Read done");
 	}
@@ -119,7 +127,7 @@ public class JudgeServer {
 			//run the core
 			String[] r=getLang(sub.lang).runCmd;
 			ArrayList<String> cmd=new ArrayList<>();
-			cmd.add("python");
+			cmd.add(callPy);
 			cmd.add("core.py");
 			cmd.add(""+pr.tl);
 			cmd.add(""+pr.ml);
@@ -373,6 +381,32 @@ public class JudgeServer {
 			System.out.println("judge ip port name");
 			System.exit(1);
 		}
+		
+		System.out.println("Please wait... Detecting Python...");
+		
+		try{
+			ProcessBuilder pb=new ProcessBuilder("python");
+			pb.start();
+			
+			callPy="python";
+		}catch(Exception e){
+			System.out.println("Calling 'python' failed");
+		}
+		
+		try{
+			ProcessBuilder pb=new ProcessBuilder("python3");
+			pb.start();
+			
+			callPy="python3";
+		}catch(Exception e){
+			System.out.println("Calling 'python3' failed");
+		}
+		
+		if(callPy==null){
+			System.out.println("No python detected!");
+			System.exit(2);
+		}
+		System.out.println("Detected Python command:"+callPy);
 		
 		ip=args[0];
 		port=Integer.parseInt(args[1]);

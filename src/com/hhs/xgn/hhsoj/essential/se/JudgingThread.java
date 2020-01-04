@@ -51,33 +51,40 @@ public class JudgingThread extends Thread {
 				for(File x:f.listFiles()){
 					if(x.isDirectory()){
 						j.dos.writeUTF("!"+x.getName());
+						
 						for(File y:x.listFiles()){
 							j.dos.writeUTF(x.getName()+"/"+y.getName());
+							int snd=(int)y.length();
+							j.dos.writeInt(snd);
 							
-							BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(y),"utf-8"));
-							while(true){
-								int send=br.read();
-								j.dos.writeInt(send);
-								if(send==-1){
-									break;
-								}
+							byte[] by=new byte[1024];
+							FileInputStream fis=new FileInputStream(y);
+							int len=0;
+							while((len=fis.read(by, 0, 1024))!=-1){
+//								System.out.println("Send"+len);
+								j.dos.write(by,0,len);
 							}
+							fis.close();
 							
-							br.close();
+							System.out.println("Send file "+y+" of size "+snd);
+							
 						}
 					}else{
 						j.dos.writeUTF(x.getName());
+						int snd=(int)x.length();
+						j.dos.writeInt(snd);
 						
-						BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(x),"utf-8"));
-						while(true){
-							int send=br.read();
-							j.dos.writeInt(send);
-							if(send==-1){
-								break;
-							}
+						byte[] by=new byte[1024];
+						FileInputStream fis=new FileInputStream(x);
+						int len=0;
+						while((len=fis.read(by, 0, 1024))!=-1){
+//							System.out.println("Send"+len);
+							j.dos.write(by,0,len);
 						}
+						fis.close();
 						
-						br.close();
+						System.out.println("Send file "+x+" of size "+snd);
+						
 					}
 				}
 				

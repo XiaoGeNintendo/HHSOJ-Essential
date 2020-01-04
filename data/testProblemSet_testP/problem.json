@@ -2,18 +2,20 @@
 	"name":"Test Problem",
 	"tl":1000,
 	"ml":262144,
-	"ver":4,
+	"ver":6,
 	"order":["easy","hard"],
 	"tests":{
 		"easy":{
 			"scheme":"min",
 			"requirement:":[],
-			"toEnd":true
+			"toEnd":true,
+			"score":60
 		},
 		"hard":{
 			"scheme":"sum",
 			"requirement":["easy"],
-			"toEnd":false
+			"toEnd":false,
+			"score":20
 		}
 	}
 }

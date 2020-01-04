@@ -2,7 +2,7 @@
 	"name":"Test Problem",
 	"tl":1000,
 	"ml":262144,
-	"ver":5,
+	"ver":6,
 	"order":["easy","hard"],
 	"tests":{
 		"easy":{
