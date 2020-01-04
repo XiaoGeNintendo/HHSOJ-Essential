@@ -26,6 +26,11 @@ public class Testset {
 	 */
 	public boolean toEnd;
 
+	/**
+	 * The base score of the subtask
+	 */
+	public float score;
+
 	@Override
 	public String toString() {
 		return "Testset [scheme=" + scheme + ", requirement=" + Arrays.toString(requirement) + ", toEnd=" + toEnd + "]";

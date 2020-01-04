@@ -53,7 +53,7 @@ public class Submission {
 		
 		float score=0;
 		for(Entry<String,TestsetResult> tsr:res.entrySet()){
-			score+=tsr.getValue().getScore(pr.tests.get(tsr.getKey()).scheme);
+			score+=pr.tests.get(tsr.getKey()).score*tsr.getValue().getScore(pr.tests.get(tsr.getKey()).scheme);
 		}
 		
 		return score;
