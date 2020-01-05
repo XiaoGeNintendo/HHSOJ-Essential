@@ -104,6 +104,7 @@ public class JudgingThread extends Thread {
 			
 			System.out.println("Judging has done for "+sub.id);
 			j.isFree=true;
+			boss.notifyJudge();
 		}catch(Exception e){
 			System.out.println("Communication failed");
 			e.printStackTrace();
