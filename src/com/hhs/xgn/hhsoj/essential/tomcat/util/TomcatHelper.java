@@ -81,7 +81,7 @@ public class TomcatHelper {
 				
 				Problemset p=gs.fromJson(CommonUtil.readFile(sub.getAbsolutePath()+"/problemset.json"), Problemset.class);
 				p.id=sub.getName();
-				System.out.println(p.id);
+//				System.out.println(p.id);
 				ap.add(p);
 			}catch(Exception e){
 				System.out.println("Corrupted P.Set Data Found:"+sub);
