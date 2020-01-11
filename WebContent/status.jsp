@@ -1,3 +1,4 @@
+<%@page import="java.util.Comparator"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.CommonUtil"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Date"%>
@@ -36,7 +37,11 @@
 			</tr>
 			<%
 				ArrayList<Submission> arr=TomcatHelper.getAllSubmissions();
-				Collections.reverse(arr);
+				arr.sort(new Comparator<Submission>(){
+					public int compare(Submission a,Submission b){
+						return -Long.compare(a.id, b.id);
+					}
+				});
 				for(Submission s:arr){
 			%>
 				<tr bgcolor="<%=(s.author.equals(session.getAttribute("username"))?"cran":"white")%>">

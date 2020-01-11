@@ -288,11 +288,13 @@ public class JudgeServer {
 		CommonUtil.copyFile(new File("data/"+sub.problemSet+"_"+sub.problemId+"/checker"),new File("judge/checker"));
 		
 		//chmod
-		ProcessBuilder pb_=new ProcessBuilder("chmod","*","+777");
-		pb_.directory(new File("judge"));
+		System.out.println("Chmod doing");
+		ProcessBuilder pb_=new ProcessBuilder("chmod","+777","checker");
+		pb_.directory(new File("judge/"));
+		pb_.inheritIO();
 		Process p_=pb_.start();
 		p_.waitFor();
-		
+		System.out.println("chmod:"+p_.exitValue());
 		//compile file
 		sub.test="Compiling";
 		rollbackInfo(sub);
