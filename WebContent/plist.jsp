@@ -24,7 +24,7 @@
 			
 			for(Problem p:allP){
 	%>
-				<a href="pview.jsp?set=<%=res %>&id=<%=p.id %>"><%=p.id+" - "+p.name %></a>				
+				<a href="pview.jsp?set=<%=res %>&id=<%=p.id %>"><%=p.id+" - "+p.name %></a> <br/>				
 	<%
 			}
 		}catch(Exception e){

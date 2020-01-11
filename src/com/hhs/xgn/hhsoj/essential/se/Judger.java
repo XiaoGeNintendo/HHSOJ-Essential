@@ -38,7 +38,7 @@ public class Judger {
 	}
 
 	public boolean isOnline() {
-		return !sock.isClosed();
+		return !sock.isClosed() || !sock.isInputShutdown() || !sock.isOutputShutdown();
 	}
 
 	public void work(Submission submission,ServerManager boss) {

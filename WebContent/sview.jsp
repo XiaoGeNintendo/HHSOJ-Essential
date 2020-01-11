@@ -48,6 +48,7 @@
 	Language:<%=s.lang %><br/>
 	Time:<%=s.getRunTime() %><br/>
 	Memory:<%=s.getRunMem() %><br/>
+	Judger:<%=s.judger %> <br/>
 	
 	<h2>Code</h2>
 	<pre><%=s.code.replace("<", "&lt;").replace(">","&gt;") %>
@@ -72,6 +73,9 @@
 				</pre>
 				<h5>Output</h5>
 				<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %>
+				</pre>
+				<h5>Answer</h5>
+				<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %>
 				</pre>
 				<h5>Checker Information</h5>
 				<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %>

@@ -57,6 +57,7 @@ public class ServerManager {
 		
 		for(int i=0;i<judgers.size();i++){
 			if(!judgers.get(i).isOnline()){ //kill offline judges
+				System.out.println("Killed judge:"+judgers.get(i).name);
 				judgers.remove(i);
 				i--;
 				continue;

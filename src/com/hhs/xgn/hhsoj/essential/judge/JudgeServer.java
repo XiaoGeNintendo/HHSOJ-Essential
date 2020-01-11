@@ -140,7 +140,7 @@ public class JudgeServer {
 			addAll(cmd,r);
 			
 			
-			System.out.println("Start running core with arg:"+cmd);
+//			System.out.println("Start running core with arg:"+cmd);
 			ProcessBuilder pb=new ProcessBuilder(cmd);
 			pb.directory(new File("judge"));
 			pb.redirectOutput(new File("judge/sbout.txt"));
@@ -161,28 +161,29 @@ public class JudgeServer {
 			String sbout=CommonUtil.readFile("judge/sbout.txt");
 			String[] arg=sbout.split("\n");
 			if(arg[0].equals("RE")){
-				sub.addResult(sn,new TestResult("Runtime Error", arg[1],arg[2], "Exit code is "+arg[3], inp, "", 0));
+				sub.addResult(sn,new TestResult("Runtime Error", arg[1],arg[2], "Exit code is "+arg[3], inp, "", "",0));
 				return false;
 			}
 			if(arg[0].equals("RF")){
-				sub.addResult(sn,new TestResult("Restrict Function", arg[1],arg[2], arg[3], inp, "", 0));
+				sub.addResult(sn,new TestResult("Restrict Function", arg[1],arg[2], arg[3], inp, "", "",0));
 				return false;
 			}
 			if(arg[0].equals("TLE")){
-				sub.addResult(sn,new TestResult("Time Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+				sub.addResult(sn,new TestResult("Time Limit Exceeded", arg[1],arg[2], "", inp, "", "",0));
 				return false;
 			}
 			if(arg[0].equals("MLE")){
-				sub.addResult(sn,new TestResult("Memory Limit Exceeded", arg[1],arg[2], "", inp, "", 0));
+				sub.addResult(sn,new TestResult("Memory Limit Exceeded", arg[1],arg[2], "", inp, "", "",0));
 				return false;
 			}
 			if(arg[0].equals("UKE")){
-				sub.addResult(sn,new TestResult("Judgement Failed", arg[1], arg[2], "Please send an issue with this information:"+arg[3], "", "", 0));
+				sub.addResult(sn,new TestResult("Judgement Failed", arg[1], arg[2], "Please send an issue with this information:"+arg[3], "", "", "",0));
 				return false;
 			}
 			//next is compare answers
 			
 			String oup=CommonUtil.readFileWithLimit("judge/out.txt",1024);
+			String ans=CommonUtil.readFileWithLimit("judge/ans.txt", 1024);
 			
 			ProcessBuilder pb2=new ProcessBuilder("./checker","in.txt","out.txt","ans.txt","report.txt");
 			pb2.directory(new File("judge"));
@@ -195,19 +196,19 @@ public class JudgeServer {
 				String info=CommonUtil.readFileWithLimit("judge/report.txt", 1024);
 				
 				if(p2.exitValue()==0){
-					sub.addResult(sn,new TestResult("Accepted", arg[1],arg[2], info, inp, oup, 1));
+					sub.addResult(sn,new TestResult("Accepted", arg[1],arg[2], info, inp, oup,ans, 1));
 					return true;
 				}else{
 					if(p2.exitValue()==7){
-						sub.addResult(sn,new TestResult("Point", arg[1],arg[2], info, inp, oup, Float.parseFloat(info.split(" ")[0])));
+						sub.addResult(sn,new TestResult("Point", arg[1],arg[2], info, inp, oup, ans,Float.parseFloat(info.split(" ")[0])));
 						return true;
 					}else{
-						sub.addResult(sn,new TestResult("Wrong Answer", arg[1],arg[2], info, inp, oup, 0));
+						sub.addResult(sn,new TestResult("Wrong Answer", arg[1],arg[2], info, inp, oup, ans,0));
 						return false;
 					}
 				}
 			}else{
-				sub.addResult(sn,new TestResult("Checker Time Limit Exceeded", arg[1],arg[2], "", inp, oup, 0));
+				sub.addResult(sn,new TestResult("Checker Time Limit Exceeded", arg[1],arg[2], "", inp, oup, ans,0));
 				return false;
 			}
 		}catch(Exception e){

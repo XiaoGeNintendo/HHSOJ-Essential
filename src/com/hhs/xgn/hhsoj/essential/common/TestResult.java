@@ -22,6 +22,11 @@ public class TestResult {
 	 */
 	public String output="";
 	/**
+	 * The answer file (1KB)
+	 */
+	public String answer="";
+	
+	/**
 	 * The score
 	 */
 	public float score;
@@ -35,13 +40,14 @@ public class TestResult {
 		this.score = score;
 	}
 	
-	public TestResult(String verdict, String time, String memory, String info, String input, String output, float score) {
+	public TestResult(String verdict, String time, String memory, String info, String input,String answer, String output, float score) {
 		this.verdict = verdict;
 		this.time = Integer.parseInt(time);
 		this.memory = Integer.parseInt(memory);
 		this.info = info;
 		this.input = input;
 		this.output = output;
+		this.answer = answer;
 		this.score = score;
 	}
 	public TestResult(){
