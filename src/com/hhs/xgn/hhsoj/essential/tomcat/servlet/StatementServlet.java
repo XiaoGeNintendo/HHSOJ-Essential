@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.Problemset;
 import com.hhs.xgn.hhsoj.essential.tomcat.util.TomcatHelper;
 
 /**
@@ -45,6 +46,13 @@ public class StatementServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		if(set==null || id==null){
 			out.print("nope");
+			return;
+		}
+		
+		Problemset ps=TomcatHelper.getProblemset(set);
+		
+		if(ps.stTime>System.currentTimeMillis()){
+			out.print("Problem Not Public!");
 			return;
 		}
 		

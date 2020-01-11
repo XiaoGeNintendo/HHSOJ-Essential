@@ -81,7 +81,8 @@ public class TomcatHelper {
 					continue;
 				}
 				
-				Problemset p=gs.fromJson(CommonUtil.readFile(sub.getAbsolutePath()+"/problemset.json"), Problemset.class);
+				Problemset p=getProblemset(sub.getName());
+				
 				p.id=sub.getName();
 //				System.out.println(p.id);
 				ap.add(p);
@@ -138,5 +139,12 @@ public class TomcatHelper {
 			fetchConfig();
 		}
 		return config.path+"/problems/"+set+"/"+id;
+	}
+	public static Problemset getProblemset(String set) {
+		if(config==null){
+			fetchConfig();
+		}
+		
+		return gs.fromJson(CommonUtil.readFile(config.path+"/problems/"+set+"/problemset.json"), Problemset.class);
 	}
 }
