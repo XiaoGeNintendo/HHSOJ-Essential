@@ -119,6 +119,8 @@ public class JudgeServer {
 			File out=new File(set.getAbsoluteFile()+"/test"+id+".out");
 			
 			System.out.println("Running:"+sub.id+" on "+in.getName()+" "+set.getName());
+			sub.test=set.getName()+"."+in.getName();
+			rollbackInfo(sub);
 			
 			//copy files to given path
 			CommonUtil.copyFile(in,new File("judge/in.txt"));
@@ -291,6 +293,9 @@ public class JudgeServer {
 		p_.waitFor();
 		
 		//compile file
+		sub.test="Compiling";
+		rollbackInfo(sub);
+		
 		System.out.println("Compiling by:"+Arrays.toString(getLang(sub.lang).compileCmd));
 		ProcessBuilder pb=new ProcessBuilder(getLang(sub.lang).compileCmd);
 		pb.redirectError(new File("judge/ce.txt"));

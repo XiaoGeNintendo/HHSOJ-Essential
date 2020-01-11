@@ -45,6 +45,31 @@ public class Submission {
 	 */
 	public String problemId;
 	
+	/**
+	 * the current test name of the submission
+	 */
+	public String test;
+	
+	public int getRunTime(){
+		int ans=0;
+		for(Entry<String, TestsetResult> e:res.entrySet()){
+			for(TestResult tr:e.getValue().res){
+				ans=Math.max(ans, tr.time);
+			}
+		}
+		return ans;
+	}
+	
+	public int getRunMem(){
+		int ans=0;
+		for(Entry<String, TestsetResult> e:res.entrySet()){
+			for(TestResult tr:e.getValue().res){
+				ans=Math.max(ans, tr.memory);
+			}
+		}
+		return ans;
+	}
+	
 	public void addResult(String tsn,TestResult testResult) {
 		res.get(tsn).res.add(testResult);
 	}

@@ -9,6 +9,7 @@ import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
 import com.hhs.xgn.hhsoj.essential.common.Language;
 import com.hhs.xgn.hhsoj.essential.common.Problem;
 import com.hhs.xgn.hhsoj.essential.common.Problemset;
+import com.hhs.xgn.hhsoj.essential.common.Submission;
 import com.hhs.xgn.hhsoj.essential.common.User;
 
 /**
@@ -172,5 +173,22 @@ public class TomcatHelper {
 		}
 		
 		return fa.list().length;
+	}
+	
+	public static ArrayList<Submission> getAllSubmissions(){
+		if(config==null){
+			fetchConfig();
+		}
+		
+		File fa=new File(config.path+"/submission");
+		if(!fa.exists()){
+			fa.mkdirs();
+		}
+		ArrayList<Submission> arr=new ArrayList<>();
+		for(File sub:fa.listFiles()){
+			arr.add(CommonUtil.readSubmissionInfo(sub.getAbsolutePath()));
+		}
+		
+		return arr;
 	}
 }

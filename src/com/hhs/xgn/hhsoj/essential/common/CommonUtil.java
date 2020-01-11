@@ -106,4 +106,8 @@ public class CommonUtil {
 		Type type = new TypeToken<HashMap<String, Language>>(){}.getType();
 		return gs.fromJson(readFile(path), type);
 	}
+
+	public static Submission readSubmissionInfo(String path) {
+		return gs.fromJson(readFile(path),Submission.class);
+	}
 }
