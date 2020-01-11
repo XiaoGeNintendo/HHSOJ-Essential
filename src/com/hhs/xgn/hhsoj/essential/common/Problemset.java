@@ -10,8 +10,4 @@ public class Problemset {
 	public String id;
 	public long stTime;
 	public long edTime;
-	/**
-	 * null for no password
-	 */
-	public String password;
 }

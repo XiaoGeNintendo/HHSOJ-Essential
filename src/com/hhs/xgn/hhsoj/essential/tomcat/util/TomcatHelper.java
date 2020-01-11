@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.Problem;
 import com.hhs.xgn.hhsoj.essential.common.Problemset;
 import com.hhs.xgn.hhsoj.essential.common.User;
 
@@ -22,6 +23,7 @@ public class TomcatHelper {
 			System.out.println("FATAL: CANNOT FIND CONFIG FILE. SEE DOCUMENTATION FOR DETAIL");
 			System.out.println("EXPECTED TO FIND IT HERE:"+new File("config.json").getAbsolutePath());
 		}else{
+			System.err.println("Fetch Config Data Success");
 			config=gs.fromJson(CommonUtil.readFile("config.json"), Config.class);
 		}
 		
@@ -89,5 +91,52 @@ public class TomcatHelper {
 		}
 		
 		return ap;
+	}
+	
+	public static ArrayList<Problem> getAllProblems(String set){
+		if(config==null){
+			fetchConfig();
+		}
+		File fa=new File(config.path+"/problems");
+		if(!fa.exists()){
+			fa.mkdirs();
+		}
+		
+		ArrayList<Problem> arr=new ArrayList<>();
+		File s=new File(config.path+"/problems/"+set);
+		if(s.exists()==false){
+			return arr;
+		}
+		
+		for(File sub:s.listFiles()){
+			if(sub.isDirectory()){
+				Problem p=getProblem(set,sub.getName());
+				
+				arr.add(p);
+			}
+		}
+		
+		return arr;
+	}
+	
+	public static Problem getProblem(String set,String id){
+		try{
+			if(config==null){
+				fetchConfig();
+			}
+			
+			Problem p=CommonUtil.readProbInfo(getProblemPath(set, id)+"/problem.json");
+			p.set=set;
+			p.id=id;
+			return p;
+		}catch(Exception e){
+			return null;
+		}
+	}
+	public static String getProblemPath(String set, String id) {
+		if(config==null){
+			fetchConfig();
+		}
+		return config.path+"/problems/"+set+"/"+id;
 	}
 }

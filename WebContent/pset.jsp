@@ -20,7 +20,7 @@
 			for(Problemset p:arr){
 				
 		%>
-				<a href="problemList.jsp?id=<%=p.id %>"><h1><%=p.name %></h1></a> opens at <b><%=new Date(p.stTime) %></b> freezes at <b><%=new Date(p.edTime) %></b>
+				<a href="plist.jsp?id=<%=p.id %>"><h1><%=p.name %></h1></a> opens at <b><%=new Date(p.stTime) %></b> freezes at <b><%=new Date(p.edTime) %></b>
 		<%
 			}
 			
