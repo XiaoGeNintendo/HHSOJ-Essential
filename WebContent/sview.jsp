@@ -60,28 +60,41 @@
 	<%
 		for(Entry<String,TestsetResult> e:s.res.entrySet()){
 		%>
-			<h3>Subtask: <%=e.getKey() %> [<%=e.getValue().getVerdict()%>;<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %>]</h3>
+			<table border="2">
+				<tr>
+					<th align="left">Subtask: <%=e.getKey() %> [<%=e.getValue().getVerdict()%>;<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %>]</th>
+				</tr>
+				<tr><td>
 		<%
 			int cnt=0;
 			for(TestResult tr:e.getValue().res){
 				cnt++;
 		%>
-				<h4>Test <%=e.getKey()%>.<%=cnt %> [<%=tr.verdict%>;<%=tr.score %>] (<%=tr.time %> ms;<%=tr.memory %> KB)</h4>
-				
-				<h5>Input</h5>
-				<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %>
-				</pre>
-				<h5>Output</h5>
-				<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %>
-				</pre>
-				<h5>Answer</h5>
-				<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %>
-				</pre>
-				<h5>Checker Information</h5>
-				<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %>
-				</pre>
+				<table border="1">
+					<tr>
+						<th align="left">Test <%=e.getKey()%>.<%=cnt %> [<%=tr.verdict%>;<%=tr.score %>] (<%=tr.time %> ms;<%=tr.memory %> KB)</th>
+					</tr>
+					<tr><td>
+						<h5>Input</h5>
+						<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %>
+						</pre>
+						<h5>Output</h5>
+						<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %>
+						</pre>
+						<h5>Answer</h5>
+						<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %>
+						</pre>
+						<h5>Checker Information</h5>
+						<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %>
+						</pre>
+					</td></tr>
+				</table> <br/>
 		<%
 			}
+		%>
+			</td></tr>
+			</table> <br/>
+		<%
 		}
 	%>
 </body>
