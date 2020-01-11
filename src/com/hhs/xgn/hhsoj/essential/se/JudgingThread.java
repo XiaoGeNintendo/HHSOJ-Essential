@@ -29,6 +29,9 @@ public class JudgingThread extends Thread {
 	
 	public void run(){
 		System.out.println("Start to judge "+sub.id+" on "+j.name);
+		sub.judger=j.name;
+		boss.saveSubmission(sub);
+		
 		try{
 			//send information
 			Gson gs=new Gson();

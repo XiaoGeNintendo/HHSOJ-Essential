@@ -2,9 +2,11 @@ package com.hhs.xgn.hhsoj.essential.tomcat.util;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.Language;
 import com.hhs.xgn.hhsoj.essential.common.Problem;
 import com.hhs.xgn.hhsoj.essential.common.Problemset;
 import com.hhs.xgn.hhsoj.essential.common.User;
@@ -146,5 +148,29 @@ public class TomcatHelper {
 		}
 		
 		return gs.fromJson(CommonUtil.readFile(config.path+"/problems/"+set+"/problemset.json"), Problemset.class);
+	}
+	
+	public static HashMap<String,Language> getLangs(){
+		if(config==null){
+			fetchConfig();
+		}
+		File fa=new File(config.path+"/config");
+		if(!fa.exists()){
+			fa.mkdirs();
+		}
+		
+		return CommonUtil.readLang(config.path+"/config/lang.json");
+	}
+	public static int getSubmissionCount() {
+		if(config==null){
+			fetchConfig();
+		}
+		
+		File fa=new File(config.path+"/submission");
+		if(!fa.exists()){
+			fa.mkdirs();
+		}
+		
+		return fa.list().length;
 	}
 }

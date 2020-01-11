@@ -8,12 +8,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class CommonUtil {
+	
+	static Gson gs=new Gson();
 	
 	public static String readFile(String path){
 		try{
@@ -42,7 +46,6 @@ public class CommonUtil {
 	}
 	
 	public static Problem readProbInfo(String path){
-		Gson gs=new Gson();
 		return gs.fromJson(readFile(path),Problem.class);
 	}
 	
@@ -97,5 +100,10 @@ public class CommonUtil {
 
 		ins.close();
 		out.close();
+	}
+
+	public static HashMap<String, Language> readLang(String path) {
+		Type type = new TypeToken<HashMap<String, Language>>(){}.getType();
+		return gs.fromJson(readFile(path), type);
 	}
 }

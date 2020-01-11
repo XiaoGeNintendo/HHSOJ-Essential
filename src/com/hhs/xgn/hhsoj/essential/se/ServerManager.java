@@ -42,7 +42,8 @@ public class ServerManager {
 	
 	public synchronized void addSubmission(Submission s){
 		submissions.add(s);
-		System.out.println("Added submission:"+s.id);
+		saveSubmission(s);
+		System.out.println("Added submission:"+s.id+" from "+s.author+" to "+s.problemSet+"."+s.problemId);
 		notifyJudge();
 	}
 	

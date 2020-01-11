@@ -49,6 +49,9 @@ MathJax.Hub.Config({
 	</center>
 	<div id="txt">Loading Statement...</div>
 	<hr/>
+	<center>
+		<a href="submit.jsp?set=<%=p.set%>&id=<%=p.id%>">Submit</a>
+	</center>
 	
 	<script>
 		$.post("requireStatement",{

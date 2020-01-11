@@ -377,7 +377,7 @@ public class JudgeServer {
 	}
 	
 	public void solve(String[] args){
-		if(args.length<2){
+		if(args.length<3){
 			System.out.println("judge ip port name");
 			System.exit(1);
 		}

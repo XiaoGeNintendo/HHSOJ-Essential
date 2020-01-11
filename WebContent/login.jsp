@@ -22,7 +22,7 @@
 				"password":document.getElementById("pass").value,
 			},function(data,status){
 				if(data=="OK"){
-					document.write('<a href="index.jsp">Success</a>')
+					window.location="index.jsp";
 				}else{
 					alert(data);
 				}
