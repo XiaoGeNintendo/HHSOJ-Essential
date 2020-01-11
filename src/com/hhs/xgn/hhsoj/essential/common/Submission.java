@@ -10,12 +10,12 @@ import java.util.Map.Entry;
  *
  */
 public class Submission {
-	public String code;
-	public String lang;
-	public String author;
+	public String code="";
+	public String lang="";
+	public String author="";
 	public long submitTime;
 	
-	public String judger;
+	public String judger="";
 	public long id;
 	
 	/**
@@ -25,7 +25,7 @@ public class Submission {
 	/**
 	 * Compiler information
 	 */
-	public String compilerInfo;
+	public String compilerInfo="";
 	
 	/**
 	 * The score of the submission.
@@ -39,16 +39,16 @@ public class Submission {
 	/**
 	 * The problem set id of the submission
 	 */
-	public String problemSet;
+	public String problemSet="";
 	/**
 	 * The problem id of the submission
 	 */
-	public String problemId;
+	public String problemId="";
 	
 	/**
 	 * the current test name of the submission
 	 */
-	public String test;
+	public String test="Init";
 	
 	public int getRunTime(){
 		int ans=0;

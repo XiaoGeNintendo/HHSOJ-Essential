@@ -12,4 +12,5 @@
 <a href="index.jsp">Index</a>
 <a href="pset.jsp">Problemsets</a> 
 <a href="submit.jsp">Submit</a>
+<a href="status.jsp">Status</a>
 <hr/>

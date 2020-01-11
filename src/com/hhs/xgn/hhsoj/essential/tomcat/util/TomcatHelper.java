@@ -191,4 +191,17 @@ public class TomcatHelper {
 		
 		return arr;
 	}
+	
+	public static Submission getSubmission(String id){
+		if(config==null){
+			fetchConfig();
+		}
+		
+		File fa=new File(config.path+"/submission");
+		if(!fa.exists()){
+			fa.mkdirs();
+		}
+		
+		return CommonUtil.readSubmissionInfo(config.path+"/submission/"+id+".json");
+	}
 }

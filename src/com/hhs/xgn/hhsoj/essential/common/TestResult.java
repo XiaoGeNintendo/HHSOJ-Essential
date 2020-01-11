@@ -6,21 +6,21 @@ package com.hhs.xgn.hhsoj.essential.common;
  *
  */
 public class TestResult {
-	public String verdict;
+	public String verdict="";
 	public int time;
 	public int memory;
 	/**
 	 * Checker information
 	 */
-	public String info;
+	public String info="";
 	/**
 	 * The input file (1KB)
 	 */
-	public String input;
+	public String input="";
 	/**
 	 * The output file (1KB)
 	 */
-	public String output;
+	public String output="";
 	/**
 	 * The score
 	 */

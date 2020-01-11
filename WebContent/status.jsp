@@ -11,7 +11,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Submit - HHSOJ</title>
+	<title>Status - HHSOJ</title>
 	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
@@ -37,12 +37,12 @@
 				for(Submission s:arr){
 			%>
 				<tr>
-					<td><%=s.id %></td>
+					<td><a href="sview.jsp?id=<%=s.id %>"><%=s.id %></a></td>
 					<td><%=new Date(s.submitTime) %></td>
 					<td><%=s.author %></td>
 					<td><a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a></td>
 					<td><%=String.format("%.1f", 100*s.score) %></td>
-					<td><%=s.test %></td>
+					<td><%=(s.isFinal?"Final":s.test) %></td>
 					<td><%=s.lang %></td>
 					<td><%=s.getRunTime() %></td>
 					<td><%=s.getRunMem() %></td>
