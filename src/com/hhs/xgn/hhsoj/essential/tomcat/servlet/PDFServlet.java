@@ -1,7 +1,9 @@
 package com.hhs.xgn.hhsoj.essential.tomcat.servlet;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -16,14 +18,14 @@ import com.hhs.xgn.hhsoj.essential.tomcat.util.TomcatHelper;
 /**
  * Servlet implementation class StatementServlet
  */
-@WebServlet("/requireStatement")
-public class StatementServlet extends HttpServlet {
+@WebServlet("/requirePDF")
+public class PDFServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StatementServlet() {
+    public PDFServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,35 +34,41 @@ public class StatementServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String set=request.getParameter("set");
+		String id=request.getParameter("id");
+		OutputStream out=response.getOutputStream();
+		if(set==null || id==null){
+			response.setStatus(403);
+			return;
+		}
+		
+		String path=TomcatHelper.getProblemPath(set,id);
+		
+		File f1=new File(path+"/statement.pdf");
+		
+		if(f1.exists()==false){
+			response.setStatus(403);
+			return;
+		}
+		response.setContentType("application/pdf");
+		response.setContentLength((int)f1.length());
+//		response.setHeader("Content-Disposition", "filename=\""+f1.getName()+"\"");
+		
+		byte[] by=new byte[1024*1024];
+		FileInputStream fis=new FileInputStream(f1);
+		int len;
+		while((len=fis.read(by))!=-1){
+			out.write(by,0,len);
+		}
+		fis.close();
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String set=request.getParameter("set");
-		String id=request.getParameter("id");
-		PrintWriter out=response.getWriter();
-		if(set==null || id==null){
-			out.print("nope");
-			return;
-		}
 		
-		String path=TomcatHelper.getProblemPath(set,id);
-		
-		File f1=new File(path+"/statement.md");
-		
-		if(f1.exists()){
-			out.println(CommonUtil.readFile(f1.getAbsolutePath()));
-		}
-		
-		File f2=new File(path+"/statement.pdf");
-		if(f2.exists()){
-			out.println("---");
-			out.println("<a href=\"requirePDF?set="+set+"&id="+id+"\" target=\"_blank\">Download PDF</a>");
-		}
 	}
 
 }
