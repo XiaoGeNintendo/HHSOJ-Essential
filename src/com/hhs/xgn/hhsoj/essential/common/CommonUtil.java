@@ -1,5 +1,6 @@
 package com.hhs.xgn.hhsoj.essential.common;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,6 +33,17 @@ public class CommonUtil {
 		}catch(Exception e){
 			return null;
 		}
+	}
+	
+	public static String colorize(float f){
+//		System.out.println(f+Integer.toHexString((int)((1-f)*256))+Integer.toHexString((int)f*256)+"00");
+		if(f>=1.0){
+			return "(0,255,0)";
+		}
+		if(f<=0.0){
+			return "(255,0,0)";
+		}
+		return "("+(int)((1-f)*256)+","+(int)(f*256)+","+"0)";
 	}
 	
 	public static boolean writeFile(String path,String content){

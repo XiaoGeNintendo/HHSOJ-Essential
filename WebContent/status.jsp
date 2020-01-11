@@ -1,3 +1,5 @@
+<%@page import="com.hhs.xgn.hhsoj.essential.common.CommonUtil"%>
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.Submission"%>
 <%@page import="java.util.Map.Entry"%>
@@ -34,6 +36,7 @@
 			</tr>
 			<%
 				ArrayList<Submission> arr=TomcatHelper.getAllSubmissions();
+				Collections.reverse(arr);
 				for(Submission s:arr){
 			%>
 				<tr>
@@ -41,7 +44,7 @@
 					<td><%=new Date(s.submitTime) %></td>
 					<td><%=s.author %></td>
 					<td><a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a></td>
-					<td><%=String.format("%.1f", 100*s.score) %></td>
+					<td><b style="color:rgb<%=CommonUtil.colorize(s.score) %>"><%=String.format("%.1f", 100*s.score) %></b></td>
 					<td><%=(s.isFinal?"Final":s.test) %></td>
 					<td><%=s.lang %></td>
 					<td><%=s.getRunTime() %></td>
