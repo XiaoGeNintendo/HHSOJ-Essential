@@ -44,7 +44,7 @@
 					<td><%=new Date(s.submitTime) %></td>
 					<td><%=s.author %></td>
 					<td><a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a></td>
-					<td><b style="color:rgb<%=CommonUtil.colorize(s.score) %>"><%=String.format("%.1f", 100*s.score) %></b></td>
+					<td align="center"><b style="color:rgb<%=CommonUtil.colorize(s.score) %>"><%=String.format("%.0f", 100*s.score) %></b></td>
 					<td><%=(s.isFinal?"Final":s.test) %></td>
 					<td><%=s.lang %></td>
 					<td><%=s.getRunTime() %></td>
