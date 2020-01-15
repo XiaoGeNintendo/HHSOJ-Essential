@@ -40,7 +40,7 @@ public class TestResult {
 		this.score = score;
 	}
 	
-	public TestResult(String verdict, String time, String memory, String info, String input,String answer, String output, float score) {
+	public TestResult(String verdict, String time, String memory, String info, String input, String output,String answer, float score) {
 		this.verdict = verdict;
 		this.time = Integer.parseInt(time);
 		this.memory = Integer.parseInt(memory);

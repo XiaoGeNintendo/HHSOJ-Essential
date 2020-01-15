@@ -44,6 +44,8 @@ public class JudgeServer {
 	
 	Gson gs=new Gson();
 	
+	final int READ_LIMIT=256;
+	
 	public void downloadData(String set,String id){
 		
 	}
@@ -148,7 +150,7 @@ public class JudgeServer {
 			p.waitFor();
 			
 	
-			String inp=CommonUtil.readFileWithLimit(in.getAbsolutePath(),1024);
+			String inp=CommonUtil.readFileWithLimit(in.getAbsolutePath(),READ_LIMIT);
 			
 			
 			int v=p.exitValue();
@@ -182,8 +184,8 @@ public class JudgeServer {
 			}
 			//next is compare answers
 			
-			String oup=CommonUtil.readFileWithLimit("judge/out.txt",1024);
-			String ans=CommonUtil.readFileWithLimit("judge/ans.txt", 1024);
+			String oup=CommonUtil.readFileWithLimit("judge/out.txt",READ_LIMIT);
+			String ans=CommonUtil.readFileWithLimit("judge/ans.txt", READ_LIMIT);
 			
 			ProcessBuilder pb2=new ProcessBuilder("./checker","in.txt","out.txt","ans.txt","report.txt");
 			pb2.directory(new File("judge"));
@@ -193,7 +195,7 @@ public class JudgeServer {
 			
 			if(notle){
 				
-				String info=CommonUtil.readFileWithLimit("judge/report.txt", 1024);
+				String info=CommonUtil.readFileWithLimit("judge/report.txt", READ_LIMIT);
 				
 				if(p2.exitValue()==0){
 					sub.addResult(sn,new TestResult("Accepted", arg[1],arg[2], info, inp, oup,ans, 1));
@@ -239,7 +241,7 @@ public class JudgeServer {
 		
 		boolean ok=true;
 //		System.out.println(p.tests);
-		
+//		System.out.println(p.tests.get(set.getName()).requirement);
 		for(String y:p.tests.get(set.getName()).requirement){
 			if(!sub.res.get(y).pass){
 				System.out.println(y+" did not pass! Skipped");
@@ -310,7 +312,7 @@ public class JudgeServer {
 		boolean notle=p.waitFor(30,TimeUnit.SECONDS);
 		
 		if(notle){
-			sub.compilerInfo=CommonUtil.readFileWithLimit("judge/ce.txt",1024);
+			sub.compilerInfo=CommonUtil.readFileWithLimit("judge/ce.txt",READ_LIMIT);
 		
 			if(p.exitValue()!=0){
 				sub.isFinal=true;
@@ -343,7 +345,13 @@ public class JudgeServer {
 	
 	public void rollbackInfo(Submission sub){
 		try{
-			dos.writeUTF(gs.toJson(sub));
+			String s=gs.toJson(sub);
+			final int BLOCK_SIZE=65530;
+			int block=(s.length()+BLOCK_SIZE-1)/BLOCK_SIZE;
+			dos.writeInt(block);
+			for(int i=0;i<block;i++){
+				dos.writeUTF(s.substring(i*BLOCK_SIZE, Math.min(s.length(), (i+1)*BLOCK_SIZE)));
+			}
 		}catch(Exception e){
 			System.out.println("Warning: cannot rollback info:");
 			e.printStackTrace();
@@ -455,6 +463,8 @@ public class JudgeServer {
 				}catch(Exception e){
 					sub.compilerInfo="Judge failed:"+e;
 					sub.isFinal=true;
+					
+					rollbackInfo(sub);
 					e.printStackTrace();
 				}
 				

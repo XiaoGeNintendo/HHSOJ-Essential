@@ -97,7 +97,13 @@ public class JudgingThread extends Thread {
 			}
 			
 			while(true){
-				sub=gs.fromJson(j.dis.readUTF(), Submission.class);
+				String s="";
+				
+				int r=j.dis.readInt();
+				for(int i=0;i<r;i++){
+					s+=j.dis.readUTF();
+				}
+				sub=gs.fromJson(s, Submission.class);
 				boss.saveSubmission(sub);
 //				System.out.println("Received:"+gs.toJson(sub));
 				if(sub.isFinal){
