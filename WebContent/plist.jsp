@@ -1,3 +1,4 @@
+<%@page import="com.hhs.xgn.hhsoj.essential.tomcat.util.HeadGenerator"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.Problem"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.File"%>
@@ -7,16 +8,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%=HeadGenerator.getMarkdown() %>
+<%=HeadGenerator.getBasic() %>
 <title>Problemlist - HHSOJ</title>
 </head>
 <body>
-	<center>
+	<jsp:include page="head.jsp"></jsp:include>
+	<div class="container">
 		<h1>Problem list of <%=request.getParameter("id")%></h1>
-		<i>OJ by XGN from HHS</i>
-		<jsp:include page="head.jsp"></jsp:include>
 		<a href="pset.jsp">Back</a>
-	</center>
+		<hr/>
 	<%
 		try{
 			String res=request.getParameter("id");
@@ -31,5 +32,6 @@
 			out.println("Nope");
 		}
 	%>
+	</div>
 </body>
 </html>

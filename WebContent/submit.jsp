@@ -1,3 +1,4 @@
+<%@page import="com.hhs.xgn.hhsoj.essential.tomcat.util.HeadGenerator"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.Language"%>
@@ -8,15 +9,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Submit - HHSOJ</title>
-	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<%=HeadGenerator.getMarkdown() %>
+<%=HeadGenerator.getBasic() %>
+<title>Submit - HHSOJ</title>
 </head>
 <body>
-	<center>
-		<h1>Submit</h1>
-		<jsp:include page="head.jsp"></jsp:include>
-	</center>
+	<jsp:include page="head.jsp"></jsp:include>
+	<div class="container">
+		<h1>Submit</h1>	
 	
 	<%
 		if(session.getAttribute("username")==null){
@@ -33,7 +33,6 @@
 			id="";
 		}
 	%>
-	
 	<center>
 		Problem Set Id:<input id="set" value="<%=set %>"> <br/>
 		Problem Id:<input id="id" value="<%=id %>"> <br/> 
@@ -51,6 +50,7 @@
 		Code:<textarea id="code" rows="20" cols="50"></textarea> <br/>
 		<button id="me" onclick="submit()">Submit</button>
 	</center>
+	</div>
 	<script>
 		function submit(){
 			document.getElementById("me").disabled=true;

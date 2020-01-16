@@ -24,3 +24,6 @@ hs_err_pid*
 
 # Eclipse build folder
 /build/
+
+# OJ data
+/users/

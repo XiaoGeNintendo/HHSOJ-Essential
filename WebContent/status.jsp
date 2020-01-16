@@ -1,3 +1,4 @@
+<%@page import="com.hhs.xgn.hhsoj.essential.tomcat.util.HeadGenerator"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.CommonUtil"%>
 <%@page import="java.util.Collections"%>
@@ -13,17 +14,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Status - HHSOJ</title>
-	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<%=HeadGenerator.getBasic() %>
+<title>Status - HHSOJ</title>
 </head>
 <body>
-	<center>
+<jsp:include page="head.jsp"></jsp:include>
+	<div class="container">
 		<h1>Status</h1>
-		<jsp:include page="head.jsp"></jsp:include>
-	
-	
-		<table border="1">
+		<hr/>
+		<table class="table table-bordered table-sm status-table">
 			<tr>
 				<th>#</th>
 				<th>Time</th>
@@ -60,6 +59,6 @@
 			%>
 		
 		</table>
-	</center>
+	</div>
 </body>
 </html>

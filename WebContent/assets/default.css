@@ -1,0 +1,125 @@
+/* HHSOJ CSS file */
+/* by Zzzyt */
+body { 
+	background: #fafaf8;
+	min-width: 600px;
+}
+
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	clear: both;
+}
+
+p, span, a, th, td, label{
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	font-family: "Consolas";
+}
+
+input[type=button],input[type=submit],button{
+	font-family: "Consolas";
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+a[class~="btn"]{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+div[class~="input-group"]{
+	margin:5px;
+}
+
+.container{
+	margin-top:50px;
+	margin-bottom:50px;
+	min-width:800px;
+}
+
+.title {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-weight: bold;
+	float: left;
+	font-family:"Consolas";
+}
+
+.subtitle {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	float: left;
+	clear: both;
+	margin-bottom: 10px;
+	font-family:"Consolas";
+}
+
+.navbar {
+	clear: both;
+}
+
+.navbar a{
+	color:#000000;
+	text-decoration:none;
+}
+
+.nav-link{
+	font-weight: bold;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	font-size: 20px;
+	float: left;
+}
+
+
+.ml-auto{
+	margin-left:0px !important;
+}
+
+.mr-auto{
+	margin-right:0px!important;
+	float:right !important;
+	margin-left:auto !important;
+}
+
+.selected {
+	border-bottom: 3px solid #66ccff;
+}
+
+.nav-link, .nav-link:hover, .nav-link:visited, .nav-link:active{
+	text-decoration:none;
+}
+
+.nostyle, .nostyle:hover, .nostyle:visited, .notstyle:active{
+	text-decoration:none;
+}
+
+.marquee {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+
+.table{
+	background: #ffffff;
+}
+
+.table>tbody>tr>th{
+	background: #dee2e6;
+}
+
+.status-table {
+	align-self: center;
+	margin: 0px auto;
+	min-width: 500px;
+}

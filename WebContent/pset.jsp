@@ -1,3 +1,4 @@
+<%@page import="com.hhs.xgn.hhsoj.essential.tomcat.util.HeadGenerator"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.Problemset"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.tomcat.util.TomcatHelper"%>
@@ -7,14 +8,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%=HeadGenerator.getMarkdown() %>
+<%=HeadGenerator.getMathJax() %>
+<%=HeadGenerator.getBasic() %>
 <title>Problemset - HHSOJ</title>
 </head>
 <body>
-	<center>
+	<jsp:include page="head.jsp"></jsp:include>
+	<div class="container">
 		<h1>Problemsets</h1>
-		<jsp:include page="head.jsp"></jsp:include>
-		
+		<hr>
 		<%
 			ArrayList<Problemset> arr=TomcatHelper.getProblemsets();
 			for(Problemset p:arr){
@@ -25,6 +28,6 @@
 			}
 			
 		%>
-	</center>
+	</div>
 </body>
 </html>

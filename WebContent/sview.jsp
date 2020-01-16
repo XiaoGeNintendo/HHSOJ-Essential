@@ -1,3 +1,4 @@
+<%@page import="com.hhs.xgn.hhsoj.essential.tomcat.util.HeadGenerator"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.TestResult"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.TestsetResult"%>
 <%@page import="java.util.Map.Entry"%>
@@ -12,8 +13,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<%=HeadGenerator.getMarkdown() %>
+<%=HeadGenerator.getMathJax() %>
+<%=HeadGenerator.getBasic() %>
 <title>Submission Viewing - HHSOJ</title>
 </head>
 <body>
@@ -32,70 +34,69 @@
 			return;
 		}
 	%>
-	
-	<center>
+	<jsp:include page="head.jsp"></jsp:include>
+	<div class="container">
 		<h1>Submission #<%=id %></h1>
-		<jsp:include page="head.jsp"></jsp:include>
-	</center>
-	
-	<h2>Basic Information</h2>
-	Id:<%=s.id %><br/>
-	Submit Time:<%=new Date(s.submitTime) %><br/>
-	Author:<%=s.author %><br/>
-	Problem:<a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a><br/>
-	Score:<%=String.format("%.1f", 100*s.score) %><br/>
-	Test:<%=(s.isFinal?"Final":s.test) %><br/>
-	Language:<%=s.lang %><br/>
-	Time:<%=s.getRunTime() %><br/>
-	Memory:<%=s.getRunMem() %><br/>
-	Judger:<%=s.judger %> <br/>
-	
-	<h2>Code</h2>
-	<pre><%=s.code.replace("<", "&lt;").replace(">","&gt;") %>
-	</pre>
-	<h2>Compiler Information</h2>
-	<pre><%=s.compilerInfo.replace("<", "&lt;").replace(">","&gt;") %>
-	</pre>
-	<h2>Testcase Detail</h2>
-	<%
-		for(Entry<String,TestsetResult> e:s.res.entrySet()){
-		%>
-			<table border="2">
-				<tr>
-					<th align="left">Subtask: <%=e.getKey() %> [<%=e.getValue().getVerdict()%>;<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %>]</th>
-				</tr>
-				<tr><td>
+		<hr/>
+		<h2>Basic Information</h2>
+		Id:<%=s.id %><br/>
+		Submit Time:<%=new Date(s.submitTime) %><br/>
+		Author:<%=s.author %><br/>
+		Problem:<a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a><br/>
+		Score:<%=String.format("%.1f", 100*s.score) %><br/>
+		Test:<%=(s.isFinal?"Final":s.test) %><br/>
+		Language:<%=s.lang %><br/>
+		Time:<%=s.getRunTime() %><br/>
+		Memory:<%=s.getRunMem() %><br/>
+		Judger:<%=s.judger %> <br/>
+		
+		<h2>Code</h2>
+		<pre><%=s.code.replace("<", "&lt;").replace(">","&gt;") %>
+		</pre>
+		<h2>Compiler Information</h2>
+		<pre><%=s.compilerInfo.replace("<", "&lt;").replace(">","&gt;") %>
+		</pre>
+		<h2>Testcase Detail</h2>
 		<%
-			int cnt=0;
-			for(TestResult tr:e.getValue().res){
-				cnt++;
-		%>
-				<table border="1">
+			for(Entry<String,TestsetResult> e:s.res.entrySet()){
+			%>
+				<table border="2">
 					<tr>
-						<th align="left">Test <%=e.getKey()%>.<%=cnt %> [<%=tr.verdict%>;<%=tr.score %>] (<%=tr.time %> ms;<%=tr.memory %> KB)</th>
+						<th align="left">Subtask: <%=e.getKey() %> [<%=e.getValue().getVerdict()%>;<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %>]</th>
 					</tr>
 					<tr><td>
-						<h5>Input</h5>
-						<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %>
-						</pre>
-						<h5>Output</h5>
-						<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %>
-						</pre>
-						<h5>Answer</h5>
-						<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %>
-						</pre>
-						<h5>Checker Information</h5>
-						<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %>
-						</pre>
-					</td></tr>
+			<%
+				int cnt=0;
+				for(TestResult tr:e.getValue().res){
+					cnt++;
+			%>
+					<table border="1">
+						<tr>
+							<th align="left">Test <%=e.getKey()%>.<%=cnt %> [<%=tr.verdict%>;<%=tr.score %>] (<%=tr.time %> ms;<%=tr.memory %> KB)</th>
+						</tr>
+						<tr><td>
+							<h5>Input</h5>
+							<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %>
+							</pre>
+							<h5>Output</h5>
+							<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %>
+							</pre>
+							<h5>Answer</h5>
+							<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %>
+							</pre>
+							<h5>Checker Information</h5>
+							<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %>
+							</pre>
+						</td></tr>
+					</table> <br/>
+			<%
+				}
+			%>
+				</td></tr>
 				</table> <br/>
-		<%
+			<%
 			}
 		%>
-			</td></tr>
-			</table> <br/>
-		<%
-		}
-	%>
+	</div>
 </body>
 </html>
