@@ -1,4 +1,3 @@
-<%@page import="com.hhs.xgn.hhsoj.essential.tomcat.util.HeadGenerator"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.Problem"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.File"%>
@@ -8,8 +7,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%=HeadGenerator.getMarkdown() %>
-<%=HeadGenerator.getBasic() %>
+<jsp:include page="head/markdown.jsp"></jsp:include>
+<jsp:include page="head/basic.jsp"></jsp:include>
 <title>Problemlist - HHSOJ</title>
 </head>
 <body>
