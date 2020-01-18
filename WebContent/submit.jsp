@@ -16,7 +16,7 @@
 	<jsp:include page="head.jsp"></jsp:include>
 	<div class="container">
 		<h1>Submit</h1>	
-	
+		<hr/>
 	<%
 		if(session.getAttribute("username")==null){
 			out.println("Login To Submit");
@@ -32,10 +32,26 @@
 			id="";
 		}
 	%>
-	<center>
-		Problem Set Id:<input id="set" value="<%=set %>"> <br/>
-		Problem Id:<input id="id" value="<%=id %>"> <br/> 
-		Language:<select id="lang">
+	
+	<div class="input-group" style="width:300px;">
+		<div class="input-group-prepend">
+     			<span class="input-group-text">Problem Set ID</span>
+   		</div>
+		<input id="set" value="<%=set %>" class="form-control">
+	</div>
+	
+	<div class="input-group" style="width:300px;">
+		<div class="input-group-prepend">
+     			<span class="input-group-text">Problem ID</span>
+   		</div>
+		<input id="id" value="<%=id %>" class="form-control">
+	</div>
+	
+	<div class="input-group" style="width:300px;">
+		<div class="input-group-prepend">
+     			<span class="input-group-text">Language</span>
+   		</div>
+		<select id="lang" class="form-control">
 			<%
 			HashMap<String,Language> arr=TomcatHelper.getLangs();
 			
@@ -45,14 +61,18 @@
 			<%
 			}
 			%>
-		</select> <br/>
-		Code:<textarea id="code" rows="20" cols="50"></textarea> <br/>
-		<button id="me" onclick="submit()">Submit</button>
-	</center>
+		</select>
+	</div>
+	
+	<textarea id="code" rows="20" cols="50"></textarea>
+	<br/>
+	
+	<button id="submit" onclick="submit()" class="btn btn-primary">Submit!</button>
+	
 	</div>
 	<script>
 		function submit(){
-			document.getElementById("me").disabled=true;
+			document.getElementById("submit").disabled=true;
 			
 			$.post("submitS",{
 				"set":document.getElementById("set").value,
@@ -64,7 +84,7 @@
 				if(data=="OK"){
 					window.location="status.jsp";
 				}else{
-					document.getElementById("me").disabled=false;
+					document.getElementById("submit").disabled=false;
 					alert(data);
 				}
 			});

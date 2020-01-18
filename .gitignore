@@ -28,3 +28,5 @@ hs_err_pid*
 # OJ data
 /users/
 /submission/
+/judge/
+/data/
