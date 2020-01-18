@@ -298,34 +298,41 @@ public class JudgeServer {
 		p_.waitFor();
 		System.out.println("chmod:"+p_.exitValue());
 		//compile file
-		sub.test="Compiling";
-		rollbackInfo(sub);
-		
-		System.out.println("Compiling by:"+Arrays.toString(getLang(sub.lang).compileCmd));
-		ProcessBuilder pb=new ProcessBuilder(getLang(sub.lang).compileCmd);
-		pb.redirectError(new File("judge/ce.txt"));
-		pb.redirectOutput(new File("judge/ce.txt"));
-		pb.directory(temp);
-		
-		Process p=pb.start();
-		
-		boolean notle=p.waitFor(30,TimeUnit.SECONDS);
-		
-		if(notle){
-			sub.compilerInfo=CommonUtil.readFileWithLimit("judge/ce.txt",READ_LIMIT);
-		
-			if(p.exitValue()!=0){
+		if(getLang(sub.lang).compileCmd.length==0) {
+			//no need for compiling
+			System.out.println("No compiling needed");
+			sub.compilerInfo="This language doesn't require compilation.";
+		}
+		else {
+			sub.test="Compiling";
+			rollbackInfo(sub);
+			
+			System.out.println("Compiling by:"+Arrays.toString(getLang(sub.lang).compileCmd));
+			ProcessBuilder pb=new ProcessBuilder(getLang(sub.lang).compileCmd);
+			pb.redirectError(new File("judge/ce.txt"));
+			pb.redirectOutput(new File("judge/ce.txt"));
+			pb.directory(temp);
+			
+			Process p=pb.start();
+			
+			boolean notle=p.waitFor(30,TimeUnit.SECONDS);
+			
+			if(notle){
+				sub.compilerInfo=CommonUtil.readFileWithLimit("judge/ce.txt",READ_LIMIT);
+			
+				if(p.exitValue()!=0){
+					sub.isFinal=true;
+					sub.compilerInfo="Compilation Error:\n"+sub.compilerInfo;
+					return;
+				}
+			}else{
+				sub.compilerInfo="Compile took 30 seconds, which was bad enough :(";
 				sub.isFinal=true;
-				sub.compilerInfo="Compilation Error:\n"+sub.compilerInfo;
 				return;
 			}
-		}else{
-			sub.compilerInfo="Compile took 30 seconds, which was bad enough :(";
-			sub.isFinal=true;
-			return;
+			
+			System.out.println("Compile Success");
 		}
-		
-		System.out.println("Compile Success");
 		
 		rollbackInfo(sub);
 		
