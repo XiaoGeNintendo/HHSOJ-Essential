@@ -10,12 +10,23 @@
 <body>
 	<jsp:include page="head.jsp"></jsp:include>
 	<div class="container">
-		<center>
-			Username:<input id="user"> <br /> Password:<input id="pass"
-				type="password"> <br />
-			<button onclick="submit()">Login</button>
-			<button onclick="reg()">Register</button>
-		</center>
+		<h1>Login/Register</h1>
+		<i>@XGN can u make two seperate pages?? --Zzzyt</i>
+		<hr/>
+		<div class="card center-form"><div class="card-body">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Username" id="user" maxlength="50" />
+			</div>
+			
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Password" id="pass" type="password" maxlength="50" />
+			</div>
+			
+			<div class="input-group">
+				<button class="form-control btn btn-primary" onclick="submit()">Login</button>
+				<button class="form-control btn btn-primary" onclick="reg()">Register</button>
+			</div>
+		</div></div>
 
 		<script>
 			function submit() {

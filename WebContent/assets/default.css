@@ -123,3 +123,9 @@ div[class~="input-group"]{
 	margin: 0px auto;
 	min-width: 500px;
 }
+
+.center-form{
+	margin: 0px auto;
+	margin-top: 50px;
+	width:300px;
+}
