@@ -42,7 +42,7 @@
 				});
 				for(Submission s:arr){
 			%>
-				<tr bgcolor="<%=(s.author.equals(session.getAttribute("username"))?"cran":"white")%>">
+				<tr bgcolor="<%=(s.author.equals(session.getAttribute("username"))?"#def":"white")%>">
 					<td><a href="sview.jsp?id=<%=s.id %>"><%=s.id %></a></td>
 					<td><%=new Date(s.submitTime) %></td>
 					<td><%=s.author %></td>
