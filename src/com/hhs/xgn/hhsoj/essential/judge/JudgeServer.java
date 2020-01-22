@@ -241,7 +241,7 @@ public class JudgeServer {
 		
 		boolean ok=true;
 //		System.out.println(p.tests);
-//		System.out.println(p.tests.get(set.getName()).requirement);
+		System.out.println("Requiring:"+Arrays.toString(p.tests.get(set.getName()).requirement));
 		for(String y:p.tests.get(set.getName()).requirement){
 			if(!sub.res.get(y).pass){
 				System.out.println(y+" did not pass! Skipped");
@@ -264,6 +264,8 @@ public class JudgeServer {
 			
 			
 			boolean b=runSingleTest(sub,id,set,p);
+			sub.score=sub.calcScore(p);
+			
 			rollbackInfo(sub);
 			if(b==false){
 				allClear=false;
