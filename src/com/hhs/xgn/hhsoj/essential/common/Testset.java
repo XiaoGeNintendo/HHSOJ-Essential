@@ -1,5 +1,6 @@
 package com.hhs.xgn.hhsoj.essential.common;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -19,7 +20,7 @@ public class Testset {
 	/**
 	 * All requirement for testing this subtask
 	 */
-	public String[] requirement=new String[0];
+	public ArrayList<String> requirement=new ArrayList<>();
 	
 	/**
 	 * Judge to the end of the subtask even if there's something wrong already?
@@ -33,6 +34,6 @@ public class Testset {
 
 	@Override
 	public String toString() {
-		return "Testset [scheme=" + scheme + ", requirement=" + Arrays.toString(requirement) + ", toEnd=" + toEnd + "]";
+		return "Testset [scheme=" + scheme + ", requirement=" + requirement + ", toEnd=" + toEnd + "]";
 	}
 }

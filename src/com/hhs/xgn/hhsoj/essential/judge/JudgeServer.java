@@ -241,7 +241,7 @@ public class JudgeServer {
 		
 		boolean ok=true;
 //		System.out.println(p.tests);
-		System.out.println("Requiring:"+Arrays.toString(p.tests.get(set.getName()).requirement));
+		System.out.println("Requiring:"+p.tests.get(set.getName().trim()).requirement);
 		for(String y:p.tests.get(set.getName()).requirement){
 			if(!sub.res.get(y).pass){
 				System.out.println(y+" did not pass! Skipped");
