@@ -91,11 +91,11 @@ public class JudgeServer {
 				int read=dis.read(by,0,1024);
 //				System.out.println("Write:"+read);
 				fos.write(by,0,read);
-				dos.writeInt(by.hashCode());
+				dos.writeInt(Arrays.hashCode(by));
 			}
 			int read=dis.read(by,0,bytes-Math.max(0, (rc-1)*1024));
 //			System.out.println("ExWrite:"+read);
-			dos.writeInt(by.hashCode());
+			dos.writeInt(Arrays.hashCode(by));
 			fos.write(by,0,read);
 			fos.close();
 			

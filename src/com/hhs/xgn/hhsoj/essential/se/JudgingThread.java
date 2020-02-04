@@ -7,6 +7,7 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
@@ -72,7 +73,7 @@ public class JudgingThread extends Thread {
 								//whenever send a string, needs rollback to confirm it's correctly received.
 								j.dos.write(by,0,len);
 								int hash=j.dis.readInt();
-								int expected=by.hashCode();
+								int expected=Arrays.hashCode(by);
 //								System.out.println("Read hash:"+hash+" Expected:"+expected);
 								
 								CommonUtil.assertEql(hash,expected);
@@ -102,7 +103,7 @@ public class JudgingThread extends Thread {
 							//whenever send a string, needs rollback to confirm it's correctly received.
 							j.dos.write(by,0,len);
 							int hash=j.dis.readInt();
-							int expected=by.hashCode();
+							int expected=Arrays.hashCode(by);
 //							System.out.println("Read hash:"+hash+" Expected:"+expected);
 							
 							CommonUtil.assertEql(hash,expected);
@@ -113,7 +114,7 @@ public class JudgingThread extends Thread {
 						
 						CommonUtil.assertEql(snd,totsend);
 						
-						System.out.println("Send file "+y+" of size "+snd);
+						System.out.println("Send file "+x+" of size "+snd);
 						
 					}
 				}
