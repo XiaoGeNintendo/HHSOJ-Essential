@@ -175,6 +175,10 @@ public class JudgeServer {
 			//core is done
 			String sbout=CommonUtil.readFile("judge/sbout.txt");
 			String[] arg=sbout.split("\n");
+			if(Integer.parseInt(arg[1])>=pr.tl+10000){
+				System.out.println("[WARNING] A program is closed too late! Is the time limit too big, or the sandbox crashed?");
+			}
+			
 			if(arg[0].equals("RE")){
 				sub.addResult(sn,new TestResult("Runtime Error", arg[1],arg[2], "Exit code is "+arg[3], inp, "", "",0));
 				return false;
