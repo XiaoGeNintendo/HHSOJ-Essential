@@ -64,8 +64,6 @@ public class ServerManager {
 				continue;
 			}
 			if(j.isFree){
-				//send handshake
-				
 				j.work(submissions.get(0),this);
 				submissions.remove(0);
 				break;

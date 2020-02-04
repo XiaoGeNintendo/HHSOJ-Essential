@@ -143,6 +143,9 @@ public class JudgingThread extends Thread {
 			System.out.println("Communication failed");
 			e.printStackTrace();
 			
+			sub.test="Error";
+			sub.compilerInfo="Contact server admin :(";
+			boss.saveSubmission(sub);
 		}
 	}
 }
