@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 public class CommonUtil {
 	
 	static Gson gs=new Gson();
+	public static final int BLOCK_SIZE=1024*1024;
 	
 	public static String readFile(String path){
 		try{
@@ -104,7 +105,7 @@ public class CommonUtil {
 	public static void copyFile(File fromFile, File toFile) throws IOException {
 		FileInputStream ins = new FileInputStream(fromFile);
 		FileOutputStream out = new FileOutputStream(toFile);
-		byte[] b = new byte[1024];
+		byte[] b = new byte[BLOCK_SIZE];
 		int n = 0;
 		while ((n = ins.read(b)) != -1) {
 			out.write(b, 0, n);
@@ -127,5 +128,16 @@ public class CommonUtil {
 		if(x!=y){
 			throw new AssertionError(x+"!="+y);
 		}
+	}
+
+	@Deprecated
+	public static int calcHash(byte[] by, int len) {
+		final int p=114514;
+		int hash=0;
+		for(int i=0;i<len;i++){
+			hash=(hash+by[i])*p;
+		}
+		
+		return hash;
 	}
 }

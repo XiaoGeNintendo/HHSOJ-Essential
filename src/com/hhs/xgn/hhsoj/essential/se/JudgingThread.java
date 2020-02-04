@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
@@ -58,64 +59,10 @@ public class JudgingThread extends Thread {
 						j.dos.writeUTF("!"+x.getName());
 						
 						for(File y:x.listFiles()){
-							j.dos.writeUTF(x.getName()+"/"+y.getName());
-							int snd=(int)y.length();
-							j.dos.writeInt(snd);
-							
-							byte[] by=new byte[1024];
-							FileInputStream fis=new FileInputStream(y);
-							int len=0;
-							int totsend=0; //verify purpose only
-							
-							while((len=fis.read(by, 0, 1024))!=-1){
-//								System.out.println("Send"+len);
-								
-								//whenever send a string, needs rollback to confirm it's correctly received.
-								j.dos.write(by,0,len);
-								int hash=j.dis.readInt();
-								int expected=Arrays.hashCode(by);
-//								System.out.println("Read hash:"+hash+" Expected:"+expected);
-								
-								CommonUtil.assertEql(hash,expected);
-								
-								totsend+=len;
-							}
-							fis.close();
-							
-							CommonUtil.assertEql(snd,totsend);
-							
-							System.out.println("Send file "+y+" of size "+snd);
-							
+							sendFile(x,y);
 						}
 					}else{
-						j.dos.writeUTF(x.getName());
-						int snd=(int)x.length();
-						j.dos.writeInt(snd);
-						
-						byte[] by=new byte[1024];
-						FileInputStream fis=new FileInputStream(x);
-						int len=0;
-						int totsend=0; //verify purpose only
-						
-						while((len=fis.read(by, 0, 1024))!=-1){
-//							System.out.println("Send"+len);
-							
-							//whenever send a string, needs rollback to confirm it's correctly received.
-							j.dos.write(by,0,len);
-							int hash=j.dis.readInt();
-							int expected=Arrays.hashCode(by);
-//							System.out.println("Read hash:"+hash+" Expected:"+expected);
-							
-							CommonUtil.assertEql(hash,expected);
-							
-							totsend+=len;
-						}
-						fis.close();
-						
-						CommonUtil.assertEql(snd,totsend);
-						
-						System.out.println("Send file "+x+" of size "+snd);
-						
+						sendFile(null,x);
 					}
 				}
 				
@@ -162,5 +109,41 @@ public class JudgingThread extends Thread {
 			sub.compilerInfo="Contact server admin :(";
 			boss.saveSubmission(sub);
 		}
+	}
+
+	private void sendFile(File x, File y) throws IOException {
+		j.dos.writeUTF((x==null?"":x.getName()+"/")+y.getName());
+		int snd=(int)y.length();
+		j.dos.writeInt(snd);
+		
+		byte[] by=new byte[CommonUtil.BLOCK_SIZE];
+		FileInputStream fis=new FileInputStream(y);
+		int len=0;
+		int totsend=0,rbc=0; //verify purpose only
+		
+		int bc=(snd+CommonUtil.BLOCK_SIZE-1)/CommonUtil.BLOCK_SIZE;
+		System.out.println("Start sending "+y+" with expected block count="+bc);
+		
+		while((len=fis.read(by, 0, CommonUtil.BLOCK_SIZE))!=-1){
+//			System.out.println("Send"+len);
+			
+			//whenever send a string, needs rollback to confirm it's correctly received.
+			j.dos.write(by,0,len);
+			int hash=j.dis.readInt();
+			int expected=Arrays.hashCode(by);
+//			System.out.println("Read hash:"+hash+" Expected:"+expected);
+			
+			CommonUtil.assertEql(hash,expected);
+			
+			totsend+=len;
+			
+			rbc++;
+		}
+		fis.close();
+		
+		CommonUtil.assertEql(snd,totsend);
+		CommonUtil.assertEql(bc, rbc);
+		System.out.println("Send file "+y+" of size "+snd);
+		
 	}
 }

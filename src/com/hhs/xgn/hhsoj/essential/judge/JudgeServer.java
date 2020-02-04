@@ -46,6 +46,8 @@ public class JudgeServer {
 	
 	final int READ_LIMIT=256;
 	
+	
+	
 	public void downloadData(String set,String id){
 		
 	}
@@ -84,19 +86,20 @@ public class JudgeServer {
 			//transfer file
 			int bytes=dis.readInt();
 			FileOutputStream fos=new FileOutputStream(path+"/"+name);
-			byte[] by=new byte[1024];
-			int rc=(bytes+1023)/1024;
+			byte[] by=new byte[CommonUtil.BLOCK_SIZE];
+			int rc=(bytes+CommonUtil.BLOCK_SIZE-1)/CommonUtil.BLOCK_SIZE;
 			System.out.println("Reading "+name+" Expected Bytes:"+bytes+" Block count="+rc);
 			for(int i=0;i<rc-1;i++){
-				int read=dis.read(by,0,1024);
+				dis.readFully(by,0,CommonUtil.BLOCK_SIZE);
 //				System.out.println("Write:"+read);
-				fos.write(by,0,read);
+				fos.write(by);
 				dos.writeInt(Arrays.hashCode(by));
 			}
-			int read=dis.read(by,0,bytes-Math.max(0, (rc-1)*1024));
+			int extra=bytes-Math.max(0, (rc-1)*CommonUtil.BLOCK_SIZE);
+			dis.readFully(by,0,extra);
 //			System.out.println("ExWrite:"+read);
 			dos.writeInt(Arrays.hashCode(by));
-			fos.write(by,0,read);
+			fos.write(by,0,extra);
 			fos.close();
 			
 			long t=System.currentTimeMillis()-last;
