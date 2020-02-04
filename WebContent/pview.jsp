@@ -38,6 +38,7 @@
 		<h5>Memory Limit Per Test:<%=p.ml %> KB</h5>
 		<h5>Problem Difficulty:<%=p.diff %>x</h5>
 		<h5>Problem Version:v<%=p.ver %></h5> 
+		<button onclick="reloadMathjax()">Render Mathjax Manually</button>
 		<hr/>
 		<div id="txt">Loading Statement...</div>
 		<hr/>
@@ -52,7 +53,12 @@
 		    var text=data;
 		    html=converter.makeHtml(text);
 		    document.getElementById("txt").innerHTML=html;
+		    reloadMathjax();
 		})
+		
+		function reloadMathjax(){
+			MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+		}
 		
 	</script>
 </body>
