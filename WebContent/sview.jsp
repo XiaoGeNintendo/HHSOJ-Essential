@@ -49,53 +49,91 @@
 		Memory:<%=s.getRunMem() %><br/>
 		Judger:<%=s.judger %> <br/>
 		
-		<h2>Code</h2>
-		<pre><%=s.code.replace("<", "&lt;").replace(">","&gt;") %>
-		</pre>
-		<h2>Compiler Information</h2>
-		<pre><%=s.compilerInfo.replace("<", "&lt;").replace(">","&gt;") %>
-		</pre>
+		<div class="card">
+	      <div class="card-header">
+	        <a class="card-link" data-toggle="collapse" href="#cc">
+	        Code
+	        </a>
+	      </div>
+	      <div id="cc" class="collapse">
+	        <div class="card-body">
+	          <pre><%=s.code.replace("<", "&lt;").replace(">","&gt;") %></pre>
+	        </div>
+	      </div>
+	    </div>
+		
+		<div class="card">
+	      <div class="card-header">
+	        <a class="card-link" data-toggle="collapse" href="#cr">
+	        Compiler Information
+	        </a>
+	      </div>
+	      <div id="cr" class="collapse">
+	        <div class="card-body">
+	          <pre><%=s.compilerInfo.replace("<", "&lt;").replace(">","&gt;") %></pre>
+	        </div>
+	      </div>
+	    </div>
+	    
 		<h2>Testcase Detail</h2>
+		<div id="superfa">
 		<%
 			for(Entry<String,TestsetResult> e:s.res.entrySet()){
 			%>
-				<table border="2">
-					<tr>
-						<th align="left">Subtask: <%=e.getKey() %> [<%=e.getValue().getVerdict()%>;<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %>]</th>
-					</tr>
-					<tr><td>
+				<div class="card">
+					<div class="card-header">
+						<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>">
+							Subtask: <%=e.getKey() %> Verdict:<%=e.getValue().getVerdict()%> Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %>
+						</a>
+					</div>
+					<div id="set<%=e.getKey() %>" class="collapse" data-parent="#superfa">
+						<div class="card-body">
 			<%
 				int cnt=0;
 				for(TestResult tr:e.getValue().res){
 					cnt++;
 			%>
-					<table border="1">
-						<tr>
-							<th align="left">Test <%=e.getKey()%>.<%=cnt %> [<%=tr.verdict%>;<%=tr.score %>] (<%=tr.time %> ms;<%=tr.memory %> KB)</th>
-						</tr>
-						<tr><td>
-							<h5>Input</h5>
-							<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %>
-							</pre>
-							<h5>Output</h5>
-							<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %>
-							</pre>
-							<h5>Answer</h5>
-							<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %>
-							</pre>
-							<h5>Checker Information</h5>
-							<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %>
-							</pre>
-						</td></tr>
-					</table> <br/>
+							<div class="card">
+								<div class="card-header">
+									<a class="card-link" data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">
+										<div class="row">
+											<div class="col-sm-2"><b>Test <%=e.getKey()%>.<%=cnt %></b></div>
+											<div class="col-sm-2">Verdict:<%=tr.verdict%> </div> 
+											<div class="col-sm-2">Score:<%=tr.score %></div>
+											<div class="col-sm-2">Time:<%=tr.time %>ms</div>
+											<div class="col-sm-2">Memory:<%=tr.memory %>KB</div>
+										</div>
+									</a>
+								</div>
+								<div id="tr<%=e.getKey()+"w"+cnt%>" class="collapse" data-parent="#set<%=e.getKey() %>">
+									<div class="card-body">
+										<h5>Input</h5>
+										<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %>
+										</pre>
+										<h5>Output</h5>
+										<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %>
+										</pre>
+										<h5>Answer</h5>
+										<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %>
+										</pre>
+										<h5>Checker Information</h5>
+										<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %>
+										</pre>
+									</div>
+								</div>
+							</div>
 			<%
 				}
 			%>
-				</td></tr>
-				</table> <br/>
+						</div>
+					</div>
+				</div>
+				<br/>
 			<%
 			}
 		%>
+		
+		</div>
 	</div>
 </body>
 </html>
