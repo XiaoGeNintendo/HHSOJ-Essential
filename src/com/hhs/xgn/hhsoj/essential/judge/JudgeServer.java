@@ -151,9 +151,15 @@ public class JudgeServer {
 			pb.directory(new File("judge"));
 			pb.redirectOutput(new File("judge/sbout.txt"));
 			Process p=pb.start();
-			p.waitFor();
+			boolean asd=p.waitFor(pr.tl+1000,TimeUnit.MILLISECONDS);
 			
-	
+			if(!asd){
+				System.out.println("@Reimu we want you!!!");
+				p.destroyForcibly();
+				sub.addResult(sn,new TestResult("Time Limit Exceeded", pr.tl+"","0", "[Youkai Taiji!]\nYour program is so TLE that it breaks down our judge system.\nPlease DON'T submit like this.", "", "", "",0));
+				return false;
+			}
+			
 			String inp=CommonUtil.readFileWithLimit(in.getAbsolutePath(),READ_LIMIT);
 			
 			
