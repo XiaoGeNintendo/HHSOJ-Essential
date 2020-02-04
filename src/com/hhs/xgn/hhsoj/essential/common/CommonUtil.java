@@ -122,4 +122,10 @@ public class CommonUtil {
 	public static Submission readSubmissionInfo(String path) {
 		return gs.fromJson(readFile(path),Submission.class);
 	}
+
+	public static void assertEql(int x, int y) {
+		if(x!=y){
+			throw new AssertionError(x+"!="+y);
+		}
+	}
 }

@@ -73,15 +73,16 @@ public class JudgingThread extends Thread {
 								j.dos.write(by,0,len);
 								int hash=j.dis.readInt();
 								int expected=by.hashCode();
-								System.out.println("Read hash:"+hash+" Expected:"+expected);
+//								System.out.println("Read hash:"+hash+" Expected:"+expected);
 								
-								assert hash==expected;
+								CommonUtil.assertEql(hash,expected);
 								
 								totsend+=len;
 							}
 							fis.close();
 							
-							assert totsend==snd;
+							CommonUtil.assertEql(snd,totsend);
+							
 							System.out.println("Send file "+y+" of size "+snd);
 							
 						}
@@ -93,13 +94,26 @@ public class JudgingThread extends Thread {
 						byte[] by=new byte[1024];
 						FileInputStream fis=new FileInputStream(x);
 						int len=0;
+						int totsend=0; //verify purpose only
+						
 						while((len=fis.read(by, 0, 1024))!=-1){
 //							System.out.println("Send"+len);
+							
+							//whenever send a string, needs rollback to confirm it's correctly received.
 							j.dos.write(by,0,len);
+							int hash=j.dis.readInt();
+							int expected=by.hashCode();
+//							System.out.println("Read hash:"+hash+" Expected:"+expected);
+							
+							CommonUtil.assertEql(hash,expected);
+							
+							totsend+=len;
 						}
 						fis.close();
 						
-						System.out.println("Send file "+x+" of size "+snd);
+						CommonUtil.assertEql(snd,totsend);
+						
+						System.out.println("Send file "+y+" of size "+snd);
 						
 					}
 				}
