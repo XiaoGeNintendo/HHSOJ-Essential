@@ -19,7 +19,7 @@
 			</div>
 			
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Password" id="pass" type="password" maxlength="50" />
+				<input type="password" class="form-control" placeholder="Password" id="pass" type="password" maxlength="50" />
 			</div>
 			
 			<div class="input-group">
