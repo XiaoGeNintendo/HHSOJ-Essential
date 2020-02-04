@@ -81,17 +81,17 @@ public class JudgeServer {
 				new File(path+"/"+name.substring(1)).mkdirs();
 				continue;
 			}
-			
-			System.out.println("Reading "+name);
 			//transfer file
 			int bytes=dis.readInt();
 			FileOutputStream fos=new FileOutputStream(path+"/"+name);
 			byte[] by=new byte[1024];
 			int rc=(bytes+1023)/1024;
+			System.out.println("Reading "+name+" Expected Bytes:"+bytes+" Block count="+rc);
 			for(int i=0;i<rc-1;i++){
 				int read=dis.read(by,0,1024);
 //				System.out.println("Write:"+read);
 				fos.write(by,0,read);
+				dos.writeInt(by.hashCode());
 			}
 			int read=dis.read(by,0,bytes-Math.max(0, (rc-1)*1024));
 //			System.out.println("ExWrite:"+read);

@@ -56,14 +56,17 @@ public class ServerManager {
 		}
 		
 		for(int i=0;i<judgers.size();i++){
-			if(!judgers.get(i).isOnline()){ //kill offline judges
-				System.out.println("Killed judge:"+judgers.get(i).name);
+			Judger j=judgers.get(i);
+			if(!j.isOnline()){ //kill offline judges
+				System.out.println("Killed judge:"+j.name);
 				judgers.remove(i);
 				i--;
 				continue;
 			}
-			if(judgers.get(i).isFree){
-				judgers.get(i).work(submissions.get(0),this);
+			if(j.isFree){
+				//send handshake
+				
+				j.work(submissions.get(0),this);
 				submissions.remove(0);
 				break;
 			}
@@ -78,7 +81,7 @@ public class ServerManager {
 		}
 		
 		//debug
-		addSubmission(CommonUtil.generateBlankSubmission("XGN", "#include <iostream>\nusing namespace std;\nint main(){cout<<\"Hello,World\"<<endl;}", "cpp", 0, "testP", "testProblemSet"));
+//		addSubmission(CommonUtil.generateBlankSubmission("XGN", "#include <iostream>\nusing namespace std;\nint main(){cout<<\"Hello,World\"<<endl;}", "cpp", 0, "testP", "testProblemSet"));
 		
 		port=Integer.parseInt(args[0]);
 		

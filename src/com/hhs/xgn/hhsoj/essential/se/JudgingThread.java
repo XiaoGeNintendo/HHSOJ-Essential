@@ -3,6 +3,7 @@ package com.hhs.xgn.hhsoj.essential.se;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -63,12 +64,24 @@ public class JudgingThread extends Thread {
 							byte[] by=new byte[1024];
 							FileInputStream fis=new FileInputStream(y);
 							int len=0;
+							int totsend=0; //verify purpose only
+							
 							while((len=fis.read(by, 0, 1024))!=-1){
 //								System.out.println("Send"+len);
+								
+								//whenever send a string, needs rollback to confirm it's correctly received.
 								j.dos.write(by,0,len);
+								int hash=j.dis.readInt();
+								int expected=by.hashCode();
+								System.out.println("Read hash:"+hash+" Expected:"+expected);
+								
+								assert hash==expected;
+								
+								totsend+=len;
 							}
 							fis.close();
 							
+							assert totsend==snd;
 							System.out.println("Send file "+y+" of size "+snd);
 							
 						}
@@ -114,6 +127,18 @@ public class JudgingThread extends Thread {
 			System.out.println("Judging has done for "+sub.id);
 			j.isFree=true;
 			boss.notifyJudge();
+		}catch(EOFException e){
+			//client really sleeping
+			System.out.println("EOF reached! Is client f**ked?");
+			e.printStackTrace();
+			
+			sub.test="Waiting for rejudge";
+			sub.compilerInfo="Nah, the judger is sleeping. Please waiting for rejudge and report this issue to the server admin.";
+			boss.saveSubmission(sub);
+			
+			boss.addSubmission(sub); //rejudge
+			
+			j.dead=true;
 		}catch(Exception e){
 			System.out.println("Communication failed");
 			e.printStackTrace();
