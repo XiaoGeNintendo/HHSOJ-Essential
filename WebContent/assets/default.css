@@ -75,7 +75,7 @@ div[class~="input-group"]{
 	height:50px;
 }
 
-.nav-link{
+.topbar-item a{
 	font-weight: bold;
 	font-family: 'Trebuchet MS', Helvetica, sans-serif;
 	font-size: 20px;
@@ -83,11 +83,11 @@ div[class~="input-group"]{
 	margin-top:2px;
 }
 
-.nav-item:hover{
+.topbar-item:hover{
 	background:#777777;
 }
 
-.nav-item{
+.topbar-item{
 	transition: 0.2s;
 }
 

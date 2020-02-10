@@ -14,7 +14,7 @@
 <title>Problem Viewing - HHSOJ</title>
 </head>
 <body>
-	<jsp:include page="head.jsp"></jsp:include>
+	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container"> 
 		<%
 			String set=request.getParameter("set");

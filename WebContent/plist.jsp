@@ -12,7 +12,7 @@
 <title>Problemlist - HHSOJ</title>
 </head>
 <body>
-	<jsp:include page="head.jsp"></jsp:include>
+	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
 		<h1>Problem list of <%=request.getParameter("id")%></h1>
 		<a href="pset.jsp">Back</a>

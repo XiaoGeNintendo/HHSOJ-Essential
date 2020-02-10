@@ -8,7 +8,7 @@
 <title>Login - HHSOJ</title>
 </head>
 <body>
-	<jsp:include page="head.jsp"></jsp:include>
+	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
 		<h1>Login/Register</h1>
 		<i>@XGN can u make two seperate pages?? --Zzzyt</i>

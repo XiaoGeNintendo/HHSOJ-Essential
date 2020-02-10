@@ -17,7 +17,7 @@
 <title>Status - HHSOJ</title>
 </head>
 <body>
-<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
 		<h1>Status</h1>
 		<hr/>

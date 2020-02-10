@@ -12,7 +12,7 @@
 <title>Problemset - HHSOJ</title>
 </head>
 <body>
-	<jsp:include page="head.jsp"></jsp:include>
+	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
 		<h1>Problemsets</h1>
 		<hr>
