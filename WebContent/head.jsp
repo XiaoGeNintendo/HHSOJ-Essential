@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-	<a class="navbar-brand" href="index.jsp"> <img
-		src="assets/hhsoj128x.png" alt="Logo" style="width: 40px;">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="index.jsp"> 
+		<img src="assets/hhsoj128x.png" alt="Logo" style="width: 40px;">
 	</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -13,7 +13,6 @@
 
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="pset.jsp">Problemsets</a></li>
 			<li class="nav-item"><a class="nav-link" href="status.jsp">Status</a></li>
 			<li class="nav-item"><a class="nav-link" href="submit.jsp">Submit</a></li>
@@ -30,3 +29,5 @@
 		</ul>
 	</div>
 </nav>
+
+<div style="height:50px;"></div>

@@ -67,11 +67,12 @@ div[class~="input-group"]{
 
 .navbar {
 	clear: both;
+	height:50px;
+	padding-right:0px;
 }
 
-.navbar a{
-	color:#000000;
-	text-decoration:none;
+.navbar-nav{
+	height:50px;
 }
 
 .nav-link{
@@ -79,8 +80,16 @@ div[class~="input-group"]{
 	font-family: 'Trebuchet MS', Helvetica, sans-serif;
 	font-size: 20px;
 	float: left;
+	margin-top:2px;
 }
 
+.nav-item:hover{
+	background:#777777;
+}
+
+.nav-item{
+	transition: 0.2s;
+}
 
 .ml-auto{
 	margin-left:0px !important;
@@ -94,10 +103,6 @@ div[class~="input-group"]{
 
 .selected {
 	border-bottom: 3px solid #66ccff;
-}
-
-.nav-link, .nav-link:hover, .nav-link:visited, .nav-link:active{
-	text-decoration:none;
 }
 
 .nostyle, .nostyle:hover, .nostyle:visited, .notstyle:active{
