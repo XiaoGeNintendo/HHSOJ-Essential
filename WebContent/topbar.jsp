@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top topbar">
 	<a class="navbar-brand" href="index.jsp"> 
-		<img src="assets/hhsoj128x.png" alt="Logo" style="width: 40px;">
+		<img src="assets/hhsoj128x.png" alt="Logo">
 	</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -12,13 +12,15 @@
 	</button>
 
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
-		<ul class="navbar-nav ml-auto">
+		<ul class="navbar-nav ml-auto topbar-nav">
 			<li class="nav-item topbar-item"><a class="nav-link" href="pset.jsp">Problemsets</a></li>
 			<li class="nav-item topbar-item"><a class="nav-link" href="status.jsp">Status</a></li>
 			<li class="nav-item topbar-item"><a class="nav-link" href="submit.jsp">Submit</a></li>
 		</ul>
 
-		<ul class="navbar-nav mr-auto">
+		<ul class="navbar-nav mr-auto topbar-nav">
+			<!-- This is to create a split line for mobile devices ---Zzzyt -->
+			<li class="nav-item">&nbsp;</li>
 			<%if (session.getAttribute("username") == null) {%>
 			<li class="nav-item topbar-item"><a class="nav-link" href="login.jsp">Login</a></li>
 			<%} else {%>

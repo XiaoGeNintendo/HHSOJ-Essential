@@ -1,7 +1,6 @@
 /* HHSOJ CSS file */
 /* by Zzzyt */
-
-body { 
+body {
 	background: #fafaf8;
 }
 
@@ -11,44 +10,44 @@ hr {
 	clear: both;
 }
 
-p, span, a, th, td, label{
+p, span, a, th, td, label {
 	margin-block-start: 0px;
 	margin-block-end: 0px;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
-	font-family: "Consolas",monospace;
+	font-family: "Consolas", monospace;
 }
 
-input[type=button],input[type=submit],button{
-	font-family: "Consolas",monospace;
+input[type=button], input[type=submit], button {
+	font-family: "Consolas", monospace;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 5px;
 	margin-right: 5px;
 }
 
-a[class~="btn"]{
+a[class~="btn"] {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 5px;
 	margin-right: 5px;
 }
 
-div[class~="input-group"]{
-	margin:5px;
+div[class~="input-group"] {
+	margin: 5px;
 }
 
-.container{
-	margin-top:50px;
-	margin-bottom:50px;
+.container {
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
-.title-right{
-	margin-top:5px;
-	margin-bottom:5px;
+.title-right {
+	margin-top: 5px;
+	margin-bottom: 5px;
 	color: #777777;
 	font-size: 15px;
-	font-family: "Consolas",monospace;
+	font-family: "Consolas", monospace;
 	float: right;
 	text-align: right;
 }
@@ -60,7 +59,7 @@ div[class~="input-group"]{
 	margin-bottom: 10px;
 	font-weight: bold;
 	float: left;
-	font-family:"Consolas",monospace;
+	font-family: "Consolas", monospace;
 }
 
 .subtitle {
@@ -71,64 +70,79 @@ div[class~="input-group"]{
 	float: left;
 	clear: both;
 	margin-bottom: 10px;
-	font-family:"Consolas";
+	font-family: "Consolas";
 }
 
-.topbar-item a{
+.topbar-item a {
 	font-weight: bold;
 	font-size: 20px;
-	padding-left:8px !important;
-	padding-right:8px !important;
+	padding-left: 8px !important;
+	padding-right: 8px !important;
 }
 
-.topbar-item:hover{
-	background:#777777;
+.topbar-item:hover {
+	background: #777777;
 }
 
-.topbar-item{
+.topbar-item {
 	transition: 0.2s;
 }
 
-@media (min-width: 768px){
-	.ml-auto{
-		margin-left:0px !important;
+.navbar-brand img {
+	width: 40px;
+}
+
+.navbar-brand:hover {
+	background: #777777;
+}
+
+.navbar-brand {
+	padding-left: 10px;
+	transition: 0.2s;
+	padding-right: 10px;
+	margin: 0px;
+}
+
+.topbar{
+	padding-left:0px;
+}
+
+@media ( min-width : 768px) {
+	.ml-auto {
+		margin-left: 0px !important;
 	}
-	
-	.mr-auto{
-		margin-right:0px!important;
-		float:right !important;
-		margin-left:auto !important;
+	.mr-auto {
+		margin-right: 0px !important;
+		float: right !important;
+		margin-left: auto !important;
 	}
-	
-	.topbar-item a{
-		margin-top:2px;
+	.topbar-item a {
+		margin-top: 2px;
 	}
-	
-	.navbar{
-		padding-top:0px;
-		padding-bottom:0px;
+	.topbar {
+		padding-top: 0px;
+		padding-bottom: 0px;
 	}
-	
-	.navbar-nav{
-		height:50px;
-		padding-top:0px;
-		padding-bottom:0px;
+	.topbar-nav {
+		height: 50px;
+		padding-top: 0px;
+		padding-bottom: 0px;
 	}
 }
 
-.card-collapse{
-	margin-bottom:10px;
+.card-collapse {
+	margin-bottom: 10px;
 }
 
-.nostyle, .nostyle:hover, .nostyle:visited, .notstyle:active{
-	text-decoration:none;
+.nostyle, .nostyle:hover, .nostyle:visited, .notstyle:active {
+	text-decoration: none;
 }
 
-.table{
+.table {
 	background: #ffffff;
 }
 
-.table>tbody>tr>th{
+.table>tbody>tr>th {
 	background: #dee2e6;
 }
 
@@ -138,8 +152,8 @@ div[class~="input-group"]{
 	min-width: 500px;
 }
 
-.center-form{
+.center-form {
 	margin: 0px auto;
 	margin-top: 50px;
-	width:300px;
+	width: 300px;
 }
