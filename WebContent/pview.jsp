@@ -31,18 +31,17 @@
 			}
 			
 		%>
-		<h1><%=p.set+"."+p.id+" - "+p.name %></h1>
+		<h1 style="display:inline;"><%=p.set+"."+p.id+" - "+p.name %></h1>
+		<span class="title-right"><br/>Version: v<%=p.ver %></span>
 		<hr/>
-		<h2><%=p.name %></h2>
-		<h5>Time Limit Per Test:<%=p.tl %> MS</h5>
-		<h5>Memory Limit Per Test:<%=p.ml %> KB</h5>
-		<h5>Problem Difficulty:<%=p.diff %>x</h5>
-		<h5>Problem Version:v<%=p.ver %></h5> 
-		<button onclick="reloadMathjax()">Render Mathjax Manually</button>
+		<button class="btn btn-secondary" style="float:right;" onclick="reloadMathjax()">Render Mathjax Manually</button>
+		<span><%=p.tl %>ms / <%=p.ml %> KB<br/>Difficulty:<%=p.diff %>x</span>
+		
 		<hr/>
 		<div id="txt">Loading Statement...</div>
 		<hr/>
-		<a href="submit.jsp?set=<%=p.set%>&id=<%=p.id%>">Submit</a>
+		
+		<a class="btn btn-primary" href="submit.jsp?set=<%=p.set%>&id=<%=p.id%>">Submit</a>
 	</div>
 	<script>
 		$.post("requireStatement",{
