@@ -20,21 +20,36 @@ p, span, a, th, td, label {
 
 input[type=button], input[type=submit], button {
 	font-family: "Consolas", monospace;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
+	margin: 5px;
 }
 
 a[class~="btn"] {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
+	margin: 5px;
 }
 
 div[class~="input-group"] {
 	margin: 5px;
+}
+
+table {
+	background: #ffffff;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+table>tbody>tr>th {
+	background: #dee2e6;
+}
+
+code, kbd, pre, samp {
+	padding: .2em .4em;
+	background-color: #f0f0f0;
+	border-radius: 3px;
+	background-color: #f0f0f0;
+}
+
+.hljs {
+	border-radius: 3px;
 }
 
 .container {
@@ -103,8 +118,8 @@ div[class~="input-group"] {
 	margin: 0px;
 }
 
-.topbar{
-	padding-left:0px;
+.topbar {
+	padding-left: 0px;
 }
 
 @media ( min-width : 768px) {
@@ -136,14 +151,6 @@ div[class~="input-group"] {
 
 .nostyle, .nostyle:hover, .nostyle:visited, .notstyle:active {
 	text-decoration: none;
-}
-
-.table {
-	background: #ffffff;
-}
-
-.table>tbody>tr>th {
-	background: #dee2e6;
 }
 
 .status-table {

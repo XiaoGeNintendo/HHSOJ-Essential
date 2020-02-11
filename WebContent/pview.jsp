@@ -49,17 +49,18 @@
 			"set":"<%=p.set%>",
 			"id":"<%=p.id%>"
 		},function(data,status){
-			var converter = new showdown.Converter();
+			var converter = new showdown.Converter({tables: true, strikethrough: true});
 		    var text=data;
 		    html=converter.makeHtml(text);
 		    document.getElementById("txt").innerHTML=html;
+		    reloadTableStyle();
+		    reloadHighlight();
 		    reloadMathjax();
 		})
 		
 		function reloadMathjax(){
 			MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 		}
-		
 	</script>
 </body>
 </html>
