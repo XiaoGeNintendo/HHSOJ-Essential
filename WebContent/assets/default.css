@@ -1,8 +1,8 @@
 /* HHSOJ CSS file */
 /* by Zzzyt */
+
 body { 
 	background: #fafaf8;
-	min-width: 600px;
 }
 
 hr {
@@ -16,11 +16,11 @@ p, span, a, th, td, label{
 	margin-block-end: 0px;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
-	font-family: "Consolas";
+	font-family: "Consolas",monospace;
 }
 
 input[type=button],input[type=submit],button{
-	font-family: "Consolas";
+	font-family: "Consolas",monospace;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 5px;
@@ -41,7 +41,6 @@ div[class~="input-group"]{
 .container{
 	margin-top:50px;
 	margin-bottom:50px;
-	min-width:800px;
 }
 
 .title {
@@ -51,7 +50,7 @@ div[class~="input-group"]{
 	margin-bottom: 10px;
 	font-weight: bold;
 	float: left;
-	font-family:"Consolas";
+	font-family:"Consolas",monospace;
 }
 
 .subtitle {
@@ -65,22 +64,11 @@ div[class~="input-group"]{
 	font-family:"Consolas";
 }
 
-.navbar {
-	clear: both;
-	height:50px;
-	padding-right:0px;
-}
-
-.navbar-nav{
-	height:50px;
-}
-
 .topbar-item a{
 	font-weight: bold;
-	font-family: 'Trebuchet MS', Helvetica, sans-serif;
 	font-size: 20px;
-	float: left;
-	margin-top:2px;
+	padding-left:8px !important;
+	padding-right:8px !important;
 }
 
 .topbar-item:hover{
@@ -91,14 +79,31 @@ div[class~="input-group"]{
 	transition: 0.2s;
 }
 
-.ml-auto{
-	margin-left:0px !important;
-}
-
-.mr-auto{
-	margin-right:0px!important;
-	float:right !important;
-	margin-left:auto !important;
+@media (min-width: 768px){
+	.ml-auto{
+		margin-left:0px !important;
+	}
+	
+	.mr-auto{
+		margin-right:0px!important;
+		float:right !important;
+		margin-left:auto !important;
+	}
+	
+	.topbar-item a{
+		margin-top:2px;
+	}
+	
+	.navbar{
+		padding-top:0px;
+		padding-bottom:0px;
+	}
+	
+	.navbar-nav{
+		height:50px;
+		padding-top:0px;
+		padding-bottom:0px;
+	}
 }
 
 .selected {
