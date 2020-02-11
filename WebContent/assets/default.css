@@ -43,6 +43,16 @@ div[class~="input-group"]{
 	margin-bottom:50px;
 }
 
+.title-right{
+	margin-top:5px;
+	margin-bottom:5px;
+	color: #777777;
+	font-size: 15px;
+	font-family: "Consolas",monospace;
+	float: right;
+	text-align: right;
+}
+
 .title {
 	margin-left: 20px;
 	margin-right: 20px;
@@ -106,18 +116,12 @@ div[class~="input-group"]{
 	}
 }
 
-.selected {
-	border-bottom: 3px solid #66ccff;
+.card-collapse{
+	margin-bottom:10px;
 }
 
 .nostyle, .nostyle:hover, .nostyle:visited, .notstyle:active{
 	text-decoration:none;
-}
-
-.marquee {
-	margin-top: 30px;
-	margin-bottom: 30px;
-	font-size: 20px;
 }
 
 .table{

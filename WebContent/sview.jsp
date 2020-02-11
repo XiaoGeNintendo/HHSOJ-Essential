@@ -34,17 +34,17 @@
 	%>
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
-		<h1>Submission #<%=id%></h1>
+		<h1 style="display:inline;">#<%=id%> </h1>
+		<i style="font-size:20px;"> by <%=s.author %></i>
+		<span class="title-right">
+			Submit Time: <%=new Date(s.submitTime) %><br/>
+			Judger: <%=s.judger %> <br/>
+		</span>
 		<hr />
-		Submit Time:<%=new Date(s.submitTime) %><br/>
-		Author:<%=s.author %><br/>
-		Problem:<a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a><br/>
-		Score:<%=String.format("%.1f", 100*s.score) %><br/>
-		Test:<%=(s.isFinal?"Final":s.test) %><br/>
-		Language:<%=s.lang %><br/>
-		Time:<%=s.getRunTime() %><br/>
-		Memory:<%=s.getRunMem() %><br/>
-		Judger:<%=s.judger %> <br/>
+		<span><%=(s.isFinal?"Final":"Running on "+s.test) %> / <%=s.getRunTime() %>ms / <%=s.getRunMem() %>KB</span><br/>
+		<span>Score: <%=String.format("%.1f", 100*s.score) %></span><br/>
+		<span>Problem: <a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a></span><br/>
+		<span>Language: <%=s.lang %></span>
 		<hr/>
 		<div class="card">
 			<div class="card-header">
@@ -70,10 +70,14 @@
 						<%
 							for(Entry<String,TestsetResult> e:s.res.entrySet()){
 							%>
-								<div class="card">
+								<div class="card card-collapse">
 									<div class="card-header">
 										<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>">
-											Subtask: <%=e.getKey() %> Verdict:<%=e.getValue().getVerdict()%> Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %>
+											<div class="row">
+												<div class="col-sm-2"><b>Subtask: <%=e.getKey() %></b></div>
+												<div class="col-sm-2">Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %></div>
+												<div class="col-sm-2"><%=e.getValue().getVerdict()%></div> 
+											</div>
 										</a>
 									</div>
 									<div id="set<%=e.getKey() %>" class="collapse" data-parent="#superfa">
@@ -83,15 +87,14 @@
 								for(TestResult tr:e.getValue().res){
 									cnt++;
 							%>
-											<div class="card">
+											<div class="card card-collapse">
 												<div class="card-header">
 													<a class="card-link" data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">
 														<div class="row">
 															<div class="col-sm-2"><b>Test <%=e.getKey()%>.<%=cnt %></b></div>
-															<div class="col-sm-2">Verdict:<%=tr.verdict%> </div> 
 															<div class="col-sm-2">Score:<%=tr.score %></div>
-															<div class="col-sm-2">Time:<%=tr.time %>ms</div>
-															<div class="col-sm-2">Memory:<%=tr.memory %>KB</div>
+															<div class="col-sm-2"><%=tr.verdict%></div> 
+															<div class="col-sm-2"><%=tr.time %>ms / <%=tr.memory %>KB</div>
 														</div>
 													</a>
 												</div>
@@ -118,14 +121,13 @@
 										</div>
 									</div>
 								</div>
-								<br/>
 							<%
 							}
 						%>
 						</div>
 					</div>
 					<div class="tab-pane" id="code" role="tabpanel" aria-labelledby="code-tab">
-						<pre><%=s.code.replace("<", "&lt;").replace(">","&gt;")%></pre>
+						<pre></pre>
 					</div>
 					<div class="tab-pane" id="compiler" role="tabpanel" aria-labelledby="compiler-tab">
 						<pre><%=s.compilerInfo.replace("<", "&lt;").replace(">","&gt;") %></pre>
@@ -134,5 +136,13 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		var converter = new showdown.Converter();
+	    var text="```<%=s.lang%>\n";
+	    text+="<%=s.code.replace("\"","\\\"").replace("\n","\\n")%>";
+	    text+="\n```";
+	    html=converter.makeHtml(text);
+	    document.getElementById("code").innerHTML=html;
+	</script>
 </body>
 </html>
