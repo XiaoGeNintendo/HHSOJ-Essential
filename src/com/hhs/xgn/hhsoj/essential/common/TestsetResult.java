@@ -19,7 +19,12 @@ public class TestsetResult {
 		if(res==null || res.isEmpty()){
 			return "Skipped";
 		}else{
-			return res.get(res.size()-1).verdict;
+			for(TestResult tr:res){
+				if(!tr.verdict.equals("Accepted")){
+					return tr.verdict;
+				}
+			}
+			return "Accepted";
 		}
 	}
 
