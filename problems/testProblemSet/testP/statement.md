@@ -60,5 +60,11 @@ $\Delta=\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \end{bmatrix}$
 
 $Actually no input$
 
-$$Double dollar sign doesn't work here :( $$
+$$
+A_i + B_i + A^i + B^i
+$$
+
+$$
+Double=\iint^{dollar}_{sign}f(works)
+$$
 

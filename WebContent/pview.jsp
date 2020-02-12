@@ -48,7 +48,13 @@
 			"set":"<%=p.set%>",
 			"id":"<%=p.id%>"
 		},function(data,status){
-			var converter = new showdown.Converter({tables: true, strikethrough: true});
+			var converter = new showdown.Converter({
+			    'disableForced4SpacesIndentedSublists': 'true', 
+			    'tasklists': 'true', 
+			    'tables': 'true', 
+			    'strikethrough':'true',
+			    'extensions': ['mathjax']
+			});
 		    var text=data;
 		    html=converter.makeHtml(text);
 		    document.getElementById("txt").innerHTML=html;
