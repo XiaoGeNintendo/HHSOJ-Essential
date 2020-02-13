@@ -204,4 +204,42 @@ public class TomcatHelper {
 		
 		return CommonUtil.readSubmissionInfo(config.path+"/submission/"+id+".json");
 	}
+	
+	public static final String[] tS={"Accepted",
+									 "Wrong Answer",
+									 "Time Limit Exceeded",
+									 "Memory Limit Exceeded",
+									 "Runtime Error",
+									 "Restrict Function",
+								    },
+								 tF={"fa fa-check",
+ 									 "fa fa-close",
+									 "fa fa-clock-o",
+									 "fa fa-database",
+									 "fa fa-bomb",
+									 "fa fa-ban",
+								    },
+								 tT={"Your code is correct",
+								     "Your code produces incorrect output",
+								     "Your code uses too much time to run",
+								     "Your code uses too much memory to run",
+								     "Your code exits abnormally",
+								     "Your code uses illegal system call"
+								    },
+								 tC={"green",
+									 "blue",
+									 "yellow",
+									 "purple",
+									 "red",
+									 "crimson" //has this color?
+								    };
+	public static final String tFor="<span style=\"color:%s\" title=\"%s\"><i class=\"%s\"></i>%s</span>";
+	public static String frontendRenderer(String ver){
+		for(int i=0;i<tS.length;i++){
+			if(ver.equals(tS[i])){
+				return String.format(tFor, tC[i],tT[i],tF[i],ver);
+			}
+		}
+		return String.format(tFor, "black","","",ver);
+	}
 }

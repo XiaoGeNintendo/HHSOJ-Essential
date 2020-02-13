@@ -93,7 +93,7 @@
 														<div class="row">
 															<div class="col-sm-2"><b>Test <%=e.getKey()%>.<%=cnt %></b></div>
 															<div class="col-sm-2">Score:<%=tr.score %></div>
-															<div class="col-sm-2"><%=tr.verdict%></div> 
+															<div class="col-sm-2"><%=TomcatHelper.frontendRenderer(tr.verdict)%></div> 
 															<div class="col-sm-2"><%=tr.time %>ms / <%=tr.memory %>KB</div>
 														</div>
 													</a>
