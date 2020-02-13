@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hhs.xgn.hhsoj.essential.common.Problem;
+import com.hhs.xgn.hhsoj.essential.common.Problemset;
 import com.hhs.xgn.hhsoj.essential.tomcat.util.TomcatHelper;
 
 /**
@@ -35,6 +37,12 @@ public class PDFServlet extends HttpServlet {
 		String id=request.getParameter("id");
 		OutputStream out=response.getOutputStream();
 		if(set==null || id==null){
+			response.setStatus(403);
+			return;
+		}
+		
+		Problemset ps=TomcatHelper.getProblemset(set);
+		if(ps==null || ps.stTime>System.currentTimeMillis()){
 			response.setStatus(403);
 			return;
 		}
