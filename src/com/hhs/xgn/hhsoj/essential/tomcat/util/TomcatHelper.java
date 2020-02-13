@@ -228,12 +228,12 @@ public class TomcatHelper {
 								    },
 								 tC={"green",
 									 "blue",
-									 "yellow",
+									 "orange",
 									 "purple",
 									 "red",
 									 "crimson" //has this color?
 								    };
-	public static final String tFor="<span style=\"color:%s\" title=\"%s\"><i class=\"%s\"></i>%s</span>";
+	public static final String tFor="<span style=\"color:%s;font-weight:bold\" title=\"%s\"><i class=\"%s\"></i>%s</span>";
 	public static String frontendRenderer(String ver){
 		for(int i=0;i<tS.length;i++){
 			if(ver.equals(tS[i])){
