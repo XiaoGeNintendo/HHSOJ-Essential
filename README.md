@@ -9,3 +9,5 @@ Currently Building
 [Documentation on everything](https://xgn.gitbook.io/hhsoj-essential-doc/)
 
 [Our Blog](https://blog.hellholestudios.top/)
+
+[How's it going?](https://betaoj.hellholestudios.top/HellOJ)
