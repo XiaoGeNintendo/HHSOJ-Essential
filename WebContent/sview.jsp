@@ -19,16 +19,24 @@
 </head>
 <body>
 	<%
-		String id = request.getParameter("id");
-		if (id == null) {
-			response.sendRedirect("status.jsp");
-			return;
-		}
-
-		Submission s = TomcatHelper.getSubmission(id);
-		Problem p = TomcatHelper.getProblem(s.problemSet, s.problemId);
-		if (s == null || p == null) {
-			response.sendRedirect("status.jsp");
+		String id;
+		Submission s;
+		Problem p;
+		try{
+			id = request.getParameter("id");
+			if (id == null) {
+				response.sendRedirect("status.jsp");
+				return;
+			}
+	
+			s = TomcatHelper.getSubmission(id);
+			p = TomcatHelper.getProblem(s.problemSet, s.problemId);
+			if (s == null || p == null) {
+				response.sendRedirect("status.jsp");
+				return;
+			}
+		}catch(Exception e){
+			out.println("Go to <a href=\"https://en.touhouwiki.net/wiki/Gensokyo\">Gensokyo</a> for fulfilling your desire!");
 			return;
 		}
 	%>
@@ -40,6 +48,9 @@
 			Submit Time: <%=new Date(s.submitTime) %><br/>
 			Judger: <%=s.judger %> <br/>
 		</span>
+		
+		<a href="rejudge.jsp?id=<%=id %>" class="btn btn-primary">Rejudge</a>
+		
 		<hr />
 		<span><%=(s.isFinal?"Final":"Running on "+s.test) %> / <%=s.getRunTime() %>ms / <%=s.getRunMem() %>KB</span><br/>
 		<span>Score: <%=String.format("%.1f", 100*s.score) %></span><br/>
