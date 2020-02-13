@@ -17,10 +17,55 @@
 <title>Status - HHSOJ</title>
 </head>
 <body>
+<%
+	int pageId=1,renSize=50;
+	try{
+		pageId=Integer.parseInt(request.getParameter("page"));
+	}catch(Exception e){
+		pageId=1;
+	}
+	
+	try{
+		renSize=Integer.parseInt(request.getParameter("renSize"));
+	}catch(Exception e){
+		renSize=50;
+	}
+	
+	ArrayList<Submission> arr=TomcatHelper.getAllSubmissions();
+	arr.sort(new Comparator<Submission>(){
+		public int compare(Submission a,Submission b){
+			return -Long.compare(a.id, b.id);
+		}
+	});
+	renSize=Math.max(1,renSize);
+	
+	int mxP=(arr.size()+renSize-1)/renSize;
+	pageId=Math.min(pageId,mxP);
+	pageId=Math.max(1,pageId);
+	
+	
+%>
+
 <jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
-		<h1>Status</h1>
+		<h1>Status #<%=pageId %>/<%=mxP %></h1>
 		<hr/>
+		<ul class="pagination pagination-sm">
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId-10%>&renSize=<%=renSize%>">&lt;&lt;10</a></li>
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId-1%>&renSize=<%=renSize%>">&lt;</a></li>
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId+1%>&renSize=<%=renSize%>">&gt;</a></li>
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId+10%>&renSize=<%=renSize%>">10&gt;&gt;</a></li>
+		</ul>
+		<ul class="pagination pagination-sm">
+			<li class="page-item disabled"><a class="page-link" href="#">Submission Per Page:</a></li>
+			<li class="page-item"><a class="page-link" href="?page=<%=pageId%>&renSize=<%=1%>">1?</a></li>
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId%>&renSize=<%=10%>">10</a></li>
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId%>&renSize=<%=20%>">20</a></li>
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId%>&renSize=<%=50%>">50</a></li>
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId%>&renSize=<%=100%>">100</a></li>
+		    <li class="page-item"><a class="page-link" href="?page=<%=pageId%>&renSize=<%=998244353%>">998244353!</a></li>
+		</ul>
+  		<hr/>
 		<table class="table table-bordered table-sm status-table">
 			<tr>
 				<th>#</th>
@@ -34,13 +79,10 @@
 				<th>Memory</th>
 			</tr>
 			<%
-				ArrayList<Submission> arr=TomcatHelper.getAllSubmissions();
-				arr.sort(new Comparator<Submission>(){
-					public int compare(Submission a,Submission b){
-						return -Long.compare(a.id, b.id);
-					}
-				});
-				for(Submission s:arr){
+				
+				
+				for(int i=(pageId-1)*renSize;i<Math.min(arr.size(),pageId*renSize);i++){
+					Submission s=arr.get(i);
 			%>
 				<tr bgcolor="<%=(s.author.equals(session.getAttribute("username"))?"#def":"white")%>">
 					<td><a href="sview.jsp?id=<%=s.id %>"><%=s.id %></a></td>
