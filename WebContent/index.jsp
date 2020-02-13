@@ -10,8 +10,8 @@
 <body>
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
-		<h1>Welcome to HHSOJ Essential</h1>
-		<i>OJ by XGN from HHS</i>
+		<h1 style="display:inline;">Welcome to HHSOJ Essential</h1>
+		<span class="title-right"><br/>OJ by XGN from HHS</span>
 		<hr/>
 		<p style="font-size:50px;">Still Indev....  :\</p>
 		<i>HHS 2019-2020</i>
