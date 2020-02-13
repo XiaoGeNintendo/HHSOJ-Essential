@@ -76,7 +76,7 @@
 											<div class="row">
 												<div class="col-sm-2"><b>Subtask: <%=e.getKey() %></b></div>
 												<div class="col-sm-2">Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %></div>
-												<div class="col-sm-2"><%=e.getValue().getVerdict()%></div> 
+												<div class="col-sm-4"><%=TomcatHelper.frontendRenderer(e.getValue().getVerdict())%></div> 
 											</div>
 										</a>
 									</div>
