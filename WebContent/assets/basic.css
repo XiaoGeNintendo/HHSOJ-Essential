@@ -1,8 +1,5 @@
-/* HHSOJ CSS file */
-/* by Zzzyt */
-body {
-	background: #fafaf8;
-}
+/* HHSOJ basic CSS file */
+/* by Zzzyt from Hell Hole Studios*/
 
 hr {
 	margin-top: 10px;
@@ -15,11 +12,9 @@ p, span, a, th, td, label {
 	margin-block-end: 0px;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
-	font-family: "Consolas", monospace;
 }
 
 input[type=button], input[type=submit], button {
-	font-family: "Consolas", monospace;
 	margin: 5px;
 }
 
@@ -32,24 +27,12 @@ div[class~="input-group"] {
 }
 
 table {
-	background: #ffffff;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 }
 
-table>tbody>tr>th {
-	background: #dee2e6;
-}
-
 code, kbd, pre, samp {
 	padding: .2em .4em;
-	background-color: #f0f0f0;
-	border-radius: 3px;
-	background-color: #f0f0f0;
-}
-
-.hljs {
-	border-radius: 3px;
 }
 
 .container {
@@ -60,9 +43,7 @@ code, kbd, pre, samp {
 .title-right {
 	margin-top: 5px;
 	margin-bottom: 5px;
-	color: #777777;
 	font-size: 15px;
-	font-family: "Consolas", monospace;
 	float: right;
 	text-align: right;
 }
@@ -72,9 +53,7 @@ code, kbd, pre, samp {
 	margin-right: 20px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	font-weight: bold;
 	float: left;
-	font-family: "Consolas", monospace;
 }
 
 .subtitle {
@@ -85,30 +64,16 @@ code, kbd, pre, samp {
 	float: left;
 	clear: both;
 	margin-bottom: 10px;
-	font-family: "Consolas";
 }
 
 .topbar-item a {
-	font-weight: bold;
 	font-size: 20px;
 	padding-left: 8px !important;
 	padding-right: 8px !important;
 }
 
-.topbar-item:hover {
-	background: #777777;
-}
-
-.topbar-item {
-	transition: 0.2s;
-}
-
 .navbar-brand img {
 	width: 40px;
-}
-
-.navbar-brand:hover {
-	background: #777777;
 }
 
 .navbar-brand {

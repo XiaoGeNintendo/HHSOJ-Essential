@@ -8,9 +8,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="head/markdown.jsp"></jsp:include>
-<jsp:include page="head/mathjax.jsp"></jsp:include>
 <jsp:include page="head/basic.jsp"></jsp:include>
+<jsp:include page="head/mathjax.jsp"></jsp:include>
+<jsp:include page="head/markdown.jsp"></jsp:include>
 <title>Problem Viewing - HHSOJ</title>
 </head>
 <body>
@@ -35,10 +35,12 @@
 		<span class="title-right"><br/>Version: v<%=p.ver %></span>
 		<hr/>
 		<button class="btn btn-secondary" style="float:right;" onclick="reloadMathjax()">Render Mathjax Manually</button>
+		<a class="btn btn-primary" style="float:right;" href="submit.jsp?set=<%=p.set%>&id=<%=p.id%>">Submit</a>
 		<span><%=p.tl %>ms / <%=p.ml %> KB<br/>Difficulty:<%=p.diff %>x</span>
 		
 		<hr/>
 		<div id="txt">Loading Statement...</div>
+		<div id="diagram"></div>
 		<hr/>
 		
 		<a class="btn btn-primary" href="submit.jsp?set=<%=p.set%>&id=<%=p.id%>">Submit</a>
@@ -48,24 +50,13 @@
 			"set":"<%=p.set%>",
 			"id":"<%=p.id%>"
 		},function(data,status){
-			var converter = new showdown.Converter({
-			    'disableForced4SpacesIndentedSublists': 'true', 
-			    'tasklists': 'true', 
-			    'tables': 'true', 
-			    'strikethrough':'true',
-			    'extensions': ['mathjax']
-			});
 		    var text=data;
 		    html=converter.makeHtml(text);
 		    document.getElementById("txt").innerHTML=html;
-		    reloadTableStyle();
 		    reloadHighlight();
+			reloadTableStyle();
 		    reloadMathjax();
 		})
-		
-		function reloadMathjax(){
-			MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-		}
 	</script>
 </body>
 </html>

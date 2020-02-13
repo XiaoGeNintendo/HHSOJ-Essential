@@ -1,3 +1,5 @@
+[TOC]
+
 # Statement
 
 Please print "Hello,World!"(no quotes).
@@ -56,7 +58,7 @@ $|k-answer| \leq\frac{1}{10^6}$
 
 $score \pm 1 \in \lbrace n \times m | n,m \in \mathbb{N}^{+} \rbrace$
 
-$\Delta=\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \end{bmatrix}$
+$\Delta=\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$
 
 $Actually no input$
 

@@ -12,9 +12,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="head/markdown.jsp"></jsp:include>
-<jsp:include page="head/mathjax.jsp"></jsp:include>
 <jsp:include page="head/basic.jsp"></jsp:include>
+<jsp:include page="head/mathjax.jsp"></jsp:include>
+<jsp:include page="head/markdown.jsp"></jsp:include>
 <title>Submission Viewing - HHSOJ</title>
 </head>
 <body>
@@ -127,7 +127,7 @@
 						</div>
 					</div>
 					<div class="tab-pane" id="code" role="tabpanel" aria-labelledby="code-tab">
-						<pre></pre>
+						<pre><code class="<%=s.lang %> language-<%=s.lang %>"><%=s.code.replace("<", "&lt;").replace(">","&gt;")%></code></pre>
 					</div>
 					<div class="tab-pane" id="compiler" role="tabpanel" aria-labelledby="compiler-tab">
 						<pre><%=s.compilerInfo.replace("<", "&lt;").replace(">","&gt;") %></pre>
@@ -136,13 +136,5 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		var converter = new showdown.Converter();
-	    var text="```<%=s.lang%>\n";
-	    text+="<%=s.code.replace("\"","\\\"").replace("\n","\\n")%>";
-	    text+="\n```";
-	    html=converter.makeHtml(text);
-	    document.getElementById("code").innerHTML=html;
-	</script>
 </body>
 </html>

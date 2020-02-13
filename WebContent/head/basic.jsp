@@ -13,5 +13,6 @@
 <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-<!-- default.css, get over everything!!!-->
-<link href="assets/default.css" rel="stylesheet" type="text/css">
+<!-- basic.css, get over everything!!!-->
+<link href="assets/basic.css" rel="stylesheet" type="text/css">
+<link href="assets/theme.css" rel="stylesheet" type="text/css">

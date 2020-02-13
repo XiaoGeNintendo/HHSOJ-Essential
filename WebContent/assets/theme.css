@@ -1,0 +1,70 @@
+/* HHSOJ default theme */
+/* by Zzzyt from Hell Hole Studios*/
+
+p, span, a, th, td, label {
+	font-family: "Consolas", monospace;
+}
+
+input[type=button], input[type=submit], button {
+	font-family: "Consolas", monospace;
+}
+
+.title{
+	font-weight: bold;
+	font-family: "Consolas", monospace;
+}
+
+.subtitle{
+	font-family: "Consolas";
+}
+
+.topbar-item a{
+	font-weight: bold;
+}
+
+.hljs {
+	border-radius: 3px;
+}
+
+.topbar-item {
+	transition: 0.2s;
+}
+
+body {
+	background: #f8f8f8;
+}
+
+table{
+	background: #ffffff;
+}
+
+table>tbody>tr>th {
+	background: #dee2e6;
+}
+
+table>tr>th {
+	background: #dee2e6;
+}
+
+code, kbd, pre, samp {
+	border-radius: 3px;
+	background-color: #f0f0f0;
+}
+
+code:empty,kdb:empty,pre:empty,samp:empty{
+	border-radius: 0px;
+	visibility: hidden;
+}
+
+.title-right{
+	font-family: "Consolas", monospace;
+	color: #777777;
+}
+
+.topbar-item:hover {
+	background: #777777;
+}
+
+.navbar-brand:hover {
+	background: #777777;
+}
