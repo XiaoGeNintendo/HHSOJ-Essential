@@ -2,7 +2,6 @@ package com.hhs.xgn.hhsoj.essential.se;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
 
 import com.google.gson.Gson;

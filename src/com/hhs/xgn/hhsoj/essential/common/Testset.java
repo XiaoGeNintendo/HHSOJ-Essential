@@ -1,7 +1,6 @@
 package com.hhs.xgn.hhsoj.essential.common;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A testset

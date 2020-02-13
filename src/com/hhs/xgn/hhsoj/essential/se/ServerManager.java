@@ -9,7 +9,6 @@ import java.net.Socket;
 import java.util.Vector;
 
 import com.google.gson.Gson;
-import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
 import com.hhs.xgn.hhsoj.essential.common.Submission;
 
 /**
