@@ -211,6 +211,7 @@ public class TomcatHelper {
 									 "Memory Limit Exceeded",
 									 "Runtime Error",
 									 "Restrict Function",
+									 "Point"
 								    },
 								 tF={"fa fa-check",
  									 "fa fa-close",
@@ -218,20 +219,23 @@ public class TomcatHelper {
 									 "fa fa-database",
 									 "fa fa-bomb",
 									 "fa fa-ban",
+									 "fa fa-pie-chart"
 								    },
 								 tT={"Your code is correct",
 								     "Your code produces incorrect output",
 								     "Your code uses too much time to run",
 								     "Your code uses too much memory to run",
 								     "Your code exits abnormally",
-								     "Your code uses illegal system call"
+								     "Your code uses illegal system call",
+								     "Click to see detail"
 								    },
 								 tC={"green",
 									 "blue",
 									 "orange",
 									 "purple",
 									 "red",
-									 "crimson" //has this color?
+									 "crimson",
+									 "darkViolet"
 								    };
 	public static final String tFor="<span style=\"color:%s;font-weight:bold\" title=\"%s\"><i class=\"%s\"></i>%s</span>";
 	public static String frontendRenderer(String ver){
