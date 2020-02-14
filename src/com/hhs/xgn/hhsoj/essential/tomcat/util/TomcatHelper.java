@@ -222,11 +222,11 @@ public class TomcatHelper {
 									 "fa fa-pie-chart"
 								    },
 								 tT={"Your code is correct",
-								     "Your code produces incorrect output",
-								     "Your code uses too much time to run",
-								     "Your code uses too much memory to run",
-								     "Your code exits abnormally",
-								     "Your code uses illegal system call",
+								     "Your code produced incorrect output",
+								     "Your code used too much time to run",
+								     "Your code used too much memory to run",
+								     "Your code exited abnormally",
+								     "Your code used illegal system call",
 								     "Click to see detail"
 								    },
 								 tC={"green",
