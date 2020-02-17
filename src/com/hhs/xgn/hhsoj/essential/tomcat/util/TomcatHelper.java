@@ -213,6 +213,15 @@ public class TomcatHelper {
 									 "Restrict Function",
 									 "Point"
 								    },
+								 tA={
+									 "AC",
+									 "WA",
+									 "TLE",
+									 "MLE",
+									 "RE",
+									 "RF",
+									 ""
+								 },
 								 tF={"fa fa-check",
  									 "fa fa-close",
 									 "fa fa-clock-o",
@@ -238,12 +247,21 @@ public class TomcatHelper {
 									 "darkViolet"
 								    };
 	public static final String tFor="<span style=\"color:%s;font-weight:bold\" title=\"%s\"><i class=\"%s\"></i>%s</span>";
-	public static String frontendRenderer(String ver){
+//	public static String frontendRenderer(String ver){
+//		for(int i=0;i<tS.length;i++){
+//			if(ver.equals(tS[i])){
+//				return String.format(tFor, tC[i],tT[i],tF[i],ver);
+//			}
+//		}
+//		return String.format(tFor, "black","","",ver);
+//	}
+	
+	public static String frontendRenderer(String ver) {
 		for(int i=0;i<tS.length;i++){
 			if(ver.equals(tS[i])){
-				return String.format(tFor, tC[i],tT[i],tF[i],ver);
+				return tA[i];
 			}
 		}
-		return String.format(tFor, "black","","",ver);
+		return ver;
 	}
 }

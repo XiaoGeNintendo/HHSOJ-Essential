@@ -91,45 +91,38 @@
 											</div>
 										</a>
 									</div>
-									<div id="set<%=e.getKey() %>" class="collapse" data-parent="#superfa">
-										<div class="card-body">
-							<%
-								int cnt=0;
-								for(TestResult tr:e.getValue().res){
-									cnt++;
-							%>
-											<div class="card card-collapse">
-												<div class="card-header">
-													<a class="card-link" data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">
-														<div class="row">
-															<div class="col-sm-2"><b>Test <%=e.getKey()%>.<%=cnt %></b></div>
-															<div class="col-sm-2">Score:<%=tr.score %></div>
-															<div class="col-sm-4"><%=TomcatHelper.frontendRenderer(tr.verdict)%></div> 
-															<div class="col-sm-3"><%=tr.time %>ms / <%=tr.memory %>KB</div>
-														</div>
-													</a>
-												</div>
-												<div id="tr<%=e.getKey()+"w"+cnt%>" class="collapse" data-parent="#set<%=e.getKey() %>">
-													<div class="card-body">
-														<h5>Input</h5>
-														<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %>
-														</pre>
-														<h5>Output</h5>
-														<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %>
-														</pre>
-														<h5>Answer</h5>
-														<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %>
-														</pre>
-														<h5>Checker Information</h5>
-														<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %>
-														</pre>
-													</div>
+									<div id="set<%=e.getKey() %>" class="card-body collapse" data-parent="#superfa">
+										<%
+											int cnt=0;
+											for(TestResult tr:e.getValue().res){
+												cnt++;
+										%>
+											<div class="vcard" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>">
+												<span class="vcard-test">#<%=cnt %></span>
+											<% if(tr.verdict.equals("Accepted")){ %>
+												<span class="vcard-score"><%=tr.score %></span>
+											<% } else { %>
+												<span class="vcard-verdict"><%=TomcatHelper.frontendRenderer(tr.verdict)%></span>
+											<% } %>
+												<span class="vcard-tm"><%=tr.time %>ms</span>
+												<span class="vcard-tm"><%=tr.memory %>KB</span>
+											</div>
+											<div class="collapse vcard-detail" id="tr<%=e.getKey()+"w"+cnt%>" data-parent="#set<%=e.getKey() %>">
+												<div class="card card-body">
+													<h3><a data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">#<%=cnt %></a></h3>
+													<h5>Input</h5>
+													<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %></pre>
+													<h5>Output</h5>
+													<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %></pre>
+													<h5>Answer</h5>
+													<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %></pre>
+													<h5>Checker Information</h5>
+													<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %></pre>
 												</div>
 											</div>
-							<%
-								}
-							%>
-										</div>
+										<%
+											}
+										%>
 									</div>
 								</div>
 							<%
@@ -147,5 +140,94 @@
 			</div>
 		</div>
 	</div>
+	<script>	
+	function getlast1(x,half,lastk){
+		var group=Math.floor(x/lastk);
+		var index=x%lastk;
+		return lastk*group*2+index;
+	}
+	
+	function getlast2(x,half,lastk){
+		var group=Math.floor(x/lastk);
+		var index=x%lastk;
+		var tot=Math.ceil(half/lastk);
+		if(group==tot-1&&half%lastk!=0){
+			return lastk*group*2+half%lastk+index;
+		} 
+		else{
+			return lastk*group*2+lastk+index;
+		}
+	}
+	
+	function getk(){
+		var k=4;
+		if(window.innerWidth>=1200){
+			k=9;
+		}
+		else if(window.innerWidth>=992){
+			k=7;
+		}
+		else if(window.innerWidth>=768){
+			k=5;
+		}
+		return k;
+	}
+	
+	var lk=1;
+	function arrange(name){
+		var k=getk();
+		if(k==lk){
+			return;
+		}
+		var a=$('#'+name).children();
+		var half=a.length;
+		half=Math.floor(half/2);
+		var s='';
+		for(var i=0;;i++){
+			if(i*k>=half)break;
+			for(var j=i*k;j<i*k+k&&j<half;j++){
+				s+=a[getlast1(j,half,lk)].outerHTML;
+			}
+			for(var j=i*k;j<i*k+k&&j<half;j++){
+				s+=a[getlast2(j,half,lk)].outerHTML;
+			}
+		}
+		$('#'+name).html(s);
+	}
+	
+	function arrangeAll(){
+		for(var i=1;i<allset.length;i+=2){
+			arrange(allset[i].id);
+		}
+		lk=getk();
+	}
+	
+	
+	if (window.addEventListener) {
+		window.addEventListener("resize", resizeThrottler, false);
+	} else if (x.attachEvent) {
+		window.attachEvent("resize", resizeThrottler);
+	}
+	
+	var time=0;
+	var allset=$('#superfa').children(0).children();
+	for(var i=1;i<allset.length;i+=2){
+		time=Math.max(time,allset[i].children.length);
+	}
+	time=Math.min(time/10,500);
+	if(time<=15)time=0;
+	
+	var resizeTimeout;
+	function resizeThrottler() {
+		if ( !resizeTimeout && getk()!=lk) {
+			resizeTimeout = setTimeout(function() {
+				resizeTimeout = null;
+				arrangeAll();
+		   }, time);
+		}
+	}
+	
+	arrangeAll();
+	</script>
 </body>
 </html>

@@ -139,3 +139,77 @@ code, kbd, pre, samp {
 	margin-top: 50px;
 	width: 300px;
 }
+
+.vcard{
+	margin:3px;
+	float:left;
+	width:100px;
+	height:100px;
+	display:flex;
+	background:#0e0;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	border-radius:.25rem;
+	transition:0.2s;
+	cursor:pointer;
+}
+
+.vcard-detail{
+	margin:3px;
+	clear:both;
+	border-radius:.25rem;
+}
+
+@media(min-width:768px){
+	.vcard{
+		margin:10px;
+	}
+
+	.vcard-detail{
+		margin:10px;
+	}
+}
+
+@media(min-width:1200px){
+	.vcard{
+		margin:7px;
+	}
+
+	.vcard-detail{
+		margin:7px;
+	}
+}
+
+.vcard:hover{
+	background-color:#0d0;
+}
+
+.vcard-verdict{
+	color:#fff;
+	font-family:monospace;
+	line-height:40px;
+	font-size:40px;
+	font-weight:bold;
+}
+
+.vcard-score{
+	color:#fff;
+	font-family:monospace;
+	line-height:40px;
+	font-size:28px;
+	font-weight:bold;
+}
+
+.vcard-tm{
+	color:#fff;
+	font-family:monospace;
+	font-size:10px;
+}
+
+.vcard-test{
+	color:#fff;
+	font-family:monospace;
+	width:90px;
+	font-size:8px;
+}
