@@ -101,6 +101,7 @@
 												<span class="vcard-test">#<%=cnt %></span>
 											<% if(tr.verdict.equals("Accepted")){ %>
 												<span class="vcard-score"><%=tr.score %></span>
+												<span class="vcard-verdict vcard-hide"><%=TomcatHelper.frontendRenderer(tr.verdict)%></span>
 											<% } else { %>
 												<span class="vcard-verdict"><%=TomcatHelper.frontendRenderer(tr.verdict)%></span>
 											<% } %>

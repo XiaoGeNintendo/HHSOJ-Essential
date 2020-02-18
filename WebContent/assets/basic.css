@@ -199,6 +199,11 @@ code, kbd, pre, samp {
 	line-height:40px;
 	font-size:28px;
 	font-weight:bold;
+	display:none;
+}
+
+.vcard:hover > .vcard-score{
+	display:block;
 }
 
 .vcard-tm{
@@ -212,4 +217,8 @@ code, kbd, pre, samp {
 	font-family:monospace;
 	width:90px;
 	font-size:8px;
+}
+
+.vcard:hover > .vcard-hide{
+	display:none;
 }
