@@ -68,3 +68,58 @@ code:empty,kdb:empty,pre:empty,samp:empty{
 .navbar-brand:hover {
 	background: #777777;
 }
+
+.vcard-verdict{
+	font-family:monospace;
+	font-weight:bold;
+	color:#ffff;
+}
+
+.vcard-score{
+	font-family:monospace;
+	font-weight:bold;
+	color:#ffffff;
+}
+
+.vcard-tm{
+	font-family:monospace;
+	color:#ffffff;
+}
+
+.vcard-test{
+	font-family:monospace;
+	color:#ffffff;
+}
+
+.vcard:hover{
+	filter:brightness(85%);
+}
+
+.vcard{
+	background:#cccccc;
+	transition:0.3s;
+}
+
+.vcard-ac{
+	background:#00ee00;
+}
+
+.vcard-wa{
+	background:#0000ee;
+}
+
+.vcard-tle{
+	background:#ff8800;
+}
+
+.vcard-mle{
+	background:#ddcc00;
+}
+
+.vcard-re{
+	background:#dd0000;
+}
+
+.vcard-rf{
+	background:#cc00cc;
+}

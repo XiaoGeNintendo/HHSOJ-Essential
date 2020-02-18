@@ -146,12 +146,10 @@ code, kbd, pre, samp {
 	width:100px;
 	height:100px;
 	display:flex;
-	background:#0e0;
 	flex-direction:column;
 	align-items:center;
 	justify-content:center;
 	border-radius:.25rem;
-	transition:0.2s;
 	cursor:pointer;
 }
 
@@ -181,44 +179,37 @@ code, kbd, pre, samp {
 	}
 }
 
-.vcard:hover{
-	background-color:#0d0;
-}
-
 .vcard-verdict{
-	color:#fff;
-	font-family:monospace;
 	line-height:40px;
 	font-size:40px;
-	font-weight:bold;
 }
 
 .vcard-score{
-	color:#fff;
-	font-family:monospace;
 	line-height:40px;
 	font-size:28px;
-	font-weight:bold;
-	display:none;
-}
-
-.vcard:hover > .vcard-score{
-	display:block;
 }
 
 .vcard-tm{
-	color:#fff;
-	font-family:monospace;
 	font-size:10px;
 }
 
 .vcard-test{
-	color:#fff;
-	font-family:monospace;
 	width:90px;
 	font-size:8px;
 }
 
-.vcard:hover > .vcard-hide{
+.vcard-hide{
 	display:none;
+}
+
+.vcard:hover > .vcard-hide{
+	display:block !important;
+}
+
+.vcard-show{
+	display:block;
+}
+
+.vcard:hover > .vcard-show{
+	display:none !important;
 }

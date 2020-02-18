@@ -97,11 +97,11 @@
 											for(TestResult tr:e.getValue().res){
 												cnt++;
 										%>
-											<div class="vcard" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>">
+											<div class="vcard vcard-<%=TomcatHelper.frontendRenderer(tr.verdict).toLowerCase()%>" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>">
 												<span class="vcard-test">#<%=cnt %></span>
 											<% if(tr.verdict.equals("Accepted")){ %>
-												<span class="vcard-score"><%=tr.score %></span>
-												<span class="vcard-verdict vcard-hide"><%=TomcatHelper.frontendRenderer(tr.verdict)%></span>
+												<span class="vcard-score vcard-hide"><%=tr.score %></span>
+												<span class="vcard-verdict vcard-show"><%=TomcatHelper.frontendRenderer(tr.verdict)%></span>
 											<% } else { %>
 												<span class="vcard-verdict"><%=TomcatHelper.frontendRenderer(tr.verdict)%></span>
 											<% } %>
