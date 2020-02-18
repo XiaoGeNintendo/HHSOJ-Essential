@@ -79,31 +79,36 @@
 					<div class="tab-pane show active" id="testcase" role="tabpanel" aria-labelledby="testcase-tab">
 						<div id="superfa">
 						<%
+							boolean flag=true;
 							for(Entry<String,TestsetResult> e:s.res.entrySet()){
 							%>
 								<div class="card card-collapse">
 									<div class="card-header">
-										<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>">
+										<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>" aria-expanded="<%=flag%>" aria-controls="set<%=e.getKey()%>">
 											<div class="row">
 												<div class="col-sm-2"><b>Subtask: <%=e.getKey() %></b></div>
 												<div class="col-sm-2">Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %></div>
-												<div class="col-sm-4"><%=TomcatHelper.frontendRenderer(e.getValue().getVerdict())%></div> 
+												<div class="col-sm-4"><%=TomcatHelper.styledVerdict(e.getValue().getVerdict())%></div> 
 											</div>
 										</a>
 									</div>
-									<div id="set<%=e.getKey() %>" class="card-body collapse" data-parent="#superfa">
+									<div id="set<%=e.getKey()%>" class="card-body collapse<%=flag?" show":""%>" data-parent="#superfa">
 										<%
 											int cnt=0;
-											for(TestResult tr:e.getValue().res){
-												cnt++;
+																			for(TestResult tr:e.getValue().res){
+																				cnt++;
 										%>
-											<div class="vcard vcard-<%=TomcatHelper.frontendRenderer(tr.verdict).toLowerCase()%>" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>">
-												<span class="vcard-test">#<%=cnt %></span>
-											<% if(tr.verdict.equals("Accepted")){ %>
-												<span class="vcard-score vcard-hide"><%=tr.score %></span>
-												<span class="vcard-verdict vcard-show"><%=TomcatHelper.frontendRenderer(tr.verdict)%></span>
-											<% } else { %>
-												<span class="vcard-verdict"><%=TomcatHelper.frontendRenderer(tr.verdict)%></span>
+											<div class="vcard vcard-<%=TomcatHelper.shortVerdict(tr.verdict).toLowerCase()%>" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>" role="button" aria-controls="#tr<%=e.getKey()+"w"+cnt%>" aria-expanded="false">
+												<span class="vcard-test">#<%=cnt%></span>
+											<%
+												if(tr.verdict.equals("Accepted")){
+											%>
+												<span class="vcard-score vcard-hide"><%=tr.score%></span>
+												<span class="vcard-verdict vcard-show"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
+											<%
+												} else {
+											%>
+												<span class="vcard-verdict"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
 											<% } %>
 												<span class="vcard-tm"><%=tr.time %>ms</span>
 												<span class="vcard-tm"><%=tr.memory %>KB</span>
@@ -127,6 +132,7 @@
 									</div>
 								</div>
 							<%
+							flag=false;
 							}
 						%>
 						</div>
@@ -183,6 +189,7 @@
 		var a=$('#'+name).children();
 		var half=a.length;
 		half=Math.floor(half/2);
+		if(half==0)return;
 		var s='';
 		for(var i=0;;i++){
 			if(i*k>=half)break;

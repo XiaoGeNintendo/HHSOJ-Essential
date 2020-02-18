@@ -238,25 +238,26 @@ public class TomcatHelper {
 								     "Your code used illegal system call",
 								     "Click to see detail"
 								    },
-								 tC={"green",
-									 "blue",
-									 "orange",
-									 "purple",
-									 "red",
-									 "crimson",
-									 "darkViolet"
+								 tC={"#00ee00",
+									 "#0000ee",
+									 "#ff8800",
+									 "#aa00aa",
+									 "#dd0000",
+									 "#ddcc00",
+									 "#000000"
 								    };
-	public static final String tFor="<span style=\"color:%s;font-weight:bold\" title=\"%s\"><i class=\"%s\"></i>%s</span>";
-//	public static String frontendRenderer(String ver){
-//		for(int i=0;i<tS.length;i++){
-//			if(ver.equals(tS[i])){
-//				return String.format(tFor, tC[i],tT[i],tF[i],ver);
-//			}
-//		}
-//		return String.format(tFor, "black","","",ver);
-//	}
+	public static final String tFor="<span style=\"color:%s;font-weight:bold\" title=\"%s\"><i class=\"%s\"></i> %s</span>";
 	
-	public static String frontendRenderer(String ver) {
+	public static String styledVerdict(String ver){
+		for(int i=0;i<tS.length;i++){
+			if(ver.equals(tS[i])){
+				return String.format(tFor, tC[i],tT[i],tF[i],ver);
+			}
+		}
+		return String.format(tFor, "#cccccc","","",ver);
+	}
+	
+	public static String shortVerdict(String ver) {
 		for(int i=0;i<tS.length;i++){
 			if(ver.equals(tS[i])){
 				return tA[i];
