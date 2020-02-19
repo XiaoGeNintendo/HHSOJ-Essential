@@ -140,6 +140,10 @@ code, kbd, pre, samp {
 	width: 300px;
 }
 
+.vcard-collapse{
+	padding:0px 20px;
+}
+
 .vcard{
 	margin:3px;
 	float:left;

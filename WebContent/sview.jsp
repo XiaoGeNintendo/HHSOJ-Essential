@@ -92,8 +92,7 @@
 											</div>
 										</a>
 									</div>
-									<div id="set<%=e.getKey()%>" class="collapse<%=flag?" show":""%>" data-parent="#superfa">
-										<div class="card-body" style="padding-top:0px">
+									<div id="set<%=e.getKey()%>" class="vcard-collapse collapse<%=flag?" show":""%>" data-parent="#superfa">
 											<%
 												int cnt=0;
 																				for(TestResult tr:e.getValue().res){
@@ -130,7 +129,6 @@
 											<%
 												}
 											%>
-										</div>
 									</div>
 								</div>
 							<%
