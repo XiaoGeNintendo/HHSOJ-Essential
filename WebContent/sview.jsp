@@ -92,43 +92,45 @@
 											</div>
 										</a>
 									</div>
-									<div id="set<%=e.getKey()%>" class="card-body collapse<%=flag?" show":""%>" data-parent="#superfa">
-										<%
-											int cnt=0;
-																			for(TestResult tr:e.getValue().res){
-																				cnt++;
-										%>
-											<div class="vcard vcard-<%=TomcatHelper.shortVerdict(tr.verdict).toLowerCase()%>" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>" role="button" aria-controls="#tr<%=e.getKey()+"w"+cnt%>" aria-expanded="false">
-												<span class="vcard-test">#<%=cnt%></span>
+									<div id="set<%=e.getKey()%>" class="collapse<%=flag?" show":""%>" data-parent="#superfa">
+										<div class="card-body" style="padding-top:0px">
 											<%
-												if(tr.verdict.equals("Accepted")){
+												int cnt=0;
+																				for(TestResult tr:e.getValue().res){
+																					cnt++;
 											%>
-												<span class="vcard-score vcard-hide"><%=tr.score%></span>
-												<span class="vcard-verdict vcard-show"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
-											<%
-												} else {
-											%>
-												<span class="vcard-verdict"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
-											<% } %>
-												<span class="vcard-tm"><%=tr.time %>ms</span>
-												<span class="vcard-tm"><%=tr.memory %>KB</span>
-											</div>
-											<div class="collapse vcard-detail" id="tr<%=e.getKey()+"w"+cnt%>" data-parent="#set<%=e.getKey() %>">
-												<div class="card card-body">
-													<h3><a data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">#<%=cnt %></a></h3>
-													<h5>Input</h5>
-													<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %></pre>
-													<h5>Output</h5>
-													<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %></pre>
-													<h5>Answer</h5>
-													<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %></pre>
-													<h5>Checker Information</h5>
-													<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %></pre>
+												<div class="vcard vcard-<%=TomcatHelper.shortVerdict(tr.verdict).toLowerCase()%>" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>" role="button" aria-controls="#tr<%=e.getKey()+"w"+cnt%>" aria-expanded="false">
+													<span class="vcard-test">#<%=cnt%></span>
+												<%
+													if(tr.verdict.equals("Accepted")){
+												%>
+													<span class="vcard-score vcard-hide"><%=tr.score%></span>
+													<span class="vcard-verdict vcard-show"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
+												<%
+													} else {
+												%>
+													<span class="vcard-verdict"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
+												<% } %>
+													<span class="vcard-tm"><%=tr.time %>ms</span>
+													<span class="vcard-tm"><%=tr.memory %>KB</span>
 												</div>
-											</div>
-										<%
-											}
-										%>
+												<div class="collapse vcard-detail" id="tr<%=e.getKey()+"w"+cnt%>" data-parent="#set<%=e.getKey() %>">
+													<div class="card card-body">
+														<h3><a data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">#<%=cnt %></a></h3>
+														<h5>Input</h5>
+														<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %></pre>
+														<h5>Output</h5>
+														<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %></pre>
+														<h5>Answer</h5>
+														<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %></pre>
+														<h5>Checker Information</h5>
+														<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %></pre>
+													</div>
+												</div>
+											<%
+												}
+											%>
+										</div>
 									</div>
 								</div>
 							<%
