@@ -103,9 +103,9 @@
 											<div class="vcard vcard-<%=TomcatHelper.shortVerdict(tr.verdict).toLowerCase()%>" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>" role="button" aria-controls="#tr<%=e.getKey()+"w"+cnt%>" aria-expanded="false">
 												<span class="vcard-test">#<%=cnt%></span>
 											<%
-												if(tr.verdict.equals("Accepted")){
+												if(Math.abs(tr.score)>0){
 											%>
-												<span class="vcard-score vcard-hide"><%=tr.score%></span>
+												<span class="vcard-score vcard-hide"><%=TomcatHelper.shortScore(tr.score)%></span>
 												<span class="vcard-verdict vcard-show"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
 											<%
 												} else {

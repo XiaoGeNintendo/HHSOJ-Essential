@@ -265,4 +265,42 @@ public class TomcatHelper {
 		}
 		return ver;
 	}
+	
+	public static String shortScore(float x) {
+		String str;
+		if(Math.abs(x)<=1e5f) {
+			str=String.format("%.1f",x);
+			if(str.length()<=6) {
+				return str;
+			}
+		}
+		if(Math.abs(x)<=1e8f) {
+			str=String.format("%.1fk",x/1000f);
+			if(str.length()<=6) {
+				return str;
+			}
+		}
+		if(Math.abs(x)<=1e11f) {
+			str=String.format("%.1fm",x/1e6f);
+			if(str.length()<=6) {
+				return str;
+			}
+		}
+		if(Math.abs(x)<=1e14f) {
+			str=String.format("%.1fb",x/1e9f);
+			if(str.length()<=6) {
+				return str;
+			}
+		}
+		if(Math.abs(x)<=1e17f) {
+			str=String.format("%.1ft",x/1e12f);
+			if(str.length()<=6) {
+				return str;
+			}
+		}
+		if(x<0) {
+			return "-Inf";
+		}
+		return "Inf";
+	}
 }
