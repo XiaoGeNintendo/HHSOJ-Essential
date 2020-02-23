@@ -56,6 +56,7 @@
 		    reloadHighlight();
 			reloadTableStyle();
 		    reloadMathjax();
+		    reloadCopyButton();
 		})
 	</script>
 </body>

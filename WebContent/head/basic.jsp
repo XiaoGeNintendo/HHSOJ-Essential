@@ -9,13 +9,52 @@
 <link rel="icon" type="image/png" href="assets/hhsoj16x.png" sizes="16x16">
 <link rel="icon" type="image/png" href="assets/hhsoj32x.png" sizes="32x32">
 
-<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
 <!-- basic.css, get over everything!!!-->
 <link href="assets/basic.css" rel="stylesheet" type="text/css">
 <link href="assets/theme.css" rel="stylesheet" type="text/css">
+
+<script>
+function reloadCopyButton(){
+	$('.copy-btn-wrapper').remove();
+	
+	var a=$('pre');
+	var cnt=0;
+	for(var i=0;i<a.length;i++){
+		if(a[i].textContent=='')continue;
+		if(a[i].id==''){
+			while($('#copycode'+cnt).length!=0){
+				cnt++;
+			}
+			a[i].id="copycode"+cnt;
+		}
+	}
+	for(var i=0;i<a.length;i++){
+		if(a[i].textContent=='')continue;
+		var str='<div class="copy-btn-wrapper">'
+		str+='<button type="button" class="copy-btn" data-clipboard-target="#'+a[i].id+'">Copy</button>';
+		str+='</div>'
+		$(a[i]).before(str);
+	}
+	
+	var clipboard=new ClipboardJS('.copy-btn');
+	clipboard.on('success', function(e) {
+	    e.clearSelection();
+	});
+	clipboard.on('error', function(e) {
+	    alert("Copy failed :(");
+	});
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+	reloadCopyButton();
+});
+</script>
