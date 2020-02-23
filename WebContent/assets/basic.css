@@ -39,6 +39,7 @@ code, kbd, pre, samp {
 }
 
 pre {
+	margin-top:8px;
 	margin-bottom: 8px;
 }
 
@@ -102,6 +103,11 @@ pre>code {
 
 .topbar {
 	padding-left: 0px;
+}
+
+/* Sorry Bootstrap, but flexs are just too hard to handle */
+.card{
+	display:block;
 }
 
 @media ( min-width : 768px) {
@@ -231,14 +237,15 @@ pre>code {
 
 .copy-btn-wrapper {
 	display: none;
-	margin-top: 8px;
+	margin: 0px;
 	position: relative;
 }
 
 .copy-btn {
 	position: absolute;
-	top: -4px;
-	right: -4px;
+	top: 0px;
+	right: 0px;
+	margin:0px;
 	z-index: 10;
 	display: block;
 	font-size: 12px;
