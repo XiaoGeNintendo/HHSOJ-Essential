@@ -220,7 +220,7 @@ public class TomcatHelper {
 									 "MLE",
 									 "RE",
 									 "RF",
-									 ""
+									 "PT"
 								 },
 								 tF={"fa fa-check",
  									 "fa fa-close",
