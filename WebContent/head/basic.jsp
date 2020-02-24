@@ -23,6 +23,12 @@
 <link href="assets/theme.css" rel="stylesheet" type="text/css">
 
 <script>
+var postload=[];
+
+function addTask(a,f){
+	postload.push({p:a,f:f});
+}
+
 function reloadCopyButton(){
 	$('.copy-btn-wrapper').remove();
 	
@@ -54,7 +60,12 @@ function reloadCopyButton(){
 	});
 }
 
+addTask(100000,reloadCopyButton);
+
 document.addEventListener('DOMContentLoaded', (event) => {
-	reloadCopyButton();
+	postload.sort(function(a,b){
+		return a.p-b.p;
+	});
+	postload.forEach(task=>{task.f()});
 });
 </script>

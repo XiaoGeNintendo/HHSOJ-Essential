@@ -55,6 +55,11 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 	visibility: hidden;
 }
 
+/* Markdown:Anchor */
+.octicon {
+	color: #1b1f23;
+}
+
 .title-right {
 	font-family: "Consolas", monospace;
 	color: #777777;

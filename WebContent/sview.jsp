@@ -13,7 +13,6 @@
 <html>
 <head>
 <jsp:include page="head/basic.jsp"></jsp:include>
-<jsp:include page="head/mathjax.jsp"></jsp:include>
 <jsp:include page="head/markdown.jsp"></jsp:include>
 <title>Submission Viewing - HHSOJ</title>
 </head>

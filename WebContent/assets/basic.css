@@ -10,13 +10,6 @@ hr {
 	clear: both;
 }
 
-p, span, a, th, td, label {
-	margin-block-start: 0px;
-	margin-block-end: 0px;
-	margin-inline-start: 0px;
-	margin-inline-end: 0px;
-}
-
 input[type=button], input[type=submit], button {
 	margin: 5px;
 }
@@ -45,6 +38,54 @@ pre {
 
 pre>code {
 	padding: 0em !important;
+}
+
+/* Markdown:Anchor style*/
+/* from excing, slightly modified by Zzzyt */
+h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon, h5:hover .octicon, h6:hover .octicon {
+    visibility: visible;
+}
+
+.anchor {
+    line-height: 1;
+    margin-left: -20px;
+    padding-right: 4px;
+}
+
+.anchor:focus .octicon {
+    visibility: visible;
+}
+
+.octicon {
+    display: inline-block;
+    fill: currentColor;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
+/* Markdown:Catalog style */
+/* from excing, slightly modified by Zzzyt */
+.cat ul {
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+
+.cat ul ul {
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+.cat li, li {
+    padding-top: 0em;
+    padding-bottom: 0em;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .container {

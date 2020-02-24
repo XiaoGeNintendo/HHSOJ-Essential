@@ -9,7 +9,6 @@
 <html>
 <head>
 <jsp:include page="head/basic.jsp"></jsp:include>
-<jsp:include page="head/mathjax.jsp"></jsp:include>
 <jsp:include page="head/markdown.jsp"></jsp:include>
 <title>Problem Viewing - HHSOJ</title>
 </head>
@@ -56,7 +55,7 @@
 		    document.getElementById("txt").innerHTML=html;
 		    reloadHighlight();
 			reloadTableStyle();
-		    reloadMathjax();
+		    reloadMathJax();
 		    reloadCopyButton();
 		})
 	</script>
