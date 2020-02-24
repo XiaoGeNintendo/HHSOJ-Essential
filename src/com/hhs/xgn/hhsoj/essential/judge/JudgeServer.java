@@ -40,7 +40,7 @@ public class JudgeServer {
 	
 	Gson gs=new Gson();
 	
-	final int READ_LIMIT=256;
+	final int READ_LIMIT=4096;
 	
 	
 	
