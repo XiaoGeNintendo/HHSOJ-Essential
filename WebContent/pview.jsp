@@ -30,6 +30,7 @@
 				return;
 			}
 			
+			response.setCharacterEncoding("utf-8");
 		%>
 		<h1 style="display:inline;"><%=p.set+"."+p.id+" - "+p.name %></h1>
 		<span class="title-right"><br/>Version: v<%=p.ver %></span>
