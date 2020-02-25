@@ -1,20 +1,20 @@
 /* HHSOJ default theme */
 /* by Zzzyt from Hell Hole Studios*/
 p, span, a, th, td, label {
-	font-family: "Consolas", monospace;
+	font-family: "Consolas", "Courier New", Courier, monospace;
 }
 
 input[type=button], input[type=submit], button {
-	font-family: "Consolas", monospace;
+	font-family: "Consolas", "Courier New", Courier, monospace;
 }
 
 .title {
 	font-weight: bold;
-	font-family: "Consolas", monospace;
+	font-family: "Consolas", "Courier New", Courier, monospace;
 }
 
 .subtitle {
-	font-family: "Consolas";
+	font-family: "Consolas", "Courier New", Courier, monospace;
 }
 
 .topbar-item a {
