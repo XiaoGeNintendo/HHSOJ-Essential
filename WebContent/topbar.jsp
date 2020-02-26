@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top topbar">
 	<a class="navbar-brand" href="index.jsp"> 
-		<img src="assets/hhsoj128x.png" alt="Logo">
+		<img src="assets/img/hhsoj128x.png" alt="Logo">
 	</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"

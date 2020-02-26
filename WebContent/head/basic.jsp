@@ -6,8 +6,9 @@
 <meta name="description" content="HellOJ - Free OJ by Hell Hole Studios">
 <meta name="keywords" content="OJ HellOJ HHSOJ Online Judge">
 
-<link rel="icon" type="image/png" href="assets/hhsoj16x.png" sizes="16x16">
-<link rel="icon" type="image/png" href="assets/hhsoj32x.png" sizes="32x32">
+<link rel="icon" type="image/png" href="assets/img/hhsoj16x.png" sizes="16x16">
+<link rel="icon" type="image/png" href="assets/img/hhsoj32x.png" sizes="32x32">
+<link rel="icon" type="image/png" href="assets/img/hhsoj128x.png" sizes="128x128">
 
 <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
@@ -16,11 +17,11 @@
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+<script src="assets/js/clipboard.2.0.4.min.js"></script>
 
 <!-- basic.css, get over everything!!!-->
-<link href="assets/basic.css" rel="stylesheet" type="text/css">
-<link href="assets/theme.css" rel="stylesheet" type="text/css">
+<link href="assets/css/basic.css" rel="stylesheet" type="text/css">
+<link href="assets/css/theme.css" rel="stylesheet" type="text/css">
 
 <script>
 var postload=[];

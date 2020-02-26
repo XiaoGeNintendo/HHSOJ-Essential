@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+<link rel="stylesheet" href="assets/css/highlight.9.18.1.default.min.css">
+<script src="assets/js/highlight.9.18.1.min.js"></script>
 <script src="https://cdn.staticfile.org/showdown/1.9.1/showdown.min.js"></script>
-<script src="assets/showdown-full-extensions.js"></script>
-<script src="assets/showdown-youtube.js"></script>
+<script src="assets/js/showdown-full-extensions.js"></script>
+<script src="assets/js/showdown-youtube.js"></script>
 <script type="text/javascript" src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
 
 <script type="text/x-mathjax-config">

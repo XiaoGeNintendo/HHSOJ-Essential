@@ -61,7 +61,7 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 }
 
 .title-right {
-	font-family: "Consolas", monospace;
+	font-family: "Consolas", "Courier New", Courier, monospace;
 	color: #777777;
 }
 

@@ -3,15 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="head/markdown.jsp"></jsp:include>
 <jsp:include page="head/basic.jsp"></jsp:include>
+<jsp:include page="head/markdown.jsp"></jsp:include>
 <title>Login - HHSOJ</title>
 </head>
 <body>
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
-		<h1>Login/Register</h1>
-		<i>@XGN can u make two seperate pages?? --Zzzyt</i>
+		<h1 class="title">Login/Register</h1>
+		<i class="title-right"><br/>@XGN can u make two seperate pages?? --Zzzyt</i>
 		<hr/>
 		<div class="card center-form"><div class="card-body">
 			<div class="input-group">
