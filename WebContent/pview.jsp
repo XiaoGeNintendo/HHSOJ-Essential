@@ -36,6 +36,7 @@
 		<hr/>
 		<button class="btn btn-secondary" style="float:right;" onclick="reloadMathjax()">Render Mathjax Manually</button>
 		<a class="btn btn-primary" style="float:right;" href="submit.jsp?set=<%=p.set%>&id=<%=p.id%>">Submit</a>
+		<a class="btn btn-secondary" style="float:right;" href="plist.jsp?id=<%=p.set%>">Problemset</a>
 		<span><%=p.tl %>ms / <%=p.ml %> KB<br/>Difficulty:<%=p.diff %>x</span>
 		
 		<hr/>
