@@ -251,10 +251,19 @@ public class TomcatHelper {
 	public static String styledVerdict(String ver){
 		for(int i=0;i<tS.length;i++){
 			if(ver.equals(tS[i])){
-				return String.format(tFor, tC[i],tT[i],tF[i],ver);
+				return String.format(tFor,tC[i],tT[i],tF[i],ver);
 			}
 		}
-		return String.format(tFor, "#cccccc","","",ver);
+		return String.format(tFor,"#cccccc","","",ver);
+	}
+	
+	public static String styledVerdict(String ver,String color){
+		for(int i=0;i<tS.length;i++){
+			if(ver.equals(tS[i])){
+				return String.format(tFor,color,tT[i],tF[i],ver);
+			}
+		}
+		return String.format(tFor, color,"","",ver);
 	}
 	
 	public static String shortVerdict(String ver) {
@@ -326,6 +335,6 @@ public class TomcatHelper {
 		else if(x<=0.7){
 			return mixColorSquared(255,127,0,238,238,0,0.7f-x,x-0.3f);
 		}
-		return mixColorSquared(238,238,0,0,255,0,1.0f-x,x-0.7f);
+		return mixColorSquared(238,238,0,0,238,0,1.0f-x,x-0.7f);
 	}
 }
