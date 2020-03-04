@@ -141,3 +141,7 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 	color: #ffffff;
 	background-color: #666666;
 }
+
+.colored-header span{
+	color: #ffffff;
+}

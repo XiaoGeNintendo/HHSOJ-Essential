@@ -82,12 +82,12 @@
 							TestsetResult set=e.getValue();
 						%>
 							<div class="card card-collapse">
-								<div class="card-header" style="background-color:<%=TomcatHelper.scoreColor(set.getPassed())%>;">
+								<div class="card-header colored-header" style="background-color:<%=TomcatHelper.scoreColor(set.getPassed())%>;">
 									<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>" aria-expanded="<%=flag%>" aria-controls="set<%=e.getKey()%>">
 										<div class="row">
-											<div class="col-sm-2"><b>Subtask: <%=e.getKey() %></b></div>
-											<div class="col-sm-2">Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %></div>
-											<div class="col-sm-4"><%=TomcatHelper.styledVerdict(set.getVerdict())%></div> 
+											<div class="col-sm-2"><span><b>Subtask: <%=e.getKey() %></b></span></div>
+											<div class="col-sm-2"><span>Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %></span></div>
+											<div class="col-sm-4"><span><%=TomcatHelper.styledVerdict(set.getVerdict())%></span></div> 
 										</div>
 									</a>
 								</div>

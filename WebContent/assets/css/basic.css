@@ -32,7 +32,7 @@ code, kbd, pre, samp {
 }
 
 pre {
-	margin-top:8px;
+	margin-top: 8px;
 	margin-bottom: 8px;
 }
 
@@ -42,50 +42,51 @@ pre>code {
 
 /* Markdown:Anchor style*/
 /* from excing, slightly modified by Zzzyt */
-h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon, h5:hover .octicon, h6:hover .octicon {
-    visibility: visible;
+h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
+	h5:hover .octicon, h6:hover .octicon {
+	visibility: visible;
 }
 
 .anchor {
-    line-height: 1;
-    margin-left: -20px;
-    padding-right: 4px;
+	line-height: 1;
+	margin-left: -20px;
+	padding-right: 4px;
 }
 
 .anchor:focus .octicon {
-    visibility: visible;
+	visibility: visible;
 }
 
 .octicon {
-    display: inline-block;
-    fill: currentColor;
-    vertical-align: middle;
-    visibility: hidden;
+	display: inline-block;
+	fill: currentColor;
+	vertical-align: middle;
+	visibility: hidden;
 }
 
 /* Markdown:Catalog style */
 /* from excing, slightly modified by Zzzyt */
 .cat ul {
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 0px;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
 }
 
 .cat ul ul {
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 40px;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 40px;
 }
 
 .cat li, li {
-    padding-top: 0em;
-    padding-bottom: 0em;
-    margin-top: 0;
-    margin-bottom: 0;
+	padding-top: 0em;
+	padding-bottom: 0em;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .container {
@@ -147,8 +148,8 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon, h5:h
 }
 
 /* Sorry Bootstrap, but flexs are just too hard to handle */
-.card{
-	display:block;
+.card {
+	display: block;
 }
 
 @media ( min-width : 768px) {
@@ -272,7 +273,7 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon, h5:h
 
 @media ( min-width : 768px) {
 	.copy-btn-wrapper {
-		display: block! important;
+		display: block ! important;
 	}
 }
 
@@ -286,7 +287,7 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon, h5:h
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	margin:0px;
+	margin: 0px;
 	z-index: 10;
 	display: block;
 	font-size: 12px;
