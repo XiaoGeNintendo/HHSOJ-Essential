@@ -303,4 +303,29 @@ public class TomcatHelper {
 		}
 		return "Inf";
 	}
+	
+	public static float squaredAvg(float x,float y,float a,float b) {
+		return (float) Math.sqrt((x*x*a+y*y*b)/(a+b));
+	}
+	
+	public static int normalizeColor(float x) {
+		return Math.max(Math.min((int)Math.round(x),255),0);
+	}
+	
+	public static String mixColorSquared(float r1,float g1,float b1,float r2,float g2,float b2,float a,float b) {
+		int r3=normalizeColor(squaredAvg(r1, r2, a, b));
+		int g3=normalizeColor(squaredAvg(g1, g2, a, b));
+		int b3=normalizeColor(squaredAvg(b1, b2, a, b));
+		return String.format("rgb(%d,%d,%d)",r3,g3,b3);
+	}
+	
+	public static String scoreColor(float x) {
+		if(x<=0.3) {
+			return mixColorSquared(255,0,0,255,127,0,0.3f-x,x);
+		}
+		else if(x<=0.7){
+			return mixColorSquared(255,127,0,238,238,0,0.7f-x,x-0.3f);
+		}
+		return mixColorSquared(238,238,0,0,255,0,1.0f-x,x-0.7f);
+	}
 }

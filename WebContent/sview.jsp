@@ -12,8 +12,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="head/basic.jsp"></jsp:include>
-<jsp:include page="head/markdown.jsp"></jsp:include>
+<jsp:include page="head.jsp"></jsp:include>
 <title>Submission Viewing - HHSOJ</title>
 </head>
 <body>
@@ -78,65 +77,66 @@
 					<div class="tab-pane show active" id="testcase" role="tabpanel" aria-labelledby="testcase-tab">
 						<div id="superfa">
 						<%
-							boolean flag=true;
-							for(Entry<String,TestsetResult> e:s.res.entrySet()){
-							%>
-								<div class="card card-collapse">
-									<div class="card-header">
-										<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>" aria-expanded="<%=flag%>" aria-controls="set<%=e.getKey()%>">
-											<div class="row">
-												<div class="col-sm-2"><b>Subtask: <%=e.getKey() %></b></div>
-												<div class="col-sm-2">Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %></div>
-												<div class="col-sm-4"><%=TomcatHelper.styledVerdict(e.getValue().getVerdict())%></div> 
-											</div>
-										</a>
-									</div>
-									<div id="set<%=e.getKey()%>" class="vcard-collapse collapse<%=flag?" show":""%>" data-parent="#superfa">
-										<div style="height:20px;clear:both;"></div>
-										<div>
-										<%
-											int cnt=0;
-																			for(TestResult tr:e.getValue().res){
-																				cnt++;
-										%>
-											<div class="vcard vcard-<%=TomcatHelper.shortVerdict(tr.verdict).toLowerCase()%>" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>" role="button" aria-controls="#tr<%=e.getKey()+"w"+cnt%>" aria-expanded="false">
-												<span class="vcard-test">#<%=cnt%></span>
-											<%
-												if(Math.abs(tr.score)>0){
-											%>
-												<span class="vcard-score vcard-hide"><%=TomcatHelper.shortScore(tr.score)%></span>
-												<span class="vcard-verdict vcard-show"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
-											<%
-												} else {
-											%>
-												<span class="vcard-verdict"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
-											<% } %>
-												<span class="vcard-tm"><%=tr.time %>ms</span>
-												<span class="vcard-tm"><%=tr.memory %>KB</span>
-											</div>
-											<div class="collapse vcard-detail" id="tr<%=e.getKey()+"w"+cnt%>" data-parent="#set<%=e.getKey() %>">
-												<div class="card card-body">
-													<h3><a data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">#<%=cnt %></a></h3>
-													<h5>Input</h5>
-													<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %></pre>
-													<h5>Output</h5>
-													<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %></pre>
-													<h5>Answer</h5>
-													<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %></pre>
-													<h5>Checker Information</h5>
-													<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %></pre>
-												</div>
-											</div>
-										<%
-											}
-										%>
+						boolean flag=true;
+						for(Entry<String,TestsetResult> e:s.res.entrySet()){
+							TestsetResult set=e.getValue();
+						%>
+							<div class="card card-collapse">
+								<div class="card-header" style="background-color:<%=TomcatHelper.scoreColor(set.getPassed())%>;">
+									<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>" aria-expanded="<%=flag%>" aria-controls="set<%=e.getKey()%>">
+										<div class="row">
+											<div class="col-sm-2"><b>Subtask: <%=e.getKey() %></b></div>
+											<div class="col-sm-2">Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %></div>
+											<div class="col-sm-4"><%=TomcatHelper.styledVerdict(set.getVerdict())%></div> 
 										</div>
-										<div style="height:20px;clear:both;"></div>
-									</div>
+									</a>
 								</div>
-							<%
-							flag=false;
-							}
+								<div id="set<%=e.getKey()%>" class="vcard-collapse collapse<%=flag?" show":""%>" data-parent="#superfa">
+									<div style="height:20px;clear:both;"></div>
+									<div>
+									<%
+										int cnt=0;
+										for(TestResult tr:set.res){
+											cnt++;
+									%>
+										<div class="vcard vcard-<%=TomcatHelper.shortVerdict(tr.verdict).toLowerCase()%>" data-toggle="collapse" data-target="#tr<%=e.getKey()+"w"+cnt%>" role="button" aria-controls="#tr<%=e.getKey()+"w"+cnt%>" aria-expanded="false">
+											<span class="vcard-test">#<%=cnt%></span>
+										<%
+											if(Math.abs(tr.score)>0){
+										%>
+											<span class="vcard-score vcard-hide"><%=TomcatHelper.shortScore(tr.score)%></span>
+											<span class="vcard-verdict vcard-show"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
+										<%
+											} else {
+										%>
+											<span class="vcard-verdict"><%=TomcatHelper.shortVerdict(tr.verdict)%></span>
+										<% } %>
+											<span class="vcard-tm"><%=tr.time %>ms</span>
+											<span class="vcard-tm"><%=tr.memory %>KB</span>
+										</div>
+										<div class="collapse vcard-detail" id="tr<%=e.getKey()+"w"+cnt%>" data-parent="#set<%=e.getKey() %>">
+											<div class="card card-body">
+												<h3><a data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">#<%=cnt %></a></h3>
+												<h5>Input</h5>
+												<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %></pre>
+												<h5>Output</h5>
+												<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %></pre>
+												<h5>Answer</h5>
+												<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %></pre>
+												<h5>Checker Information</h5>
+												<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %></pre>
+											</div>
+										</div>
+									<%
+										}
+									%>
+									</div>
+									<div style="height:20px;clear:both;"></div>
+								</div>
+							</div>
+						<%
+						flag=false;
+						}
 						%>
 						</div>
 					</div>

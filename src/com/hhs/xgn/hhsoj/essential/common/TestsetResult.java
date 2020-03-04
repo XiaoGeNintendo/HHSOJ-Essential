@@ -71,4 +71,14 @@ public class TestsetResult {
 		
 		return 0;
 	}
+	
+	public float getPassed() {
+		int cnt=0;
+		for(TestResult i:res) {
+			if(i.verdict.equals("Accepted")||i.verdict.equals("Point")) {
+				cnt++;
+			}
+		}
+		return (float)cnt/res.size();
+	}
 }
