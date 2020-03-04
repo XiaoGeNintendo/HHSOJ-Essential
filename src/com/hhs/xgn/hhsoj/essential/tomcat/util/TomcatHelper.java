@@ -328,7 +328,7 @@ public class TomcatHelper {
 		return String.format("rgb(%d,%d,%d)",r3,g3,b3);
 	}
 	
-	public static String scoreColor(float x) {
+	public static String colorize(float x) {
 		if(x<=0.3) {
 			return mixColorSquared(255,0,0,255,127,0,0.3f-x,x);
 		}

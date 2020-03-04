@@ -33,6 +33,7 @@ public class CommonUtil {
 		}
 	}
 	
+	@Deprecated
 	public static String colorize(float f){
 //		System.out.println(f+Integer.toHexString((int)((1-f)*256))+Integer.toHexString((int)f*256)+"00");
 		if(f>=1.0){

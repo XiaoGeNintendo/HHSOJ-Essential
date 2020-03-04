@@ -81,8 +81,8 @@
 						for(Entry<String,TestsetResult> e:s.res.entrySet()){
 							TestsetResult set=e.getValue();
 						%>
-							<div class="card card-collapse" style="border-color:<%=TomcatHelper.scoreColor(set.getPassed())%>;">
-								<div class="card-header colored-header" style="background-color:<%=TomcatHelper.scoreColor(set.getPassed())%>;">
+							<div class="card card-collapse" style="border-color:<%=TomcatHelper.colorize(set.getPassed())%>;">
+								<div class="card-header colored-header" style="background-color:<%=TomcatHelper.colorize(set.getPassed())%>;">
 									<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>" aria-expanded="<%=flag%>" aria-controls="set<%=e.getKey()%>">
 										<div class="row">
 											<div class="col-sm-3"><span><b>Subtask: <%=e.getKey() %></b></span></div>
