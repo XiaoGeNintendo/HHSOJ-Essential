@@ -46,6 +46,7 @@ public class RegisterServlet extends HttpServlet {
 			return;
 		}
 		
+		
 		ArrayList<User> usr=TomcatHelper.getUsers();
 		
 		for(User x:usr){
@@ -53,6 +54,15 @@ public class RegisterServlet extends HttpServlet {
 				response.getWriter().append("Nope. Username exists!");
 				return;
 			}
+		}
+		
+		if(user.contains("<") || user.contains(">") || user.length()>=50){
+			response.getWriter().append("Not a nice username :/");
+			return;
+		}
+		if(pass.length()>=50){
+			response.getWriter().append("Ehh.. Your password is too secure?");
+			return;
 		}
 		
 		TomcatHelper.addUser(user,pass);
