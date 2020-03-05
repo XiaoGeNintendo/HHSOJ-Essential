@@ -57,7 +57,7 @@ code, kbd, pre, samp {
 		<pre><%
 StringWriter sw = new StringWriter();
 exception.printStackTrace(new PrintWriter(sw));
-out.print(sw.toString().replace("<","&lt;").replace(">","&gt;"));
+out.print(sw.toString().replace("&","&amp;").replace("<","&lt;").replace(">","&gt;"));
 %></pre>
 	</div>
 </body>

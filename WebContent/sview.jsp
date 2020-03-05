@@ -6,6 +6,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.Problemset"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.tomcat.util.TomcatHelper"%>
+<%@page import="com.hhs.xgn.hhsoj.essential.common.CommonUtil"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -41,7 +42,7 @@
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
 		<h1 style="display:inline;">#<%=id%> </h1>
-		<i style="font-size:20px;"> by <%=s.author %></i>
+		<i style="font-size:20px;"> by <%=CommonUtil.removeHTML(s.author) %></i>
 		<span class="title-right">
 			Submit Time: <%=new Date(s.submitTime) %><br/>
 			Judger: <%=s.judger %> <br/>
@@ -119,13 +120,13 @@
 												<h3 style="display:inline;"><a data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">#<%=cnt %></a></h3>
 												<span style="float:right;"><%=tr.time %>ms / <%=tr.memory %>KB / <%=TomcatHelper.styledVerdict(set.getVerdict())%></span>
 												<h5>Input</h5>
-												<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %></pre>
+												<pre><%=CommonUtil.removeHTML(tr.input)%></pre>
 												<h5>Output</h5>
-												<pre><%=tr.output.replace("<", "&lt;").replace(">","&gt;") %></pre>
+												<pre><%=CommonUtil.removeHTML(tr.output)%></pre>
 												<h5>Answer</h5>
-												<pre><%=tr.answer.replace("<", "&lt;").replace(">","&gt;") %></pre>
+												<pre><%=CommonUtil.removeHTML(tr.answer)%></pre>
 												<h5>Checker Information</h5>
-												<pre><%=tr.info.replace("<", "&lt;").replace(">","&gt;") %></pre>
+												<pre><%=CommonUtil.removeHTML(tr.info)%></pre>
 											</div>
 										</div>
 									<%
@@ -142,10 +143,10 @@
 						</div>
 					</div>
 					<div class="tab-pane" id="code" role="tabpanel" aria-labelledby="code-tab">
-						<pre><code class="<%=s.lang %> language-<%=s.lang %>"><%=s.code.replace("<", "&lt;").replace(">","&gt;")%></code></pre>
+						<pre><code class="<%=s.lang %> language-<%=s.lang %>"><%=CommonUtil.removeHTML(s.code)%></code></pre>
 					</div>
 					<div class="tab-pane" id="compiler" role="tabpanel" aria-labelledby="compiler-tab">
-						<pre><%=s.compilerInfo.replace("<", "&lt;").replace(">","&gt;") %></pre>
+						<pre><%=CommonUtil.removeHTML(s.compilerInfo)%></pre>
 					</div>
 				</div>
 			</div>

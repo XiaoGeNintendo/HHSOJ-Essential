@@ -1,3 +1,4 @@
+<%@page import="com.hhs.xgn.hhsoj.essential.common.CommonUtil"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Date"%>
@@ -86,7 +87,7 @@
 				<tr bgcolor="<%=(s.author.equals(session.getAttribute("username"))?"#def":"white")%>">
 					<td><a href="sview.jsp?id=<%=s.id %>"><%=s.id %></a></td>
 					<td><%=new Date(s.submitTime) %></td>
-					<td><%=s.author %></td>
+					<td><%=CommonUtil.removeHTML(s.author) %></td>
 					<td><a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a></td>
 					<td align="center"><b style="color:<%=TomcatHelper.colorize(s.score) %>;"><%=String.format("%.0f", 100*s.score) %></b></td>
 					<td><%=(s.isFinal?"Final":s.test) %></td>

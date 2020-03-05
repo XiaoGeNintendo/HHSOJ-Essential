@@ -56,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
 			}
 		}
 		
-		if(user.contains("<") || user.contains(">") || user.length()>=50){
+		if(user.length()>=50){
 			response.getWriter().append("Not a nice username :/");
 			return;
 		}

@@ -28,26 +28,46 @@
 		</div></div>
 
 		<script>
-			function login() {
-				$.post("loginS", {
-					"username" : document.getElementById("user").value,
-					"password" : document.getElementById("pass").value,
-				}, function(data, status) {
-					if (data == "OK") {
-						window.location = "index.jsp";
-					} else {
-						alert(data);
-					}
-				});
+		function login() {
+			var user=$("#user").val();
+			var pass=$("#pass").val();
+			if(user.length>50){
+				alert("Username too long!");
+				return;
 			}
-			function reg() {
-				$.post("regS", {
-					"username" : document.getElementById("user").value,
-					"password" : document.getElementById("pass").value,
-				}, function(data, status) {
+			if(pass.length>50){
+				alert("Username too long!");
+				return;
+			}
+			$.post("loginS", {
+				"username" : user,
+				"password" : pass,
+			}, function(data, status) {
+				if (data == "OK") {
+					window.location = "index.jsp";
+				} else {
 					alert(data);
-				});
+				}
+			});
+		}
+		function reg() {
+			var user=$("#user").val();
+			var pass=$("#pass").val();
+			if(user.length>50){
+				alert("Username too long!");
+				return;
 			}
+			if(pass.length>50){
+				alert("Username too long!");
+				return;
+			}
+			$.post("regS", {
+				"username" : user,
+				"password" : pass,
+			}, function(data, status) {
+				alert(data);
+			});
+		}
 		</script>
 	</div>
 </body>

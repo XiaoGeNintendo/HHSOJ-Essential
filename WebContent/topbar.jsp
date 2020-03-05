@@ -1,3 +1,4 @@
+<%@page import="com.hhs.xgn.hhsoj.essential.common.CommonUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -25,7 +26,7 @@
 			<li class="nav-item topbar-item"><a class="nav-link" href="login.jsp">Login</a></li>
 		<%} else {%>
 			<%-- TODO: "index.jsp" below should be replaced with user page URL --%>
-			<li class="nav-item topbar-item"><a class="nav-link" href="index.jsp"><%=session.getAttribute("username") %></a></li>
+			<li class="nav-item topbar-item"><a class="nav-link" href="index.jsp"><%=CommonUtil.removeHTML((String)session.getAttribute("username"))%></a></li>
 			<li class="nav-item topbar-item"><a class="nav-link" href="logoutS">Logout</a></li>
 		<%}%>
 		</ul>

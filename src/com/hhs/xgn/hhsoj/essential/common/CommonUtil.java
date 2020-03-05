@@ -138,4 +138,10 @@ public class CommonUtil {
 		
 		return hash;
 	}
+	
+	public static String removeHTML(String s) {
+		return s.replace("&","&amp;")
+				.replace("<","&lt;")
+				.replace(">","&gt;");
+	}
 }
