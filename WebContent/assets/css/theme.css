@@ -33,6 +33,10 @@ body {
 	background: #f8f8f8;
 }
 
+.container{
+	background: #f8f8f8;
+}
+
 table {
 	background: #ffffff;
 }
@@ -128,6 +132,10 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 	background: #ddcc00;
 }
 
+.vcard-pt {
+	background: #66ccff;
+}
+
 .copy-btn {
 	color: #999999;
 	background-color: transparent;
@@ -136,4 +144,8 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 .copy-btn:hover {
 	color: #ffffff;
 	background-color: #666666;
+}
+
+.colored-header span{
+	color: #ffffff;
 }

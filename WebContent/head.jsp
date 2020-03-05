@@ -19,54 +19,38 @@
 
 <script src="assets/js/clipboard.2.0.4.min.js"></script>
 
+<link rel="stylesheet" href="assets/css/highlight.9.18.1.default.min.css">
+<script src="assets/js/highlight.9.18.1.min.js"></script>
+<script src="https://cdn.staticfile.org/showdown/1.9.1/showdown.min.js"></script>
+<script src="assets/js/showdown-extensions.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
 <!-- basic.css, get over everything!!!-->
 <link href="assets/css/basic.css" rel="stylesheet" type="text/css">
 <link href="assets/css/theme.css" rel="stylesheet" type="text/css">
 
-<script>
-var postload=[];
-
-function addTask(a,f){
-	postload.push({p:a,f:f});
-}
-
-function reloadCopyButton(){
-	$('.copy-btn-wrapper').remove();
-	
-	var a=$('pre');
-	var cnt=0;
-	for(var i=0;i<a.length;i++){
-		if(a[i].textContent=='')continue;
-		if(a[i].id==''){
-			while($('#copycode'+cnt).length!=0){
-				cnt++;
-			}
-			a[i].id="copycode"+cnt;
-		}
-	}
-	for(var i=0;i<a.length;i++){
-		if(a[i].textContent=='')continue;
-		var str='<div class="copy-btn-wrapper">'
-		str+='<button type="button" class="copy-btn" data-clipboard-target="#'+a[i].id+'">Copy</button>';
-		str+='</div>'
-		$(a[i]).before(str);
-	}
-	
-	var clipboard=new ClipboardJS('.copy-btn');
-	clipboard.on('success', function(e) {
-	    e.clearSelection();
-	});
-	clipboard.on('error', function(e) {
-	    alert("Copy failed :(");
-	});
-}
-
-addTask(100000,reloadCopyButton);
-
-document.addEventListener('DOMContentLoaded', (event) => {
-	postload.sort(function(a,b){
-		return a.p-b.p;
-	});
-	postload.forEach(task=>{task.f()});
-});
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="assets/js/default.js"></script>

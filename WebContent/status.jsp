@@ -1,5 +1,4 @@
 <%@page import="java.util.Comparator"%>
-<%@page import="com.hhs.xgn.hhsoj.essential.common.CommonUtil"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.hhs.xgn.hhsoj.essential.common.Submission"%>
@@ -13,7 +12,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="head/basic.jsp"></jsp:include>
+<jsp:include page="head.jsp"></jsp:include>
 <title>Status - HHSOJ</title>
 </head>
 <body>
@@ -89,7 +88,7 @@
 					<td><%=new Date(s.submitTime) %></td>
 					<td><%=s.author %></td>
 					<td><a href="pview.jsp?set=<%=s.problemSet%>&id=<%=s.problemId %>"><%=s.problemSet+"."+s.problemId %></a></td>
-					<td align="center"><b style="color:rgb<%=CommonUtil.colorize(s.score) %>"><%=String.format("%.0f", 100*s.score) %></b></td>
+					<td align="center"><b style="color:<%=TomcatHelper.colorize(s.score) %>;"><%=String.format("%.0f", 100*s.score) %></b></td>
 					<td><%=(s.isFinal?"Final":s.test) %></td>
 					<td><%=s.lang %></td>
 					<td><%=s.getRunTime() %></td>
