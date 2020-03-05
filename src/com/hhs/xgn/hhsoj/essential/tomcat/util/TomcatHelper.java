@@ -246,7 +246,7 @@ public class TomcatHelper {
 									 "#ddcc00",
 									 "#000000"
 								    };
-	public static final String tFor="<span style=\"color:%s;font-weight:bold\" title=\"%s\"><i class=\"%s\"></i> %s</span>";
+	public static final String tFor="<span class=\"verdict-span\" style=\"color:%s;font-weight:bold\" title=\"%s\"><i class=\"%s\"></i> %s</span>";
 	
 	public static String styledVerdict(String ver){
 		for(int i=0;i<tS.length;i++){

@@ -12,6 +12,21 @@ function addTask(a,f){
 	postload.push({p:a,f:f});
 }
 
+function reloadAll(){
+	postload.sort(function(a,b){
+		return a.p-b.p;
+	});
+	postload.forEach(task=>{
+		try{
+			task.f();
+		}
+		catch(e){
+			console.log('Error during task execution:');
+			console.log(e);
+		}
+	});
+}
+
 function reloadCopyButton(){
 	$('.copy-btn-wrapper').remove();
 	
@@ -63,12 +78,9 @@ function reloadMathJax(){
 
 addTask(10,reloadHighlight);
 addTask(20,reloadTableStyle);
-addTask(30,reloadMathJax);
-addTask(100000,reloadCopyButton);
+addTask(1000,reloadCopyButton);
+addTask(10000,reloadMathJax);
 
 document.addEventListener('DOMContentLoaded', (event) => {
-	postload.sort(function(a,b){
-		return a.p-b.p;
-	});
-	postload.forEach(task=>{task.f()});
+	reloadAll();
 });

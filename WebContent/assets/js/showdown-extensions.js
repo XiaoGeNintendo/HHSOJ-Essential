@@ -300,7 +300,6 @@
         // then we replace the full img tag in the output with our iframe
         type: 'output',
         filter: function (text, converter, options) {
-          console.log(text);
           var tag = iframe;
           if (options.smoothLivePreview) {
             tag = (options.simpleImgPreview) ? img : svg;
@@ -380,7 +379,6 @@
       {
         type: 'output',
         filter: function (text, converter, options) {
-          console.log(text);
           var tag = iframe;
           if (options.smoothLivePreview) {
             tag = (options.simpleImgPreview) ? img : svg;

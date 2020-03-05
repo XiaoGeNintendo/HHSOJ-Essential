@@ -52,10 +52,7 @@
 		    var text=data;
 		    html=converter.makeHtml(text);
 		    document.getElementById("txt").innerHTML=html;
-		    reloadHighlight();
-			reloadTableStyle();
-		    reloadMathJax();
-		    reloadCopyButton();
+		    reloadAll();
 		})
 	</script>
 </body>

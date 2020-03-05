@@ -86,8 +86,8 @@
 									<a class="card-link" data-toggle="collapse" href="#set<%=e.getKey() %>" aria-expanded="<%=flag%>" aria-controls="set<%=e.getKey()%>">
 										<div class="row">
 											<div class="col-sm-3"><span><b>Subtask: <%=e.getKey() %></b></span></div>
-											<div class="col-sm-3"><span>Score:<%=e.getValue().getScore(p.tests.get(e.getKey()).scheme) %></span></div>
-											<div class="col-sm-6"><span><%=TomcatHelper.styledVerdict(set.getVerdict(),"#ffffff")%></span></div> 
+											<div class="col-sm-4"><span>Score:<%=String.format("%.1f",e.getValue().getScore(p.tests.get(e.getKey()).scheme))%></span></div>
+											<div class="col-sm-5"><span><%=TomcatHelper.styledVerdict(set.getVerdict(),"#ffffff")%></span></div> 
 										</div>
 									</a>
 								</div>
@@ -116,7 +116,8 @@
 										</div>
 										<div class="collapse vcard-detail" id="tr<%=e.getKey()+"w"+cnt%>" data-parent="#set<%=e.getKey() %>">
 											<div class="card card-body">
-												<h3><a data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">#<%=cnt %></a></h3>
+												<h3 style="display:inline;"><a data-toggle="collapse" href="#tr<%=e.getKey()+"w"+cnt%>">#<%=cnt %></a></h3>
+												<span style="float:right;"><%=tr.time %>ms / <%=tr.memory %>KB / <%=TomcatHelper.styledVerdict(set.getVerdict())%></span>
 												<h5>Input</h5>
 												<pre><%=tr.input.replace("<", "&lt;").replace(">","&gt;") %></pre>
 												<h5>Output</h5>

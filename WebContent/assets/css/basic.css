@@ -90,11 +90,13 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 }
 
 .container {
-	margin-top: 50px;
-	margin-bottom: 50px;
+	border-radius:10px;
+	padding: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
-@media ( max-width :576px) {
+@media ( max-width :576px ) {
 	.container {
 		width: 540px;
 	}
@@ -152,7 +154,7 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 	display: block;
 }
 
-@media ( min-width : 768px) {
+@media ( min-width : 768px ) {
 	.ml-auto {
 		margin-left: 0px !important;
 	}
@@ -218,7 +220,7 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 	border-radius: .25rem;
 }
 
-@media ( min-width :768px) {
+@media ( min-width :768px ) {
 	.vcard {
 		margin: 10px;
 	}
@@ -227,7 +229,7 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 	}
 }
 
-@media ( min-width :1200px) {
+@media ( min-width :1200px ) {
 	.vcard {
 		margin: 7px;
 	}
@@ -247,12 +249,12 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 }
 
 .vcard-tm {
-	font-size: 10px;
+	font-size: 12px;
 }
 
 .vcard-test {
 	width: 90px;
-	font-size: 8px;
+	font-size: 12px;
 }
 
 .vcard-hide {
@@ -271,7 +273,7 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 	display: none !important;
 }
 
-@media ( min-width : 768px) {
+@media ( min-width : 768px ) {
 	.copy-btn-wrapper {
 		display: block ! important;
 	}
