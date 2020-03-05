@@ -5,7 +5,7 @@ var converter = new showdown.Converter({
     'tasklists': 'true', 
     'tables': 'true', 
     'strikethrough':'true',
-    'extensions': ['mathjax', 'video', 'audio', 'catalog', 'anchor', 'youtube']
+    'extensions': ['mathjax', 'video', 'audio', 'catalog', 'anchor', 'youtube', 'bilibili'],
 });
 
 function addTask(a,f){
