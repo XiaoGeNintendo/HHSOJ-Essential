@@ -1,4 +1,4 @@
-<%@page import="com.hhs.xgn.hhsoj.essential.common.CommonUtil"%>
+<%@page import="com.hhs.xgn.hhsoj.essential.common.StyleUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -22,11 +22,15 @@
 		<ul class="navbar-nav mr-auto topbar-nav">
 			<!-- This is to create a split line for mobile devices ---Zzzyt -->
 			<li class="nav-item">&nbsp;</li>
-		<%if (session.getAttribute("username") == null) {%>
+		<%
+			if (session.getAttribute("username") == null) {
+		%>
 			<li class="nav-item topbar-item"><a class="nav-link" href="login.jsp">Login</a></li>
-		<%} else {%>
+		<%
+			} else {
+		%>
 			<%-- TODO: "index.jsp" below should be replaced with user page URL --%>
-			<li class="nav-item topbar-item"><a class="nav-link" href="index.jsp"><%=CommonUtil.removeHTML((String)session.getAttribute("username"))%></a></li>
+			<li class="nav-item topbar-item"><a class="nav-link" href="index.jsp"><%=StyleUtil.encodeEntity((String)session.getAttribute("username"))%></a></li>
 			<li class="nav-item topbar-item"><a class="nav-link" href="logoutS">Logout</a></li>
 		<%}%>
 		</ul>

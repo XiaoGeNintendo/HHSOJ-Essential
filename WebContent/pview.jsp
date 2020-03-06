@@ -29,7 +29,7 @@
 			
 			response.setCharacterEncoding("utf-8");
 		%>
-		<h1 style="display:inline;"><%=p.set+"."+p.id+" - "+p.name %></h1>
+		<h1 class="title-left"><%=p.set+"."+p.id+" - "+p.name %></h1>
 		<span class="title-right"><br/>Version: v<%=p.ver %></span>
 		<hr/>
 		<button class="btn btn-secondary" style="float:right;" onclick="reloadMathjax()">Render Mathjax Manually</button>

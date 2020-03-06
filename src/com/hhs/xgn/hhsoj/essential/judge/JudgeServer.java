@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.FileUtil;
 import com.hhs.xgn.hhsoj.essential.common.Language;
 import com.hhs.xgn.hhsoj.essential.common.Problem;
 import com.hhs.xgn.hhsoj.essential.common.Submission;
@@ -82,16 +82,16 @@ public class JudgeServer {
 			//transfer file
 			int bytes=dis.readInt();
 			FileOutputStream fos=new FileOutputStream(path+"/"+name);
-			byte[] by=new byte[CommonUtil.BLOCK_SIZE];
-			int rc=(bytes+CommonUtil.BLOCK_SIZE-1)/CommonUtil.BLOCK_SIZE;
+			byte[] by=new byte[FileUtil.BLOCK_SIZE];
+			int rc=(bytes+FileUtil.BLOCK_SIZE-1)/FileUtil.BLOCK_SIZE;
 			System.out.println("Reading "+name+" Expected Bytes:"+bytes+" Block count="+rc);
 			for(int i=0;i<rc-1;i++){
-				dis.readFully(by,0,CommonUtil.BLOCK_SIZE);
+				dis.readFully(by,0,FileUtil.BLOCK_SIZE);
 //				System.out.println("Write:"+read);
 				fos.write(by);
 				dos.writeInt(Arrays.hashCode(by));
 			}
-			int extra=bytes-Math.max(0, (rc-1)*CommonUtil.BLOCK_SIZE);
+			int extra=bytes-Math.max(0, (rc-1)*FileUtil.BLOCK_SIZE);
 			dis.readFully(by,0,extra);
 //			System.out.println("ExWrite:"+read);
 			dos.writeInt(Arrays.hashCode(by));
@@ -125,8 +125,8 @@ public class JudgeServer {
 			rollbackInfo(sub);
 			
 			//copy files to given path
-			CommonUtil.copyFile(in,new File("judge/in.txt"));
-			CommonUtil.copyFile(out,new File("judge/ans.txt"));
+			FileUtil.copyFile(in,new File("judge/in.txt"));
+			FileUtil.copyFile(out,new File("judge/ans.txt"));
 			
 			//run the core
 			String[] r=getLang(sub.lang).runCmd;
@@ -159,7 +159,7 @@ public class JudgeServer {
 //				throw new Error("In order to protect your CPU, the judging thread has been shut down.");
 //			}
 			
-			String inp=CommonUtil.readFileWithLimit(in.getAbsolutePath(),READ_LIMIT);
+			String inp=FileUtil.readFileWithLimit(in.getAbsolutePath(),READ_LIMIT);
 			
 			
 			int v=p.exitValue();
@@ -169,7 +169,7 @@ public class JudgeServer {
 			}
 			
 			//core is done
-			String sbout=CommonUtil.readFile("judge/sbout.txt");
+			String sbout=FileUtil.readFile("judge/sbout.txt");
 			String[] arg=sbout.split("\n");
 			if(Integer.parseInt(arg[1])>=pr.tl+10000){
 				System.out.println("[WARNING] A program is closed too late! Is the time limit too big, or the sandbox crashed?");
@@ -197,8 +197,8 @@ public class JudgeServer {
 			}
 			//next is compare answers
 			
-			String oup=CommonUtil.readFileWithLimit("judge/out.txt",READ_LIMIT);
-			String ans=CommonUtil.readFileWithLimit("judge/ans.txt", READ_LIMIT);
+			String oup=FileUtil.readFileWithLimit("judge/out.txt",READ_LIMIT);
+			String ans=FileUtil.readFileWithLimit("judge/ans.txt", READ_LIMIT);
 			
 			ProcessBuilder pb2=new ProcessBuilder("./checker","in.txt","out.txt","ans.txt","report.txt");
 			pb2.directory(new File("judge"));
@@ -208,7 +208,7 @@ public class JudgeServer {
 			
 			if(notle){
 				
-				String info=CommonUtil.readFileWithLimit("judge/report.txt", READ_LIMIT);
+				String info=FileUtil.readFileWithLimit("judge/report.txt", READ_LIMIT);
 				
 				if(p2.exitValue()==0){
 					sub.addResult(sn,new TestResult("Accepted", arg[1],arg[2], info, inp, oup,ans, 1));
@@ -298,11 +298,11 @@ public class JudgeServer {
 		temp.mkdirs();
 		
 		//write to file
-		CommonUtil.writeFile("judge/Main."+getLang(sub.lang).ext,sub.code);
+		FileUtil.writeFile("judge/Main."+getLang(sub.lang).ext,sub.code);
 		
 		//copy library
-		CommonUtil.copyFile(new File("lib/core.py"), new File("judge/core.py"));
-		CommonUtil.copyFile(new File("data/"+sub.problemSet+"_"+sub.problemId+"/checker"),new File("judge/checker"));
+		FileUtil.copyFile(new File("lib/core.py"), new File("judge/core.py"));
+		FileUtil.copyFile(new File("data/"+sub.problemSet+"_"+sub.problemId+"/checker"),new File("judge/checker"));
 		
 		//chmod
 		System.out.println("Chmod doing");
@@ -333,7 +333,7 @@ public class JudgeServer {
 			boolean notle=p.waitFor(30,TimeUnit.SECONDS);
 			
 			if(notle){
-				sub.compilerInfo=CommonUtil.readFileWithLimit("judge/ce.txt",READ_LIMIT);
+				sub.compilerInfo=FileUtil.readFileWithLimit("judge/ce.txt",READ_LIMIT);
 			
 				if(p.exitValue()!=0){
 					sub.isFinal=true;
@@ -352,7 +352,7 @@ public class JudgeServer {
 		rollbackInfo(sub);
 		
 		//collect problem data
-		Problem pr=gs.fromJson(CommonUtil.readFile("data/"+sub.problemSet+"_"+sub.problemId+"/problem.json"), Problem.class);
+		Problem pr=gs.fromJson(FileUtil.readFile("data/"+sub.problemSet+"_"+sub.problemId+"/problem.json"), Problem.class);
 		
 		for(String ord:pr.order){
 			File x=new File("data/"+sub.problemSet+"_"+sub.problemId+"/"+ord);
@@ -397,7 +397,7 @@ public class JudgeServer {
 		}else{
 			//read ver
 			try{
-				dos.writeInt(CommonUtil.readProbInfo(path+"/problem.json").ver);
+				dos.writeInt(FileUtil.readProbInfo(path+"/problem.json").ver);
 			}catch(Exception e){
 				//even structure isn't right!
 				dos.writeInt(-1);

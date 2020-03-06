@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import com.google.gson.Gson;
-import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.FileUtil;
+import com.hhs.xgn.hhsoj.essential.common.MiscUtil;
 import com.hhs.xgn.hhsoj.essential.common.Problem;
 import com.hhs.xgn.hhsoj.essential.common.Submission;
 
@@ -38,7 +39,7 @@ public class JudgingThread extends Thread {
 			
 			String path="problems/"+sub.problemSet+"/"+sub.problemId;
 			
-			Problem p=CommonUtil.readProbInfo(path+"/problem.json");
+			Problem p=FileUtil.readProbInfo(path+"/problem.json");
 			
 			int clientVer=j.dis.readInt();
 			
@@ -112,15 +113,15 @@ public class JudgingThread extends Thread {
 		int snd=(int)y.length();
 		j.dos.writeInt(snd);
 		
-		byte[] by=new byte[CommonUtil.BLOCK_SIZE];
+		byte[] by=new byte[FileUtil.BLOCK_SIZE];
 		FileInputStream fis=new FileInputStream(y);
 		int len=0;
 		int totsend=0,rbc=0; //verify purpose only
 		
-		int bc=(snd+CommonUtil.BLOCK_SIZE-1)/CommonUtil.BLOCK_SIZE;
+		int bc=(snd+FileUtil.BLOCK_SIZE-1)/FileUtil.BLOCK_SIZE;
 		System.out.println("Start sending "+y+" with expected block count="+bc);
 		
-		while((len=fis.read(by, 0, CommonUtil.BLOCK_SIZE))!=-1){
+		while((len=fis.read(by, 0, FileUtil.BLOCK_SIZE))!=-1){
 //			System.out.println("Send"+len);
 			
 			//whenever send a string, needs rollback to confirm it's correctly received.
@@ -129,7 +130,7 @@ public class JudgingThread extends Thread {
 			int expected=Arrays.hashCode(by);
 //			System.out.println("Read hash:"+hash+" Expected:"+expected);
 			
-			CommonUtil.assertEql(hash,expected);
+			MiscUtil.assertEql(hash,expected);
 			
 			totsend+=len;
 			
@@ -137,8 +138,8 @@ public class JudgingThread extends Thread {
 		}
 		fis.close();
 		
-		CommonUtil.assertEql(snd,totsend);
-		CommonUtil.assertEql(bc, rbc);
+		MiscUtil.assertEql(snd,totsend);
+		MiscUtil.assertEql(bc, rbc);
 		System.out.println("Send file "+y+" of size "+snd);
 		
 	}

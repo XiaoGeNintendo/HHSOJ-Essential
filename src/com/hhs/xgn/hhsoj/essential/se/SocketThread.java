@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.net.Socket;
 
 import com.google.gson.Gson;
-import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.FileUtil;
 import com.hhs.xgn.hhsoj.essential.common.Submission;
 
 public class SocketThread extends Thread {
@@ -43,7 +43,7 @@ public class SocketThread extends Thread {
 			if(op.equals("judger")){
 				judgerRegister();
 				
-				dos.writeUTF(CommonUtil.readFile("config/lang.json"));
+				dos.writeUTF(FileUtil.readFile("config/lang.json"));
 			}else if(op.equals("submit")){
 				addSubmission();
 			}else{

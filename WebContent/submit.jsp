@@ -14,11 +14,14 @@
 <body>
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
-		<h1>Submit</h1>	
+		<h1 class="title-left">Submit</h1>
+		<button onclick="submit()" class="title-right btn btn-primary btn-submit" style="float:right;">Submit!</button>	
 		<hr/>
 	<%
 		if(session.getAttribute("username")==null){
-			out.println("Login To Submit");
+	%>
+		<p>Please <a href="login.jsp">Login</a> to submit.</p>
+	<%
 			return;
 		}
 	
@@ -31,22 +34,19 @@
 			id="";
 		}
 	%>
-	
-	<div class="input-group" style="width:300px;">
+	<div class="input-group" style="width:400px;">
 		<div class="input-group-prepend">
      			<span class="input-group-text">Problem Set ID</span>
    		</div>
 		<input id="set" value="<%=set %>" class="form-control">
 	</div>
-	
-	<div class="input-group" style="width:300px;">
+	<div class="input-group" style="width:400px;">
 		<div class="input-group-prepend">
      			<span class="input-group-text">Problem ID</span>
    		</div>
 		<input id="id" value="<%=id %>" class="form-control">
 	</div>
-	
-	<div class="input-group" style="width:300px;">
+	<div class="input-group" style="width:400px;">
 		<div class="input-group-prepend">
      			<span class="input-group-text">Language</span>
    		</div>
@@ -63,15 +63,18 @@
 		</select>
 	</div>
 	
-	<textarea id="code" rows="20" cols="50"></textarea>
+	<textarea id="code" style="width:80%;height:600px;"></textarea>
 	<br/>
 	
-	<button id="submit" onclick="submit()" class="btn btn-primary">Submit!</button>
+	<button onclick="submit()" class="btn btn-primary btn-submit">Submit!</button>
 	
 	</div>
 	<script>
 		function submit(){
-			document.getElementById("submit").disabled=true;
+			var list=$(".btn-submit");
+			for(var i=0;i<list.length;i++){
+				list[i].disabled=true;
+			}
 			
 			$.post("submitS",{
 				"set":document.getElementById("set").value,
@@ -83,7 +86,10 @@
 				if(data=="OK"){
 					window.location="status.jsp";
 				}else{
-					document.getElementById("submit").disabled=false;
+					var list=$(".btn-submit");
+					for(var i=0;i<list.length;i++){
+						list[i].disabled=false;
+					}
 					alert(data);
 				}
 			});

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.FileUtil;
 import com.hhs.xgn.hhsoj.essential.common.Problemset;
 import com.hhs.xgn.hhsoj.essential.tomcat.util.TomcatHelper;
 
@@ -61,7 +61,7 @@ public class StatementServlet extends HttpServlet {
 		File f1=new File(path+"/statement.md");
 		
 		if(f1.exists()){
-			out.println(CommonUtil.readFile(f1.getAbsolutePath()));
+			out.println(FileUtil.readFile(f1.getAbsolutePath()));
 		}
 		
 		File f2=new File(path+"/statement.pdf");
