@@ -9,7 +9,7 @@
 <body>
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
-		<h1 style="display:inline;">Welcome to HHSOJ Essential</h1>
+		<h1 class="title-left">Welcome to HHSOJ Essential</h1>
 		<span class="title-right"><br/>OJ by XGN from HHS</span>
 		<hr/>
 		<p style="font-size:50px;">Still Indev....  :\</p>

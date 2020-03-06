@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
-		<h1>Problemsets</h1>
+		<h1 class="title-left">Problemsets</h1>
 		<hr>
 		<%
 			ArrayList<Problemset> arr=TomcatHelper.getProblemsets();

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class CommonUtil {
+public class FileUtil {
 	
 	static Gson gs=new Gson();
 	public static final int BLOCK_SIZE=1024*1024;
@@ -25,24 +25,11 @@ public class CommonUtil {
 			while((str=br.readLine())!=null){
 				tot+=str+"\n";
 			}
-			
 			br.close();
 			return tot;
 		}catch(Exception e){
 			return null;
 		}
-	}
-	
-	@Deprecated
-	public static String colorize(float f){
-//		System.out.println(f+Integer.toHexString((int)((1-f)*256))+Integer.toHexString((int)f*256)+"00");
-		if(f>=1.0){
-			return "(0,255,0)";
-		}
-		if(f<=0.0){
-			return "(255,0,0)";
-		}
-		return "("+(int)((1-f)*256)+","+(int)(f*256)+","+"0)";
 	}
 	
 	public static boolean writeFile(String path,String content){
@@ -120,28 +107,5 @@ public class CommonUtil {
 
 	public static Submission readSubmissionInfo(String path) {
 		return gs.fromJson(readFile(path),Submission.class);
-	}
-
-	public static void assertEql(int x, int y) {
-		if(x!=y){
-			throw new AssertionError(x+"!="+y);
-		}
-	}
-
-	@Deprecated
-	public static int calcHash(byte[] by, int len) {
-		final int p=114514;
-		int hash=0;
-		for(int i=0;i<len;i++){
-			hash=(hash+by[i])*p;
-		}
-		
-		return hash;
-	}
-	
-	public static String removeHTML(String s) {
-		return s.replace("&","&amp;")
-				.replace("<","&lt;")
-				.replace(">","&gt;");
 	}
 }

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.hhs.xgn.hhsoj.essential.common.CommonUtil;
+import com.hhs.xgn.hhsoj.essential.common.FileUtil;
 import com.hhs.xgn.hhsoj.essential.common.Problem;
 import com.hhs.xgn.hhsoj.essential.common.Problemset;
 import com.hhs.xgn.hhsoj.essential.common.Submission;
@@ -81,7 +81,7 @@ public class SubmitServlet extends HttpServlet {
 			
 			Socket s=new Socket("localhost", TomcatHelper.config.port);
 			
-			Submission blank=CommonUtil.generateBlankSubmission(usr, code, lang, TomcatHelper.getSubmissionCount(), id, set);
+			Submission blank=FileUtil.generateBlankSubmission(usr, code, lang, TomcatHelper.getSubmissionCount(), id, set);
 			
 			Gson gs=new Gson();
 			String js=gs.toJson(blank);

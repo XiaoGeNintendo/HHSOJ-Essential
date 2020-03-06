@@ -9,7 +9,7 @@
 <body>
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
-		<h1 class="title">Login/Register</h1>
+		<h1 class="title-left">Login/Register</h1>
 		<i class="title-right"><br/>@XGN can u make two seperate pages?? --Zzzyt</i>
 		<hr/>
 		<div class="card center-form"><div class="card-body">
