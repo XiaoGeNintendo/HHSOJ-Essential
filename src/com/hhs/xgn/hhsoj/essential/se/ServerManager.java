@@ -70,7 +70,7 @@ public class ServerManager {
 		}
 	}
 	
-	void solve(String[] args) throws Exception{
+	public void solve(String[] args) throws Exception{
 		if(args.length<1){
 			System.out.println("ServerManager <port>");
 			System.out.println("7512 is recommended");
@@ -81,7 +81,10 @@ public class ServerManager {
 //		addSubmission(CommonUtil.generateBlankSubmission("XGN", "#include <iostream>\nusing namespace std;\nint main(){cout<<\"Hello,World\"<<endl;}", "cpp", 0, "testP", "testProblemSet"));
 		
 		port=Integer.parseInt(args[0]);
-		
+		start(port);
+	}
+	
+	public void start(int port) throws Exception{
 		ServerSocket ss=new ServerSocket(port);
 		System.out.println("ServerSocket started successfully");
 		while(true){
