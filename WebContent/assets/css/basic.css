@@ -40,6 +40,12 @@ pre>code {
 	padding: 0em !important;
 }
 
+/* Sorry Bootstrap, but flexs are just too hard to handle */
+.card {
+	display: block;
+}
+
+
 /* Markdown:Anchor style*/
 /* from excing, slightly modified by Zzzyt */
 h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
@@ -91,7 +97,7 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 
 .container {
 	border-radius:10px;
-	padding: 30px;
+	padding: 15px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
@@ -149,36 +155,32 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 	margin: 0px;
 }
 
-.topbar {
-	padding-left: 0px;
-}
-
-/* Sorry Bootstrap, but flexs are just too hard to handle */
-.card {
-	display: block;
-}
-
 @media ( min-width : 768px ) {
-	.ml-auto {
-		margin-left: 0px !important;
+	.topbar-nav{
+		height:50px;
 	}
-	.mr-auto {
-		margin-right: 0px !important;
-		float: right !important;
-		margin-left: auto !important;
-	}
-	.topbar-item a {
-		margin-top: 2px;
-	}
-	.topbar {
-		padding-top: 0px;
-		padding-bottom: 0px;
-	}
-	.topbar-nav {
-		height: 50px;
-		padding-top: 0px;
-		padding-bottom: 0px;
-	}
+}
+
+.ml-auto {
+	margin-left: 0px !important;
+}
+
+.mr-auto {
+	margin-right: 0px !important;
+	float: right !important;
+	margin-left: auto !important;
+}
+.topbar-item a {
+	margin-top: 2px;
+}
+
+.topbar {
+	padding:0px;
+}
+
+.topbar-nav {
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .card-collapse {
