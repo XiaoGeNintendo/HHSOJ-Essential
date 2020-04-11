@@ -15,11 +15,10 @@
 	<jsp:include page="topbar.jsp"></jsp:include>
 	<div class="container">
 		<h1 class="title-left">Submit</h1>
-		<button onclick="submit()" class="title-right btn btn-primary btn-submit" style="float:right;">Submit!</button>	
-		<hr/>
 	<%
 		if(session.getAttribute("username")==null){
 	%>
+		<hr/>
 		<p>Please <a href="login.jsp">Login</a> to submit.</p>
 	<%
 			return;
@@ -34,40 +33,41 @@
 			id="";
 		}
 	%>
-	<div class="input-group" style="width:400px;">
-		<div class="input-group-prepend">
-     			<span class="input-group-text">Problem Set ID</span>
-   		</div>
-		<input id="set" value="<%=set %>" class="form-control">
-	</div>
-	<div class="input-group" style="width:400px;">
-		<div class="input-group-prepend">
-     			<span class="input-group-text">Problem ID</span>
-   		</div>
-		<input id="id" value="<%=id %>" class="form-control">
-	</div>
-	<div class="input-group" style="width:400px;">
-		<div class="input-group-prepend">
-     			<span class="input-group-text">Language</span>
-   		</div>
-		<select id="lang" class="form-control">
-			<%
-			HashMap<String,Language> arr=TomcatHelper.getLangs();
-			
-			for(Entry<String,Language> l:arr.entrySet()){
-			%>
-				<option value="<%=l.getKey() %>"><%=l.getValue().name %></option>
-			<%
-			}
-			%>
-		</select>
-	</div>
-	
-	<textarea id="code" style="width:80%;height:600px;"></textarea>
-	<br/>
-	
-	<button onclick="submit()" class="btn btn-primary btn-submit">Submit!</button>
-	
+		<button onclick="submit()" class="title-right btn btn-primary btn-submit" style="float:right;">Submit!</button>	
+		<hr/>
+		<div class="input-group" style="width:400px;">
+			<div class="input-group-prepend">
+	     			<span class="input-group-text">Problem Set ID</span>
+	   		</div>
+			<input id="set" value="<%=set %>" class="form-control">
+		</div>
+		<div class="input-group" style="width:400px;">
+			<div class="input-group-prepend">
+	     			<span class="input-group-text">Problem ID</span>
+	   		</div>
+			<input id="id" value="<%=id %>" class="form-control">
+		</div>
+		<div class="input-group" style="width:400px;">
+			<div class="input-group-prepend">
+	     			<span class="input-group-text">Language</span>
+	   		</div>
+			<select id="lang" class="form-control">
+				<%
+				HashMap<String,Language> arr=TomcatHelper.getLangs();
+				
+				for(Entry<String,Language> l:arr.entrySet()){
+				%>
+					<option value="<%=l.getKey() %>"><%=l.getValue().name %></option>
+				<%
+				}
+				%>
+			</select>
+		</div>
+		
+		<textarea id="code" style="width:80%;height:600px;"></textarea>
+		<br/>
+		
+		<button onclick="submit()" class="btn btn-primary btn-submit">Submit!</button>
 	</div>
 	<script>
 		function submit(){

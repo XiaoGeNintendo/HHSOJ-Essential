@@ -1,20 +1,31 @@
 /* HHSOJ default theme */
 /* by Zzzyt from Hell Hole Studios*/
-p, span, a, th, td, label {
-	font-family: "Consolas", "Courier New", Courier, monospace;
+span, th, td, pre, code{
+	font-family: 'Consolas', 'Ubuntu Mono', 'Lucida Console', monospace;
 }
 
-input[type=button], input[type=submit], button {
-	font-family: "Consolas", "Courier New", Courier, monospace;
+[class~="btn"], input[type~=button], input[type~=submit], button {
+	font-family: 'Consolas', 'Ubuntu Mono', 'Lucida Console', monospace;
 }
 
-.title {
+.topbar{
+	font-family: 'Consolas', 'Ubuntu Mono', 'Lucida Console', monospace;
+}
+
+p, h1, h2, h3, h4, h5, h6{
+	font-family: 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
+}
+
+[class~="title"] {
+	font-family: 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
+}
+
+.title-right {
+	font-family: 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
+}
+
+.title-left{
 	font-weight: bold;
-	font-family: "Consolas", "Courier New", Courier, monospace;
-}
-
-.subtitle {
-	font-family: "Consolas", "Courier New", Courier, monospace;
 }
 
 .topbar-item a {
@@ -65,7 +76,6 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 }
 
 .title-right p, .title-right span, .title-right i, .title-right b{
-	font-family: "Consolas", "Courier New", Courier, monospace;
 	color: #777777;
 }
 
@@ -104,16 +114,16 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 }
 
 .vcard {
-	background: #cccccc;
+	background: #aaaaaa;
 	transition: 0.3s;
 }
 
 .vcard-ac {
-	background: #00ee00;
+	background: #00cc00;
 }
 
 .vcard-wa {
-	background: #0000ee;
+	background: #0000dd;
 }
 
 .vcard-tle {
@@ -129,7 +139,7 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 }
 
 .vcard-rf {
-	background: #ddcc00;
+	background: #ccbb00;
 }
 
 .vcard-pt {

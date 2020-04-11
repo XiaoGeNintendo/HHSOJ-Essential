@@ -1,10 +1,11 @@
 var postload=[];
 
 var converter = new showdown.Converter({
-    'disableForced4SpacesIndentedSublists': 'true', 
-    'tasklists': 'true', 
-    'tables': 'true', 
-    'strikethrough':'true',
+    'disableForced4SpacesIndentedSublists': true, 
+    'tasklists': true, 
+    'tables': true, 
+    'strikethrough': true,
+    'prefixHeaderId': true,
     'extensions': ['mathjax', 'video', 'audio', 'catalog', 'anchor', 'youtube', 'bilibili'],
 });
 

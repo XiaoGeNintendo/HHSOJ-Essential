@@ -125,9 +125,9 @@ public class StyleUtil {
 
 	public static String colorize(float x) {
 		if (x <= 0.3) {
-			return mixColorSquared(255, 0, 0, 255, 127, 0, 0.3f - x, x);
+			return mixColorSquared(255, 0, 0, 255, 136, 0, 0.3f - x, x);
 		} else if (x <= 0.7) {
-			return mixColorSquared(255, 127, 0, 238, 238, 0, 0.7f - x, x - 0.3f);
+			return mixColorSquared(255, 136, 0, 238, 238, 0, 0.7f - x, x - 0.3f);
 		}
 		return mixColorSquared(238, 238, 0, 0, 238, 0, 1.0f - x, x - 0.7f);
 	}

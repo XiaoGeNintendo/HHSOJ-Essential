@@ -43,6 +43,7 @@ public class StatementServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String set=request.getParameter("set");
 		String id=request.getParameter("id");
+		response.setCharacterEncoding("UTF-8");
 		PrintWriter out=response.getWriter();
 		if(set==null || id==null){
 			out.print("nope");

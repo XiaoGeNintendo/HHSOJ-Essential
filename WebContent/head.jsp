@@ -10,6 +10,9 @@
 <link rel="icon" type="image/png" href="assets/img/hhsoj32x.png" sizes="32x32">
 <link rel="icon" type="image/png" href="assets/img/hhsoj128x.png" sizes="128x128">
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=optional">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=optional">
+
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
 <link async rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
 <link async rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
