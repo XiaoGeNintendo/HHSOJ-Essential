@@ -8,6 +8,7 @@ public class StyleUtil {
 			"Memory Limit Exceeded",
 			"Runtime Error",
 			"Restrict Function",
+			"Judgement Failed",
 			"Point"};
 	public static final String[] verShort = {
 			"AC",
@@ -16,6 +17,7 @@ public class StyleUtil {
 			"MLE",
 			"RE",
 			"RF",
+			"JF",
 			"PT"};
 	public static final String[] verIcon = {
 			"check",
@@ -24,6 +26,7 @@ public class StyleUtil {
 			"database",
 			"bomb",
 			"ban",
+			"remove",
 			"pie-chart"};
 	public static final String[] verColor = {
 			"#00ee00",
@@ -32,6 +35,7 @@ public class StyleUtil {
 			"#aa00aa",
 			"#dd0000",
 			"#ddcc00",
+			"#aaaaaa",
 			"#000000"};
 	public static final String[] verDescription = { 
 			"Your code is correct",
@@ -40,6 +44,7 @@ public class StyleUtil {
 			"Your code used too much memory to run",
 			"Your code exited abnormally",
 			"Your code used illegal system call",
+			"There's something wrong with our system",
 			"Click to see detail" };
 	public static final String verFormat = "<span class=\"verdict-span\" style=\"color:%s;font-weight:bold\" title=\"%s\"><i class=\"%s\"></i> %s</span>";
 

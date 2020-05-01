@@ -1,6 +1,6 @@
 /* HHSOJ default theme */
 /* by Zzzyt from Hell Hole Studios*/
-span, th, td, pre, code{
+span, th, td, pre, code {
 	font-family: 'Consolas', 'Ubuntu Mono', 'Lucida Console', monospace;
 }
 
@@ -8,23 +8,23 @@ span, th, td, pre, code{
 	font-family: 'Consolas', 'Ubuntu Mono', 'Lucida Console', monospace;
 }
 
-.topbar{
+.topbar {
 	font-family: 'Consolas', 'Ubuntu Mono', 'Lucida Console', monospace;
 }
 
-p, h1, h2, h3, h4, h5, h6{
-	font-family: 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
+p, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans CJK JP', 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
 }
 
 [class~="title"] {
-	font-family: 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
+	font-family: 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans CJK JP', 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
 }
 
 .title-right {
-	font-family: 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
+	font-family: 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans CJK JP', 'Noto Sans SC', 'Noto Sans', 'Roboto', sans-serif;
 }
 
-.title-left{
+.title-left {
 	font-weight: bold;
 }
 
@@ -44,7 +44,7 @@ body {
 	background: #f8f8f8;
 }
 
-.container{
+.container {
 	background: #f8f8f8;
 }
 
@@ -75,7 +75,7 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 	color: #1b1f23;
 }
 
-.title-right p, .title-right span, .title-right i, .title-right b{
+.title-right p, .title-right span, .title-right i, .title-right b {
 	color: #777777;
 }
 
@@ -88,24 +88,20 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 }
 
 .vcard-verdict {
-	font-family: monospace;
 	font-weight: bold;
 	color: #ffff;
 }
 
 .vcard-score {
-	font-family: monospace;
 	font-weight: bold;
 	color: #ffffff;
 }
 
 .vcard-tm {
-	font-family: monospace;
 	color: #ffffff;
 }
 
 .vcard-test {
-	font-family: monospace;
 	color: #ffffff;
 }
 
@@ -116,6 +112,11 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 .vcard {
 	background: #aaaaaa;
 	transition: 0.3s;
+	font-family: 'Consolas', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Lucida Console', monospace;
+}
+
+.vcard *{
+	font-family: inherit;
 }
 
 .vcard-ac {
@@ -156,6 +157,6 @@ code:empty, kdb:empty, pre:empty, samp:empty {
 	background-color: #666666;
 }
 
-.colored-header span{
+.colored-header span {
 	color: #ffffff;
 }

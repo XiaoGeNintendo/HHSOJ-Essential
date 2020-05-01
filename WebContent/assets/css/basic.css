@@ -139,7 +139,8 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 }
 
 .topbar-item a {
-	font-size: 20px;
+	font-size: 22px;
+	line-height: 34px;
 	padding-left: 8px !important;
 	padding-right: 8px !important;
 }
@@ -169,9 +170,6 @@ h1:hover .octicon, h2:hover .octicon, h3:hover .octicon, h4:hover .octicon,
 	margin-right: 0px !important;
 	float: right !important;
 	margin-left: auto !important;
-}
-.topbar-item a {
-	margin-top: 2px;
 }
 
 .topbar {
