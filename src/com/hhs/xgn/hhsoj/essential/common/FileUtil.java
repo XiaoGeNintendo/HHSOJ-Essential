@@ -21,12 +21,14 @@ public class FileUtil {
 	public static String readFile(String path){
 		try{
 			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(path),"utf-8"));
-			String str,tot="";
-			while((str=br.readLine())!=null){
-				tot+=str+"\n";
+			StringBuilder sb=new StringBuilder();
+			String str;
+			while((str=br.readLine())!=null) {
+				sb.append(str);
+				sb.append('\n');
 			}
 			br.close();
-			return tot;
+			return sb.toString();
 		}catch(Exception e){
 			return null;
 		}
