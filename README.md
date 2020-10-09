@@ -1,4 +1,7 @@
 # HHSOJ-Essential
+
+[This project is no longer maintained. Please visit here for another version](https://github.com/HellHoleStudios/hhsoj)
+
 The 3rd generation HHSOJ!
 
 A light-weight, fast and portable OJ!
