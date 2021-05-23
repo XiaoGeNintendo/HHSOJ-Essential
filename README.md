@@ -11,6 +11,8 @@ Currently Building
 # Links
 [Documentation on everything](https://xgn.gitbook.io/hhsoj-essential-doc/)
 
+[Another Documentation](https://hhsoj.readthedocs.io/en/latest/structure.html)
+
 [Our Blog](https://blog.hellholestudios.top/)
 
 [How's it going?](https://betaoj.hellholestudios.top/HellOJ)
